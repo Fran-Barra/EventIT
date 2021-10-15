@@ -6,4 +6,5 @@ class Ciudadano(Usuario):
         self.__Telefono = telefono
         self.__CUIL = cuil
         self.__ContactosDeInteres = []
+        self.__ListaDeSolicitudes = [] 
         
