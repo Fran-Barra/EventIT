@@ -1,10 +1,10 @@
 
-from _typeshed import Self
+
 
 
 class RegDeUsuarios:
     def __init__(self):
-        Self.__Admins = []
+        self.__Admins = []
         self.__Ciudadanos = {}
 
 
