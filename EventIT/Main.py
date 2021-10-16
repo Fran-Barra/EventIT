@@ -1,1 +1,3 @@
-print("This is the main code")
+from UsersLib.py.RegDeUsuarios import RegDeUsuarios
+
+regdeusuarios = RegDeUsuarios()
