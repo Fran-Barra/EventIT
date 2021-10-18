@@ -19,15 +19,13 @@ class DatasetANSES:
 
         usuarios_ANSES.close()
 
-    # def getListOfUsuariosANSES(self):
-    #     return self.__usuariosANSES
+    def getListOfUsuariosANSES(self):
+        return self.__usuariosANSES
 
     def validarUsuario(self, user):
-        cuil = user.getCuil() # chequeear que la clase usuarios tenga este metodo
-        telCell = user.getTelCell()
-        value = False
+        cuil = user.Get_Cuil()
+        telCell = user.Get_Telefono()
         for usuario in self.__usuariosANSES:
             if usuario.getCuil() == cuil and usuario.getTelCell() == telCell:
-                value = True
-        return value
-
+                return True
+        return False
