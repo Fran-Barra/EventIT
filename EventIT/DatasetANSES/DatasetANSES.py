@@ -1,4 +1,4 @@
-from TP.UsuarioANSES import UsuarioANSES
+from DatasetANSES.UsuarioANSES import UsuarioANSES
 
 class DatasetANSES:
     def __init__(self):
@@ -18,14 +18,6 @@ class DatasetANSES:
             self.addUser(UsuarioANSES(name, telCell, cuil))
 
         usuarios_ANSES.close()
-
+        
     def getListOfUsuariosANSES(self):
         return self.__usuariosANSES
-
-    def validarUsuario(self, user):
-        cuil = user.Get_Cuil()
-        telCell = user.Get_Telefono()
-        for usuario in self.__usuariosANSES:
-            if usuario.getCuil() == cuil and usuario.getTelCell() == telCell:
-                return True
-        return False
