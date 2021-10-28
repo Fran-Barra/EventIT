@@ -10,7 +10,7 @@ class Frienship_Sistem:
             a = CiudadanoDestinatario.Mod_ListaDeSolicitudes()
             a.append(CiudadanoSolicitante)
         else:
-            return "Ya le enviaste una solicitud a este ciudadano"
+            return "Ya le enviaste una solicitud a este usuario"
 
     def AceptarSolicitud(self, CiudadanoSolicitante, CiudadanoDestinatario):
         if CiudadanoSolicitante in CiudadanoDestinatario.Get_ListaDeSolicitudes():
@@ -19,7 +19,7 @@ class Frienship_Sistem:
             b = CiudadanoDestinatario.Mod_ListaDeSolicitudes()
             b.remove(CiudadanoSolicitante)
         else:
-            return "No tienes solicitudes de este ciudadano"
+            return "No tienes solicitudes de este usuario"
 
     def RechazarSolicitud(self, CiudadanoSolicitante, CiudadanoDestinatario):
         if CiudadanoSolicitante in CiudadanoDestinatario.Get_ListaDeSolicitudes():
