@@ -1,5 +1,5 @@
 from ExeptionLib.UnexpectedValueClass import UnexpectedValue
-from UserLib.AdminClass import Administrator
+from UsersLib.AdminClass import Administrator
 from UsersLib.CitizenClass import Ciudadano
 from UsersLib.RegDeUsuarios import RegDeUsuarios
 from DatasetANSES.DatasetANSES import DatasetANSES
