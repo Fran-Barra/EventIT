@@ -1,5 +1,5 @@
 from ExeptionLib.UnexpectedValueClass import UnexpectedValue
-from UsersLib.AdminClass import Administrator
+from UserLib.AdminClass import Administrator
 from UsersLib.CitizenClass import Ciudadano
 from UsersLib.RegDeUsuarios import RegDeUsuarios
 from DatasetANSES.DatasetANSES import DatasetANSES
@@ -24,9 +24,9 @@ class CreateProfile:
     @classmethod
     def Create_Profile_Admin(cls, name, regdeusuarios: RegDeUsuarios):
         #Chequea que no exista un admin con ese nombre
-        if name not in regdeusuarios.Get_Admins:
+        if name not in regdeusuarios.Get_Admins():
             #Crea el admin y lo añade al registro de usuarios
-            regdeusuarios.Manage_Admins[name] = Administrator(name)
+            regdeusuarios.Manage_Admins()[name] = Administrator(name)
         else:
             pass #Manejar nombre ya existente
 
@@ -35,9 +35,9 @@ class CreateProfile:
     def Create_Profile_Citizen(cls, Keyname, name, telefono, cuil, regdeusuario: RegDeUsuarios):
             if CreateProfile.ValidarUsuario():
                 #Chequea que no existan usuarios con ese nombre clave
-                if Keyname not in regdeusuario.Get_Ciudadanos:
+                if Keyname not in regdeusuario.Get_Ciudadanos():
                     #crea al usuario y lo añade al regdeusuarios
-                    regdeusuario.Manage_Ciudadanos[Keyname] = (Ciudadano(name, telefono, cuil), 0)
+                    regdeusuario.Manage_Ciudadanos()[Keyname] = (Ciudadano(name, telefono, cuil), 0)
                 else:
                     pass #Manejar nombre ya existente
             else:
