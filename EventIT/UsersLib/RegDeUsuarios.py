@@ -4,7 +4,7 @@
 
 class RegDeUsuarios:
     def __init__(self):
-        self.__Admins = []
+        self.__Admins = {}
         self.__Ciudadanos = {}
 
 
