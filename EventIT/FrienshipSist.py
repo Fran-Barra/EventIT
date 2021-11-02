@@ -18,6 +18,8 @@ class Frienship_Sistem:
             a.append(CiudadanoSolicitante)
             b = CiudadanoDestinatario.Mod_ListaDeSolicitudes()
             b.remove(CiudadanoSolicitante)
+            c = CiudadanoSolicitante.Mod_ContactosDeInteres()
+            c.append(CiudadanoDestinatario)
         else:
             return "No tienes solicitudes de este usuario"
 
