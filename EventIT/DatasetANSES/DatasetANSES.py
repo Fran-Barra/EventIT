@@ -1,4 +1,5 @@
-from DatasetANSES.UsuarioANSES import UsuarioANSES
+from EventIT.DatasetANSES.UsuarioANSES import UsuarioANSES
+from EventIT.MapsSist.UbicacionClass import Ubicacion
 
 class DatasetANSES:
     def __init__(self):
@@ -15,9 +16,16 @@ class DatasetANSES:
             name = linea.split('/')[0]
             telCell = linea.split('/')[1]
             cuil = linea.split('/')[2]
-            self.addUser(UsuarioANSES(name, telCell, cuil))
+            ubicacionString = linea.split('/')[3]
+            latitud = ubicacionString.split(',')[0]
+            longitud = ubicacionString.split(',')[1]
+            ubicacion = Ubicacion(latitud, longitud)
+            self.addUser(UsuarioANSES(name, telCell, cuil, ubicacion))
 
         usuarios_ANSES.close()
-        
+
     def getListOfUsuariosANSES(self):
         return self.__usuariosANSES
+
+a = DatasetANSES()
+print(a.getListOfUsuariosANSES())
