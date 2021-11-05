@@ -24,5 +24,5 @@ class UsuarioANSES:
 
     def getZona(self, lista_de_zonas):
         for zona in lista_de_zonas:
-            if self.__ubicacion in zona: #la idea es ver si esa ubicacion es parte de la zona PROBAR
+            if self.__ubicacion in zona.Get_Ubicaciones(): #la idea es ver si esa ubicacion es parte de la zona PROBAR
                 return zona

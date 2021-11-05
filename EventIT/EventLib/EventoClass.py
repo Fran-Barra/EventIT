@@ -2,10 +2,14 @@ from EventIT.MapsSist.UbicacionClass import Ubicacion
 
 
 class Evento:
-    def __init__(self, tipo, ubicacion: Ubicacion):
+    def __init__(self, tipo, ubicacion: Ubicacion, nombre):
         self.__Tipo = tipo
         self.__Ubicacion = ubicacion
         self.__ListaAsistentes = []
+        self.__nombre = nombre
+
+    def __repr__(self):
+        return self.__nombre
 
     def getTipo(self):
         return self.__Tipo
