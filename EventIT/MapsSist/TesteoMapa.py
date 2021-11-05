@@ -1,7 +1,7 @@
 import unittest
 from ZonaClass import Zona
 from UbicacionClass import Ubicacion
-from MapClass import Map
+# from MapClass import Map
 
 class TestMapa(unittest.TestCase):
     def test_ubic(self):
@@ -21,7 +21,7 @@ class TestMapa(unittest.TestCase):
         b = Ubicacion(10,10)
         c = Ubicacion(20,20)
         ListaUbic = [a,b,c]
-        Zona1 = Zona(ListaUbic,1)
+        Zona1 = Zona(ListaUbic,1, 'zona1')
 
         self.assertEqual(Zona1.Get_Ubicaciones(),[a,b,c])
         self.assertEqual(Zona1.Get_Ubicaciones(),ListaUbic)
@@ -37,11 +37,11 @@ class TestMapa(unittest.TestCase):
         b = Ubicacion(10,10)
         c = Ubicacion(20,20)
         ListaUbic = [a,b,c]
-        Zona1 = Zona(ListaUbic,1)
+        Zona1 = Zona(ListaUbic,1, 'zona1')
         d = Ubicacion(30,30)
         e = Ubicacion(40,40)
         f = Ubicacion(50,50)
-        Zona2 = Zona([d,e,f],2)
+        Zona2 = Zona([d,e,f],2, 'zona2')
         ListZonas = [Zona1,Zona2]
 
         self.assertEqual(ListZonas[0].Get_Ubicaciones(),[a,b,c])

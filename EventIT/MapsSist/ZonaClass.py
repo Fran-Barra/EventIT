@@ -1,10 +1,14 @@
 from typing import List
-from UbicacionClass import Ubicacion
+from EventIT.MapsSist.UbicacionClass import Ubicacion
 
 class Zona:
-    def __init__(self, ubicaciones: List[Ubicacion], numeroDeZona):
+    def __init__(self, ubicaciones: List[Ubicacion], numeroDeZona, nombre):
         self.__Ubicaciones = ubicaciones
         self.__NumeroDeZona = numeroDeZona
+        self.__nombre = nombre
+
+    def __repr__(self):
+        return f'{self.__nombre}'
 
     def Get_Ubicaciones(self):
         return self.__Ubicaciones

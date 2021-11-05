@@ -1,8 +1,8 @@
-from ExeptionLib.UnexpectedValueClass import UnexpectedValue
-from UsersLib.AdminClass import Administrator
-from UsersLib.CitizenClass import Ciudadano
-from UsersLib.RegDeUsuarios import RegDeUsuarios
-from DatasetANSES.DatasetANSES import DatasetANSES
+from EventIT.ExeptionLib.UnexpectedValueClass import UnexpectedValue
+from EventIT.UsersLib.AdminClass import Administrator
+from EventIT.UsersLib.CitizenClass import Ciudadano
+from EventIT.UsersLib.RegDeUsuarios import RegDeUsuarios
+from EventIT.DatasetANSES.DatasetANSES import DatasetANSES
 
 
 class CreateProfile:
@@ -33,7 +33,7 @@ class CreateProfile:
 
     @classmethod
     def Create_Profile_Citizen(cls, Keyname, name, telefono, cuil, regdeusuario: RegDeUsuarios):
-            if CreateProfile.ValidarUsuario():
+            if CreateProfile.ValidarUsuario(): #!!!Chequear que validar usuario no esta recibiendo parametros
                 #Chequea que no existan usuarios con ese nombre clave
                 if Keyname not in regdeusuario.Get_Ciudadanos():
                     #crea al usuario y lo añade al regdeusuarios
@@ -45,7 +45,7 @@ class CreateProfile:
                 pass
 
     @classmethod
-    def ValidarUsuario(cls, name, cuil, telefono, datasetANSES: DatasetANSES):
+    def ValidarUsuario(cls, cuil, telefono, datasetANSES: DatasetANSES):
         for usuario in datasetANSES.getListOfUsuariosANSES():
             if usuario.getCuil() == cuil and usuario.getTelCell() == telefono:
                 return True

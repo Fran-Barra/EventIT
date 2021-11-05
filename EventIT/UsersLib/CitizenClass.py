@@ -1,15 +1,12 @@
 from Users import Usuario
 
 class Ciudadano(Usuario):
-    def __init__(self, Name, telefono, cuil):
-        super().__init__(Name)
+    def __init__(self, name, telefono, cuil):
+        super().__init__(name)
         self.__Telefono = telefono
         self.__CUIL = cuil
         self.__ContactosDeInteres = []
         self.__ListaDeSolicitudes = []
-        
-    def Get_Name(self):
-        return self.__Name 
         
     def Get_Telefono(self):
         return self.__Telefono
