@@ -1,15 +1,15 @@
 import tkinter as tk
-from tkinter.messagebox import showwarning
+
 
 
 class LogUser(tk.Tk):
-    def __init__(self, regdeusuarios):
+    def __init__(self):
         super().__init__()
         self.wm_title("EventIT")
         self.wm_geometry("350x400")
         self.wm_resizable(0,0)
         self.Create_Widgets()
-        self.regDeUsuarios = regdeusuarios
+        #self.regDeUsuarios = regdeusuarios
 
     def Create_Widgets(self):
         #creacion de widgets
@@ -28,12 +28,12 @@ class LogUser(tk.Tk):
         self.keyname.insert(0, "Enter the key name")
         self.LogInBtn.grid(row=3, column= centerW)
 
-    def Log_in_User(self):
+    """def Log_in_User(self):
         keyName = self.keyname.get()
         if keyName in self.regDeUsuarios.Get_Ciudadanos():
             self.keyname = keyName
             self.Usuario = self.regDeUsuarios.Manage_Ciudadanos()[keyName]
         else:
-            self.Mesage = showwarning(message="keyname couldt be found, try again or crate a profile",
+            self.Mesage = tk.messagebox.showwarning(message="keyname couldt be found, try again or crate a profile",
             title= "keyname not found")
-
+"""
