@@ -8,3 +8,5 @@ class TestDatasetANSES(unittest.TestCase):
         self.assertEqual(datasetANSES.getListOfUsuariosANSES()[1].getName(), 'Jose.Hernandez')
         self.assertEqual(datasetANSES.getListOfUsuariosANSES()[0].getTelCell(), '1150042603')
         self.assertEqual(datasetANSES.getListOfUsuariosANSES()[1].getTelCell(), '1133280846')
+        self.assertEqual(datasetANSES.getListOfUsuariosANSES()[1].getCuil(), '23224040')
+        self.assertEqual(datasetANSES.getListOfUsuariosANSES()[1].getUbicacion().Get_Coordinates(), (20, 20))

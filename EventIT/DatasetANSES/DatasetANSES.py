@@ -15,8 +15,8 @@ class DatasetANSES:
                 telCell = linea.split('/')[1]
                 cuil = linea.split('/')[2]
                 ubicacionString = linea.split('/')[3]
-                latitud = ubicacionString.split(',')[0]
-                longitud = ubicacionString.split(',')[1]
+                latitud = int(ubicacionString.split(',')[0])
+                longitud = int(ubicacionString.split(',')[1])
                 ubicacion = Ubicacion(latitud, longitud)
                 user = UsuarioANSES(name, telCell, cuil, ubicacion)
                 if user not in self.__usuariosANSES:
