@@ -22,7 +22,7 @@ class Evento:
 
     def getZona(self, lista_de_zonas):
         for zona in lista_de_zonas:
-            if self.__Ubicacion in zona: #la idea es ver si esa ubicacion es parte de la zona PROBAR
+            if self.__Ubicacion.Get_Coordinates() in list(map(lambda x:x.Get_Coordinates(), zona.Get_Ubicaciones())): #la idea es ver si esa ubicacion es parte de la zona PROBAR
                 return zona
 
     def Set_Attendance(self):

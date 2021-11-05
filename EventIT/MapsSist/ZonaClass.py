@@ -5,10 +5,10 @@ class Zona:
     def __init__(self, ubicaciones: List[Ubicacion], numeroDeZona, nombre):
         self.__Ubicaciones = ubicaciones
         self.__NumeroDeZona = numeroDeZona
-        self.__nombre = nombre
+        self.nombre = nombre
 
     def __repr__(self):
-        return f'{self.__nombre}'
+        return f"{list(map(lambda x:x.Get_Coordinates(), self.__Ubicaciones))}"
 
     def Get_Ubicaciones(self):
         return self.__Ubicaciones

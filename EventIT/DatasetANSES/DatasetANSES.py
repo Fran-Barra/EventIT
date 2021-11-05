@@ -7,6 +7,9 @@ class DatasetANSES:
         self.__usuariosANSES = []
         self.makeListOfUsers()
 
+    def __repr__(self):
+        return "DatasetANSES"
+
     def makeListOfUsers(self):
         with open(r"C:\Users\lucky\PycharmProjects\EventIT\EventIT\DatasetANSES\usuarios_ANSES.txt", "r") as usuarios_ANSES:
             # usuarios_ANSES = open('usuarios_ANSES.txt', 'r')

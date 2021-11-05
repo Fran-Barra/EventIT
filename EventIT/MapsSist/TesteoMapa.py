@@ -48,8 +48,5 @@ class TestMapa(unittest.TestCase):
         self.assertEqual(ListZonas[1].Get_Ubicaciones(),[d,e,f])
 
 
-
-
-
 if __name__ == '__main__':
     unittest.main()
