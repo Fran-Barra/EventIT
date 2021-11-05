@@ -1,4 +1,4 @@
-from MapsSist.UbicacionClass import Ubicacion
+from EventIT.MapsSist.UbicacionClass import Ubicacion
 
 
 class Evento:
@@ -7,9 +7,19 @@ class Evento:
         self.__Ubicacion = ubicacion
         self.__ListaAsistentes = []
 
-    def Get_Info(self):
-        #retorna la informacion del evento en conjunto con una copia de los asistentes
-        return (self.__Tipo, self.__Ubicacion, self.__ListaAsistentes.copy())
+    def getTipo(self):
+        return self.__Tipo
+
+    def getUbicacion(self):
+        return self.__Ubicacion
+
+    def getListaDeAsistencia(self):
+        return self.__ListaAsistentes.copy()
+
+    def getZona(self, lista_de_zonas):
+        for zona in lista_de_zonas:
+            if self.__Ubicacion in zona: #la idea es ver si esa ubicacion es parte de la zona PROBAR
+                return zona
 
     def Set_Attendance(self):
         #permite inscribirse o desinscribirse de un evento

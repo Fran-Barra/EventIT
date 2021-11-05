@@ -1,5 +1,5 @@
 from typing import List
-from UbicacionClass import Ubicacion
+from EventIT.MapsSist.UbicacionClass import Ubicacion
 
 class Zona:
     def __init__(self, ubicaciones: List[Ubicacion], numeroDeZona):
