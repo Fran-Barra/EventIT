@@ -28,6 +28,6 @@ class Frienship_Sistem:
             self.personas_rechazadas.append(CiudadanoSolicitante)
             a = CiudadanoDestinatario.Mod_ListaDeSolicitudes()
             a.remove(CiudadanoSolicitante)
-            (CiudadanoSolicitante.Mod_NumeroDeRechazos()).append(CiudadanoDestinatario)
+            (CiudadanoSolicitante.Mod_ListaDeRechazos()).append(CiudadanoDestinatario)
         else:
             return "No tienes solicitudes de este usuario"
