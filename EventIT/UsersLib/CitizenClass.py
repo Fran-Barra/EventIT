@@ -41,7 +41,7 @@ class Ciudadano(Usuario):
         #Solo accedible por FrienshipSistem
         return self.__ListaDeSolicitudes
     
-    def Mod_NumeroDeRechazos(self):
+    def Mod_ListaDeRechazos(self):
         #Solo accedible por FrienshipSistem
         return self.__ListaDeRechazos
         
