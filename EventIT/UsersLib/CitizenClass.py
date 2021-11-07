@@ -7,7 +7,7 @@ class Ciudadano(Usuario):
         self.__CUIL = cuil
         self.__ContactosDeInteres = []
         self.__ListaDeSolicitudes = []
-        self.__NumeroDeRechazos = []
+        self.__ListaDeRechazos = []
         
     def Get_Telefono(self):
         return self.__Telefono
@@ -43,5 +43,5 @@ class Ciudadano(Usuario):
     
     def Mod_NumeroDeRechazos(self):
         #Solo accedible por FrienshipSistem
-        return self.__NumeroDeRechazos
+        return self.__ListaDeRechazos
         
