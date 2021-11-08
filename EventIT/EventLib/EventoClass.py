@@ -25,6 +25,6 @@ class Evento:
             if self.__Ubicacion.Get_Coordinates() in list(map(lambda x:x.Get_Coordinates(), zona.Get_Ubicaciones())): #la idea es ver si esa ubicacion es parte de la zona PROBAR
                 return zona
 
-    def Set_Attendance(self):
+    def Set_Attendance(self): #arreglar y modificar dentro de la calse
         #permite inscribirse o desinscribirse de un evento
         return self.__ListaAsistentes
