@@ -6,22 +6,30 @@ class Frienship_Sistem:
         return self.personas_rechazadas
 
     def EnviarSolicitud(self, CiudadanoSolicitante, CiudadanoDestinatario):
-        if CiudadanoSolicitante not in CiudadanoDestinatario.Get_ListaDeSolicitudes():
-            a = CiudadanoDestinatario.Mod_ListaDeSolicitudes()
-            a.append(CiudadanoSolicitante)
-        else:
-            return "Ya le enviaste una solicitud a este usuario"
+        try:
+            if len(CiudadanoSolicitante.Get_ListaDeRechazos()) < 5:
+                if CiudadanoSolicitante not in CiudadanoDestinatario.Get_ListaDeSolicitudes():
+                    a = CiudadanoDestinatario.Mod_ListaDeSolicitudes()
+                    a.append(CiudadanoSolicitante)
+                else:
+                    return "Ya le enviaste una solicitud a este usuario"
+        except:
+            return "Tu usuario fue bloqueado por el sistema"
 
     def AceptarSolicitud(self, CiudadanoSolicitante, CiudadanoDestinatario):
-        if CiudadanoSolicitante in CiudadanoDestinatario.Get_ListaDeSolicitudes():
-            a = CiudadanoDestinatario.Mod_ContactosDeInteres()
-            a.append(CiudadanoSolicitante)
-            b = CiudadanoDestinatario.Mod_ListaDeSolicitudes()
-            b.remove(CiudadanoSolicitante)
-            c = CiudadanoSolicitante.Mod_ContactosDeInteres()
-            c.append(CiudadanoDestinatario)
-        else:
-            return "No tienes solicitudes de este usuario"
+        try:
+            if len(CiudadanoDestinatario.Get_ListaDeRechazos()) < 5:
+                if CiudadanoSolicitante in CiudadanoDestinatario.Get_ListaDeSolicitudes():
+                    a = CiudadanoDestinatario.Mod_ContactosDeInteres()
+                    a.append(CiudadanoSolicitante)
+                    b = CiudadanoDestinatario.Mod_ListaDeSolicitudes()
+                    b.remove(CiudadanoSolicitante)
+                    c = CiudadanoSolicitante.Mod_ContactosDeInteres()
+                    c.append(CiudadanoDestinatario)
+                else:
+                    return "No tienes solicitudes de este usuario"
+        except:
+            return "Tu usuario fue bloqueado por el sistema"
 
     def RechazarSolicitud(self, CiudadanoSolicitante, CiudadanoDestinatario):
         if CiudadanoSolicitante in CiudadanoDestinatario.Get_ListaDeSolicitudes():
@@ -29,5 +37,6 @@ class Frienship_Sistem:
             a = CiudadanoDestinatario.Mod_ListaDeSolicitudes()
             a.remove(CiudadanoSolicitante)
             (CiudadanoSolicitante.Mod_ListaDeRechazos()).append(CiudadanoDestinatario)
+
         else:
             return "No tienes solicitudes de este usuario"
