@@ -1,4 +1,4 @@
-from Users import Usuario
+from EventIT.UsersLib.Users import Usuario
 
 class Ciudadano(Usuario):
     def __init__(self, name, telefono, cuil):

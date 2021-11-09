@@ -1,4 +1,4 @@
-from Users import Usuario 
+from EventIT.UsersLib.Users import Usuario
 
 class Administrator(Usuario):
     def __init__(self, Name):
