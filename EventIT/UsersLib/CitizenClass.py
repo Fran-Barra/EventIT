@@ -1,5 +1,6 @@
 from EventIT.UsersLib.Users import Usuario
 
+
 class Ciudadano(Usuario):
     def __init__(self, name, telefono, cuil):
         super().__init__(name)
@@ -8,6 +9,9 @@ class Ciudadano(Usuario):
         self.__ContactosDeInteres = []
         self.__ListaDeSolicitudes = []
         self.__ListaDeRechazos = []
+
+    def __repr__(self):
+        return f"{self.Get_Name()}"
         
     def Get_Telefono(self):
         return self.__Telefono
