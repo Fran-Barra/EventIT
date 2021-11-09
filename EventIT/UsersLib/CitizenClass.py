@@ -10,8 +10,6 @@ class Ciudadano(Usuario):
         self.__ListaDeSolicitudes = []
         self.__ListaDeRechazos = []
 
-    def __repr__(self):
-        return f"{self.Get_Name()}"
         
     def Get_Telefono(self):
         return self.__Telefono
