@@ -39,6 +39,6 @@ class TestPrueba(unittest.TestCase):
         self.assertEqual(evento1.getListaDeAsistencia(), [juan, jose]) # Test de Evento.Set_Attendance()
 
         estadisticas = Estadisticas(mapa1, datasetANSES, regDeEventos)
-        result = estadisticas.calculateRanking()
-        self.assertEqual(result, datasetANSES.getListOfUsuariosANSES())
+        result = estadisticas.haha()
+        self.assertEqual(result[evento1], 2)
 

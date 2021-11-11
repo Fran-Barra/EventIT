@@ -10,16 +10,28 @@ class Estadisticas:
         self.lista_de_eventos = regDeEventos.View_Events()
         self.datasetANSES =datasetANSES
 
-    def calculateRanking(self):
-        listasDeAsistenciaXEvento = dict({})
-        for evento in self.lista_de_eventos:
-            listasDeAsistenciaXEvento[evento] = evento.getListaDeAsistencia()
-        for evento, asistentes in list(zip(listasDeAsistenciaXEvento.keys(), listasDeAsistenciaXEvento.values())):
-            for asistente in asistentes:
-                listasDeAsistenciaXEvento[evento] = list(map(lambda x:self.datasetANSES.searchUser(asistente.Get_Telefono, asistente.Get_Cuil), asistentes))
-        return list(listasDeAsistenciaXEvento.values())
+    # def calculateRanking(self):
+    #     listasDeAsistenciaXEvento = dict({})
+    #     for evento in self.lista_de_eventos:
+    #         listasDeAsistenciaXEvento[evento] = evento.getListaDeAsistencia()
+    #     for evento, asistentes in list(zip(listasDeAsistenciaXEvento.keys(), listasDeAsistenciaXEvento.values())):
+    #         for asistente in asistentes:
+    #             listasDeAsistenciaXEvento[evento] = list(map(lambda x:self.datasetANSES.searchUser(asistente.Get_Telefono, asistente.Get_Cuil), asistentes))
+    #     return list(listasDeAsistenciaXEvento.values())
 
-# en cada evento obtengo la lista de asistentes, la recorro y comparo la zona del evento con la zona del asistente, si son iguales incremento el total de asistentes de la zona del evento
+# en cada evento obtengo la lista de asistentes, la recorro y comparo la zona del evento con la zona del asistente, si son iguales incremento
+# el total de asistentes de la zona del evento
+
+    def calcularCantidadDeAsistentesXZonaXEvento(self):
+        """Calcula la cantidad de asistentes que asistieron a un evento y que viven en la misma zona donde se realizo el evento"""
+        cantidad_de_asistentes_x_zona_x_evento = dict({})
+        for evento in self.lista_de_eventos:
+            cantidad_de_asistentes_x_zona_x_evento[evento] = 0
+        for evento in self.lista_de_eventos:
+            for asistente in evento.getListaDeAsistencia():
+                if evento.getZona(self.lista_de_zonas) == self.datasetANSES.searchUser(asistente.Get_Telefono(), asistente.Get_Cuil()).getZona(self.lista_de_zonas): #compara la zona del evento con la zona del asistente obtenida en el datasetANSES
+                    cantidad_de_asistentes_x_zona_x_evento[evento] += 1
+        return cantidad_de_asistentes_x_zona_x_evento
 
 
 

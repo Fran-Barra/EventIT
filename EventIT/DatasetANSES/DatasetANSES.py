@@ -15,8 +15,8 @@ class DatasetANSES:
             # usuarios_ANSES = open('usuarios_ANSES.txt', 'r')
             for linea in usuarios_ANSES.readlines():
                 name = linea.split('/')[0]
-                telCell = linea.split('/')[1]
-                cuil = linea.split('/')[2]
+                telCell = int(linea.split('/')[1])
+                cuil = int(linea.split('/')[2])
                 ubicacionString = linea.split('/')[3]
                 latitud = int(ubicacionString.split(',')[0])
                 longitud = int(ubicacionString.split(',')[1])
