@@ -48,6 +48,13 @@ class Estadisticas:
                 porcentaje_de_asistentes_de_la_zona_por_evento[evento] = 0.0
         return porcentaje_de_asistentes_de_la_zona_por_evento
 
+    def calculate_positions_of_the_ranking(self, mayor_cantidad_de_asistentes_de_la_zona: bool = False, mayor_cantidad_de_asistentes: bool = False, mayor_porcentaje: bool = False):
+        """Calcula el ranking de eventos en orden descendente segun el parametro que elija"""
+        if mayor_cantidad_de_asistentes_de_la_zona:
+            rank = self.lista_de_eventos.copy().sort(key=lambda x:self.calculate_number_of_attendees_per_zone_per_event()[x], reverse=True)
+            # Ordena la lista de eventos poniendo en primer lugar al evento con mas asistentes de la zona
+            self.calculate_number_of_attendees_per_zone_per_event()
+
 
 
         # cantidad_de_asistentes_x_evento = dict({}) #cantidad de personas que asisten a un evento
