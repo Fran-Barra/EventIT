@@ -10,35 +10,43 @@ from EventIT.Estadisticas.prueba import Estadisticas
 
 
 class TestPrueba(unittest.TestCase):
-    def test_create_the_assistance_list_with_ANSES_users(self):
-        u1 = Ubicacion(0, 0)
-        u2 = Ubicacion(10, 10)
-        u3 = Ubicacion(20, 20)
-        ListaUbic = [u1, u2, u3]
-        Zona1 = Zona(ListaUbic, 1, 'Zona1')
-        u4 = Ubicacion(30, 30)
-        u5 = Ubicacion(40, 40)
-        u6 = Ubicacion(50, 50)
-        Zona2 = Zona([u4, u5, u6], 2, 'Zona2')
-        mapa1 = Map([Zona1, Zona2])
+    def setUp(self):
+        self.u1 = Ubicacion(0, 0)
+        self.u2 = Ubicacion(10, 10)
+        self.u3 = Ubicacion(20, 20)
+        self.ListaUbic = [self.u1, self.u2, self.u3]
+        self.Zona1 = Zona(self.ListaUbic, 1, 'Zona1')
+        self.u4 = Ubicacion(30, 30)
+        self.u5 = Ubicacion(40, 40)
+        self.u6 = Ubicacion(50, 50)
+        self.Zona2 = Zona([self.u4, self.u5, self.u6], 2, 'Zona2')
+        self.mapa1 = Map([self.Zona1, self.Zona2])
 
-        datasetANSES = DatasetANSES()
-        regDeEventos = RegDeEventos()
+        self.datasetANSES = DatasetANSES()
+        self.regDeEventos = RegDeEventos()
 
-        evento1 = Evento(None, Ubicacion(10, 10), 'evento1')
-        evento2 = Evento(None, Ubicacion(30, 30), 'evento2')
-        regDeEventos.Set_Events().append(evento1)
-        regDeEventos.Set_Events().append(evento2)
-        self.assertEqual(regDeEventos.View_Events(), [evento1, evento2])
+        self.evento1 = Evento(None, Ubicacion(10, 10), 'evento1')
+        self.evento2 = Evento(None, Ubicacion(30, 30), 'evento2')
+        self.regDeEventos.Set_Events().append(self.evento1)
+        self.regDeEventos.Set_Events().append(self.evento2)
 
-        juan = Ciudadano('Juan.Perez', 1150042603, 43807968)
-        jose = Ciudadano('Jose.Hernandez', 1133280846, 23224040)
+        self.juan = Ciudadano('Juan.Perez', 1150042603, 43807968)
+        self.jose = Ciudadano('Jose.Hernandez', 1133280846, 23224040)
 
-        evento1.Set_Attendance(juan, True)
-        evento1.Set_Attendance(jose, True)
-        self.assertEqual(evento1.getListaDeAsistencia(), [juan, jose]) # Test de Evento.Set_Attendance()
+        self.evento1.Set_Attendance(self.juan, True)
+        self.evento1.Set_Attendance(self.jose, True)
 
-        estadisticas = Estadisticas(mapa1, datasetANSES, regDeEventos)
-        result = estadisticas.calcularCantidadDeAsistentesXZonaXEvento()
-        self.assertEqual(result[evento1], 2)
+        self.estadisticas = Estadisticas(self.mapa1, self.datasetANSES, self.regDeEventos)
+        self.result = self.estadisticas.calcularCantidadDeAsistentesXZonaXEvento()
+
+    # def test_create_the_attendees_list_with_ANSES_users(self):
+
+    def test_add_events(self):
+        self.assertEqual(self.regDeEventos.View_Events(), [self.evento1, self.evento2])
+
+    def test_set_attendance(self):
+        self.assertEqual(self.evento1.getListaDeAsistencia(), [self.juan, self.jose]) # Test de Evento.Set_Attendance()
+
+    def test_calculate_number_of_attendees_per_zone_per_event(self):
+        self.assertEqual(self.result[self.evento1], 2)
 
