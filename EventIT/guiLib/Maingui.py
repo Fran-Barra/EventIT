@@ -4,23 +4,26 @@ import tkinter as tk
 from logAdmin import LogAdmin
 from logSensor import LogSensor
 from logUser import LogUser
+from EventIT.UsersLib.RegDeUsuarios import RegDeUsuarios
+from EventIT.DatasetANSES.DatasetANSES import DatasetANSES
 
 
 
 class App(tk.Tk):
-    def __init__(self, regDeUsuarios):
+    def __init__(self, reg_de_usuarios: RegDeUsuarios, data_anses: DatasetANSES):
         super().__init__()
         self.wm_title("EventIT")
         self.wm_geometry("350x400")
         self.wm_resizable(0,0)
+        self.data_anses = data_anses
         self.Create_Widgets()
-        self.regDeUsuarios = regDeUsuarios 
+        self.regDeUsuarios = reg_de_usuarios
         
 
 
     def OpenWindow(self, NewWindow):
         if NewWindow == LogUser:
-            LogUser(self.regDeUsuarios)
+            LogUser(self.regDeUsuarios, self.data_anses)
         elif NewWindow == LogAdmin:
             LogAdmin(self.regDeUsuarios)
         elif NewWindow == LogSensor:

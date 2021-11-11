@@ -1,13 +1,15 @@
-#import tkinter as tk
-#from Maingui import App
-from UsersLib.RegDeUsuarios import RegDeUsuarios
+from EventIT.UsersLib.RegDeUsuarios import RegDeUsuarios
+from EventIT.DatasetANSES.DatasetANSES import DatasetANSES
+from EventIT.guiLib.Maingui import App
 
 
 
 regdeusuarios = RegDeUsuarios()
+dataAnses= DatasetANSES()
+
 
 #mainMenu
-#application = App()
+application = App(regdeusuarios, dataAnses)
 
 
-#application.mainloop()
+application.mainloop()
