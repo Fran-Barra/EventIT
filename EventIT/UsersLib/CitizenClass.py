@@ -10,8 +10,6 @@ class Ciudadano(Usuario):
         self.__ListaDeSolicitudes = []
         self.__ListaDeRechazos = []
 
-    def __repr__(self):
-        return f"{self.Get_Name()}"
         
     def Get_Telefono(self):
         return self.__Telefono
@@ -24,6 +22,9 @@ class Ciudadano(Usuario):
 
     def Get_ListaDeSolicitudes(self):
         return self.__ListaDeSolicitudes.copy()
+    
+    def Get_ListaDeRechazos(self):
+        return self.__ListaDeRechazos.copy()
 
     def Mod_Name(self, name: str):
         #Solo la puede llamar el AMB
