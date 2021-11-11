@@ -37,7 +37,6 @@ class TestPrueba(unittest.TestCase):
         self.evento1.Set_Attendance(self.jose, True)
 
         self.estadisticas = Estadisticas(self.mapa1, self.datasetANSES, self.regDeEventos)
-        self.result = self.estadisticas.calcularCantidadDeAsistentesXZonaXEvento()
 
     # def test_create_the_attendees_list_with_ANSES_users(self):
 
@@ -48,5 +47,11 @@ class TestPrueba(unittest.TestCase):
         self.assertEqual(self.evento1.getListaDeAsistencia(), [self.juan, self.jose]) # Test de Evento.Set_Attendance()
 
     def test_calculate_number_of_attendees_per_zone_per_event(self):
-        self.assertEqual(self.result[self.evento1], 2)
+        self.assertEqual(self.estadisticas.calculate_number_of_attendees_per_zone_per_event()[self.evento1], 2)
+
+    def test_calculate_total_number_of_attendees(self):
+        self.assertEqual(self.estadisticas.calculate_total_number_of_attendees()[self.evento1], 2)
+
+    def test_calculate_percentage_of_atendees_of_the_zone(self):
+        self.assertEqual(self.estadisticas.calculate_percentage_of_atendees_of_the_zone()[self.evento1], 100)
 
