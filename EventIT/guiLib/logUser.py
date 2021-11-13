@@ -3,6 +3,7 @@ from tkinter import messagebox
 from EventIT.guiLib.UsersGui.RegisterUser import RegisterNewUserW
 from EventIT.UsersLib.RegDeUsuarios import RegDeUsuarios
 from EventIT.DatasetANSES.DatasetANSES import DatasetANSES
+from EventIT.guiLib.UsersGui.menuusers import MenuUsersr
 
 
 class LogUser(tk.Tk):
@@ -15,12 +16,6 @@ class LogUser(tk.Tk):
         self.regDeUsuarios = regdeusuarios
         self.Create_Widgets()
 
-
-
-    def Open_Window(self, window):
-        if window ==  RegisterNewUserW:
-            RegisterNewUserW(self.regDeUsuarios, self.data_anses)
-        self.withdraw()
 
 
     def Create_Widgets(self):
@@ -49,7 +44,8 @@ class LogUser(tk.Tk):
             if estado_de_cuenta == 0:
                 #cuenta desbloqueada
                 self.keyname = keyName
-                self.Usuario = self.regDeUsuarios.Manage_Ciudadanos()[keyName]
+                self.user = self.regDeUsuarios.Manage_Ciudadanos()[keyName]
+                self.Open_Window(MenuUsersr)
             elif estado_de_cuenta == 1:
                 #cuenta bloqueada
                 self.mesage_estado = tk.messagebox.showwarning(message="your acount is block, try other day.",
@@ -57,4 +53,12 @@ class LogUser(tk.Tk):
         else:
             self.Mesage = tk.messagebox.showwarning(message="keyname couldt be found, try again or crate a profile",
             title= "keyname not found")
+
+
+    def Open_Window(self, window):
+        if window ==  RegisterNewUserW:
+            RegisterNewUserW(self.regDeUsuarios, self.data_anses)
+        if window == MenuUsersr:
+            MenuUsersr(self.regDeUsuarios, self.data_anses, self.user)
+        self.withdraw()
 
