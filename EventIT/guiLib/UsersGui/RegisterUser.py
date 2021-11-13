@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 from EventIT.UsersLib.RegDeUsuarios import RegDeUsuarios
 from EventIT.UserManagementLib.CreateProfileClass import CreateProfile
 from EventIT.DatasetANSES.DatasetANSES import DatasetANSES
@@ -40,10 +41,13 @@ class RegisterNewUserW(tk.Tk):
         key_name = self.key_name.get()
         phone = self.phone.get()
         cuil = self.cuil.get()
-        CreateProfile.Create_Profile("user", key_name, phone, cuil, self.regDeUsuarios, self.data_anses)
-        if key_name in self.regDeUsuarios.Get_Ciudadanos():
-            self.user = self.regDeUsuarios.Get_Ciudadanos()[key_name]
-            self.Open_window(MenuUsersr)
+        if self.regDeUsuarios.searchCitizen(phone) != None or self.regDeUsuarios.searchCitizen(cuil= cuil):
+            alert = tk.messagebox.showwarning(title= "Existing account", text= "An acount with this data already exist")
+        else:
+            CreateProfile.Create_Profile("user", key_name, phone, cuil, self.regDeUsuarios, self.data_anses)
+            if key_name in self.regDeUsuarios.Get_Ciudadanos():
+                self.user = self.regDeUsuarios.Get_Ciudadanos()[key_name]
+                self.Open_window(MenuUsersr)
 
 
     def Open_window(self, window):

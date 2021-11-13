@@ -44,7 +44,7 @@ class LogUser(tk.Tk):
             if estado_de_cuenta == 0:
                 #cuenta desbloqueada
                 self.keyname = keyName
-                self.user = self.regDeUsuarios.Manage_Ciudadanos()[keyName]
+                self.user = self.regDeUsuarios.Get_Ciudadanos()[keyName]
                 self.Open_Window(MenuUsersr)
             elif estado_de_cuenta == 1:
                 #cuenta bloqueada
