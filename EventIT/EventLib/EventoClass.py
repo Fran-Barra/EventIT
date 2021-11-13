@@ -26,15 +26,16 @@ class Evento:
             if self.__Ubicacion.Get_Coordinates() in list(map(lambda x:x.Get_Coordinates(), zona.Get_Ubicaciones())): #la idea es ver si esa ubicacion es parte de la zona PROBAR
                 return zona
 
-    def Set_Attendance(self, ciudadano: Ciudadano, inscribirse: bool): #TESTEAR
+    def Set_Attendance(self, ciudadano: Ciudadano, inscribirse: bool):
         """Permite inscribirse o desinscribirse de un evento.\n
             inscribirse = True, para inscribirse.\n
             inscribirse = False, para desinscribirse"""
         if inscribirse:
             self.__ListaAsistentes.append(ciudadano)
         else:
-            for asistente, index in enumerate(self.__ListaAsistentes):
-                if asistente == ciudadano:
-                    del self.__ListaAsistentes[index]
+            self.__ListaAsistentes.remove(ciudadano)
+            # for asistente, index in enumerate(self.__ListaAsistentes):
+            #     if asistente == ciudadano:
+            #         del self.__ListaAsistentes[index]
 
 

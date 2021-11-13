@@ -27,18 +27,18 @@ class CreateProfile:
         #Chequea que no exista un admin con ese nombre
         if name not in regdeusuarios.Get_Admins():
             #Crea el admin y lo añade al registro de usuarios
-            regdeusuarios.Manage_Admins()[name] = Administrator(name)
+            regdeusuarios.Manage_Admins(Administrator(name), True, name)
         else:
-            pass #Manejar nombre ya existente
+            alert_name = messagebox.showwarning(title = "Key Name", message= "key name already taken") #Manejar nombre ya existente
 
 
     @classmethod
-    def Create_Profile_Citizen(cls, Keyname, name, telefono, cuil, regdeusuario: RegDeUsuarios, datasetAnses):
+    def Create_Profile_Citizen(cls, Keyname, name, telefono, cuil, regdeusuario: RegDeUsuarios, datasetAnses: DatasetANSES):
             if CreateProfile.ValidarUsuario(cuil, telefono, datasetAnses):
                 #Chequea que no existan usuarios con ese nombre clave
                 if Keyname not in regdeusuario.Get_Ciudadanos():
                     #crea al usuario y lo añade al regdeusuarios
-                    regdeusuario.Manage_Ciudadanos()[Keyname] = (Ciudadano(name, telefono, cuil), 0)
+                    regdeusuario.Manage_Ciudadanos(Ciudadano(name, telefono, cuil), True, Keyname)
                 else:
                     alert_name = messagebox.showwarning(title = "Key Name", message= "key name already taken")
             else:
