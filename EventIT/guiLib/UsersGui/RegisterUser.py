@@ -2,6 +2,7 @@ import tkinter as tk
 from EventIT.UsersLib.RegDeUsuarios import RegDeUsuarios
 from EventIT.UserManagementLib.CreateProfileClass import CreateProfile
 from EventIT.DatasetANSES.DatasetANSES import DatasetANSES
+from EventIT.guiLib.UsersGui.menuusers import  MenuUsersr
 
 
 class RegisterNewUserW(tk.Tk):
@@ -11,8 +12,9 @@ class RegisterNewUserW(tk.Tk):
         self.wm_geometry("350x400")
         self.wm_resizable(0, 0)
         self.data_anses = data_anses
-        self.Create_Widgets()
         self.regDeUsuarios = regdeusuarios
+        self.Create_Widgets()
+
 
     def Create_Widgets(self):
         # creacion de widgents
@@ -38,4 +40,13 @@ class RegisterNewUserW(tk.Tk):
         key_name = self.key_name.get()
         phone = self.phone.get()
         cuil = self.cuil.get()
-        CreateProfile.Create_Profile("user", key_name, phone, cuil, self.regDeUsuarios)
+        CreateProfile.Create_Profile("user", key_name, phone, cuil, self.regDeUsuarios, self.data_anses)
+        if key_name in self.regDeUsuarios.Get_Ciudadanos():
+            self.user = self.regDeUsuarios.Get_Ciudadanos()[key_name]
+            self.Open_window(MenuUsersr)
+
+
+    def Open_window(self, window):
+        if window == MenuUsersr:
+            MenuUsersr(self.regDeUsuarios, self.data_anses, self.user)
+        self.withdraw()

@@ -40,7 +40,7 @@ class CreateProfile:
                     #crea al usuario y lo añade al regdeusuarios
                     regdeusuario.Manage_Ciudadanos()[Keyname] = (Ciudadano(name, telefono, cuil), 0)
                 else:
-                    pass #Manejar nombre ya existente
+                    alert_name = messagebox.showwarning(title = "Key Name", message= "key name already taken")
             else:
                 #Manejar que los datos no existen
                 alert = messagebox.showwarning(title= "Data not found", message = "The data couldn be foun in ANSES")
@@ -48,7 +48,7 @@ class CreateProfile:
     @classmethod
     def ValidarUsuario(cls, cuil, telefono, datasetANSES: DatasetANSES):
         for usuario in datasetANSES.getListOfUsuariosANSES():
-            if usuario.getCuil() == cuil and usuario.getTelCell() == telefono:
+            if str(usuario.getCuil()) == cuil and str(usuario.getTelCell()) == telefono:
                 return True
         return False
 
