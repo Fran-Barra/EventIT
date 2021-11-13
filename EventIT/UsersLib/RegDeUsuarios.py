@@ -14,6 +14,11 @@ class RegDeUsuarios:
 
     def Manage_Ciudadanos(self):
         return self.__Ciudadanos
+
+    def searchCitizen(self, telCell: int = 0, cuil: int = 0, name: int = None):
+        for ciudadano in self.__Ciudadanos:
+            if ciudadano.Get_Cuil() == cuil and ciudadano.Get_Telefono() == telCell:
+                return ciudadano
         
 
 
