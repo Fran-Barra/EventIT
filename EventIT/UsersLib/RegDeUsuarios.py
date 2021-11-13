@@ -1,3 +1,6 @@
+import tkinter as tk
+from tkinter import messagebox
+
 class RegDeUsuarios:
     def __init__(self):
         self.__Admins = {}
@@ -15,11 +18,16 @@ class RegDeUsuarios:
     def Manage_Ciudadanos(self):
         return self.__Ciudadanos
 
-    def searchCitizen(self, telCell: int = 0, cuil: int = 0, name: int = None):
+    def searchCitizen(self, telCell: int = None, cuil: int = None, name: str = None):
+        if cuil == None and telCell == None and name == None:
+            alert = tk.messagebox.showwarning(title="Falta de argumentos", text="Para buscar un ciudadano es necesario que ")
         for ciudadano in self.__Ciudadanos:
-            if ciudadano.Get_Cuil() == cuil and ciudadano.Get_Telefono() == telCell:
+            cuil = ciudadano.Get_Cuil() if cuil == None else cuil
+            telCell = ciudadano.Get_Telefono() if telCell == None else telCell
+            name = ciudadano.Get_Name() if name == None else name
+            if ciudadano.Get_Cuil() == cuil and ciudadano.Get_Telefono() == telCell and ciudadano.Get_Name() == name:
                 return ciudadano
-        
+
 
 
 

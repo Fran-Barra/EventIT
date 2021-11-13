@@ -10,3 +10,7 @@ class TestDatasetANSES(unittest.TestCase):
         self.assertEqual(datasetANSES.getListOfUsuariosANSES()[1].getTelCell(), 1133280846)
         self.assertEqual(datasetANSES.getListOfUsuariosANSES()[1].getCuil(), 23224040)
         self.assertEqual(datasetANSES.getListOfUsuariosANSES()[1].getUbicacion().Get_Coordinates(), (20, 20))
+
+
+if __name__ == '__main__':
+    unittest.main()

@@ -55,3 +55,5 @@ class TestPrueba(unittest.TestCase):
     def test_calculate_percentage_of_atendees_of_the_zone(self):
         self.assertEqual(self.estadisticas.calculate_percentage_of_atendees_of_the_zone()[self.evento1], 100)
 
+if __name__ == '__main__':
+    unittest.main()
