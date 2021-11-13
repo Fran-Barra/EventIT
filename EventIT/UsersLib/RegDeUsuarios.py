@@ -42,8 +42,8 @@ class RegDeUsuarios:
         if cuil == None and telCell == None and name == None:
             alert = tk.messagebox.showwarning(title="Falta de argumentos", text="Para buscar un ciudadano es necesario que introduzca al menos un argumento")
         for ciudadano in list(map(lambda x:x[0], list(self.__Ciudadanos.values()))):
-            cuil = ciudadano.Get_Cuil() if cuil == None else cuil
-            telCell = ciudadano.Get_Telefono() if telCell == None else telCell
-            name = ciudadano.Get_Name() if name == None else name
-            if ciudadano.Get_Cuil() == cuil and ciudadano.Get_Telefono() == telCell and ciudadano.Get_Name() == name:
+            cuilAux = ciudadano.Get_Cuil() if cuil == None else cuil
+            telCellAux = ciudadano.Get_Telefono() if telCell == None else telCell
+            nameAux = ciudadano.Get_Name() if name == None else name
+            if ciudadano.Get_Cuil() == cuilAux and ciudadano.Get_Telefono() == telCellAux and ciudadano.Get_Name() == nameAux:
                 return ciudadano
