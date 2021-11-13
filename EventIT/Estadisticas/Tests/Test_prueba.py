@@ -43,8 +43,12 @@ class TestPrueba(unittest.TestCase):
     def test_add_events(self):
         self.assertEqual(self.regDeEventos.View_Events(), [self.evento1, self.evento2])
 
-    def test_set_attendance(self):
-        self.assertEqual(self.evento1.getListaDeAsistencia(), [self.juan, self.jose]) # Test de Evento.Set_Attendance()
+    def test_set_attendance_inscribirse(self):
+        self.assertEqual(self.evento1.getListaDeAsistencia(), [self.juan, self.jose])
+
+    def test_set_attendance_desinscribirse(self):
+        self.evento1.Set_Attendance(self.jose, False)
+        self.assertEqual(self.evento1.getListaDeAsistencia(), [self.juan])
 
     def test_calculate_number_of_attendees_per_zone_per_event(self):
         self.assertEqual(self.estadisticas.calculate_number_of_attendees_per_zone_per_event()[self.evento1], 2)
