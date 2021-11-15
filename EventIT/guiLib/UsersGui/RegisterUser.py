@@ -4,16 +4,19 @@ from EventIT.UsersLib.RegDeUsuarios import RegDeUsuarios
 from EventIT.UserManagementLib.CreateProfileClass import CreateProfile
 from EventIT.DatasetANSES.DatasetANSES import DatasetANSES
 from EventIT.guiLib.UsersGui.menuusers import  MenuUsers
-
+from EventIT.EventLib.RegDeEventosClass import RegDeEventos
+from EventIT.MapsSist.MapClass import Map
 
 class RegisterNewUserW(tk.Tk):
-    def __init__(self, regdeusuarios: RegDeUsuarios, data_anses: DatasetANSES):
+    def __init__(self, regdeusuarios: RegDeUsuarios, data_anses: DatasetANSES, regdeeventos: RegDeEventos, mapa: Map):
         super().__init__()
         self.wm_title("EventIT")
         self.wm_geometry("350x400")
         self.wm_resizable(0, 0)
-        self.data_anses = data_anses
-        self.regDeUsuarios = regdeusuarios
+        self.dataanses = data_anses
+        self.regdeusuarios = regdeusuarios
+        self.regdeeventos = regdeeventos
+        self.mapa = mapa
         self.Create_Widgets()
 
 
@@ -41,16 +44,16 @@ class RegisterNewUserW(tk.Tk):
         key_name = self.key_name.get()
         phone = self.phone.get()
         cuil = self.cuil.get()
-        if (self.regDeUsuarios.searchCitizen(int(phone)) != None) or (self.regDeUsuarios.searchCitizen(cuil= int(cuil)) != None):
+        if (self.regdeusuarios.searchCitizen(int(phone)) != None) or (self.regdeusuarios.searchCitizen(cuil= int(cuil)) != None):
             messagebox.showwarning(title= "Existing account", message= "An acount with this data already exist")
         else:
-            if CreateProfile.Create_Profile("user", key_name, phone, cuil, self.regDeUsuarios, self.data_anses):
-                self.user = self.regDeUsuarios.Get_Ciudadanos()[key_name]
+            if CreateProfile.Create_Profile("user", key_name, phone, cuil, self.regdeusuarios, self.dataanses):
+                self.user = self.regdeusuarios.Get_Ciudadanos()[key_name]
                 self.Open_window(MenuUsers)
 
 
 
     def Open_window(self, window):
         if window == MenuUsers:
-            MenuUsers(self.regDeUsuarios, self.data_anses, self.user)
+            MenuUsers(self.regdeusuarios, self.dataanses, self.regdeeventos, self.mapa,self.user)
         self.withdraw()

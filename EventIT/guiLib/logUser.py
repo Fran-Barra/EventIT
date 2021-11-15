@@ -4,16 +4,20 @@ from EventIT.guiLib.UsersGui.RegisterUser import RegisterNewUserW
 from EventIT.UsersLib.RegDeUsuarios import RegDeUsuarios
 from EventIT.DatasetANSES.DatasetANSES import DatasetANSES
 from EventIT.guiLib.UsersGui.menuusers import MenuUsers
+from EventIT.EventLib.RegDeEventosClass import RegDeEventos
+from EventIT.MapsSist.MapClass import Map
 
 
 class LogUser(tk.Tk):
-    def __init__(self, regdeusuarios: RegDeUsuarios, data_anses: DatasetANSES):
+    def __init__(self, regdeusuarios: RegDeUsuarios, dataanses: DatasetANSES, regdeeventos: RegDeEventos, mapa: Map):
         super().__init__()
         self.wm_title("EventIT")
         self.wm_geometry("350x400")
         self.wm_resizable(0,0)
-        self.data_anses = data_anses
-        self.regDeUsuarios = regdeusuarios
+        self.dataanses = dataanses
+        self.regdeusuarios = regdeusuarios
+        self.regdeeventos = regdeeventos
+        self.mapa = mapa
         self.Create_Widgets()
 
 
@@ -39,12 +43,12 @@ class LogUser(tk.Tk):
 
     def Log_in_User(self):
         keyName = self.keyname.get()
-        if keyName in self.regDeUsuarios.Get_Ciudadanos():
-            estado_de_cuenta = self.regDeUsuarios.Get_Ciudadanos()[keyName][1]
+        if keyName in self.regdeusuarios.Get_Ciudadanos():
+            estado_de_cuenta = self.regdeusuarios.Get_Ciudadanos()[keyName][1]
             if estado_de_cuenta == 0:
                 #cuenta desbloqueada
                 self.keyname = keyName
-                self.user = self.regDeUsuarios.Get_Ciudadanos()[keyName]
+                self.user = self.regdeusuarios.Get_Ciudadanos()[keyName]
                 self.Open_Window(MenuUsers)
             elif estado_de_cuenta == 1:
                 #cuenta bloqueada
@@ -57,8 +61,8 @@ class LogUser(tk.Tk):
 
     def Open_Window(self, window):
         if window ==  RegisterNewUserW:
-            RegisterNewUserW(self.regDeUsuarios, self.data_anses)
+            RegisterNewUserW(self.regdeusuarios, self.dataanses, self.regdeeventos, self.mapa)
         if window == MenuUsers:
-            MenuUsers(self.regDeUsuarios, self.data_anses, self.user)
+            MenuUsers(self.regdeusuarios, self.dataanses, self.regdeeventos, self.mapa, self.user)
         self.withdraw()
 
