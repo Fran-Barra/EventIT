@@ -2,47 +2,50 @@ from EventIT.MapsSist.MapClass import Map
 from EventIT.DatasetANSES.DatasetANSES import DatasetANSES
 from EventIT.EventLib.RegDeEventosClass import RegDeEventos
 
+
 class Estadisticas:
     def __init__(self, map: Map, datasetANSES: DatasetANSES, regDeEventos: RegDeEventos):
         self.lista_de_zonas = map.getListaDeZonas()
         self.lista_de_ciudadanos = datasetANSES.getListOfUsuariosANSES()
         self.lista_de_eventos = regDeEventos.View_Events()
+        self.datasetANSES =datasetANSES
 
-    def __repr__(self):
-        return 'Estadisticas'
-
-    def calculateRanking(self):
-        """Este metodo calcula un ranking de los eventos que impactan a mas personas. Retorna un diccionario donde las keys son los eventos y los values su impacto"""
-        cantidad_de_personas_por_zona = dict({})
-        for zona in self.lista_de_zonas: # Agrega las zonas al dict
-            cantidad_de_personas_por_zona[zona] = 0
-        for ciudadano in self.lista_de_ciudadanos: # Agrega la cantidad de ciudadanos que hay en cada zona
-            cantidad_de_personas_por_zona[ciudadano.getZona(self.lista_de_zonas)] += 1
-
-        # Cambiar ZONA por el metodo que devuelva la zona del evento
-        self.lista_de_eventos.sort(key=lambda x:cantidad_de_personas_por_zona[x.getZona(self.lista_de_zonas)], reverse=True) # Ordena la lista de eventos por zona, en orden desscendente de la cantidad de personas por zona
-        impacto_x_evento = dict({}) # diccionario donde las keys son las zonas y los values la cantidad de personas
+    def calculate_number_of_attendees_per_zone_per_event(self):
+        """Calcula la cantidad de asistentes que asistieron a un evento y que viven en la misma zona donde se realizo el evento"""
+        cantidad_de_asistentes_x_zona_x_evento = dict({})
         for evento in self.lista_de_eventos:
-            impacto_x_evento[evento] = cantidad_de_personas_por_zona[evento.getZona(self.lista_de_zonas)]
-        return impacto_x_evento
+            cantidad_de_asistentes_x_zona_x_evento[evento] = 0
+        for evento in self.lista_de_eventos:
+            for asistente in evento.getListaDeAsistencia():
+                if evento.getZona(self.lista_de_zonas) == self.datasetANSES.searchUser(asistente.Get_Telefono(), asistente.Get_Cuil()).getZona(self.lista_de_zonas): #compara la zona del evento con la zona del asistente obtenida en el datasetANSES
+                    cantidad_de_asistentes_x_zona_x_evento[evento] += 1
+        return cantidad_de_asistentes_x_zona_x_evento
 
-    def printedRanking(self):
-        """Este metodo imprime en consola un ranking de los eventos que impactan a mas personas."""
-        impacto_x_evento = self.calculateRanking()
-        eventos = list(impacto_x_evento.keys())
-        impactos = list(impacto_x_evento.values())
-        index = list(range(1,len(eventos) + 1))
-        listOfImpactoXEvento = list(zip(eventos, impactos, index)) # arma una lista de tuplas, y en cada tupla esta el evento y su impacto
-        rankingString = f"|\tPosicion\t|\tNombre del evento\t|\tZona\t|\tCantidad de personas\t|\n"
-        for evento, impacto, index in listOfImpactoXEvento: # arma el ranking en formato string para imprmirlo
-            rankingString += f"|\t\t{index}\t\t|\t\t{evento}\t\t\t|\t{evento.getZona(self.lista_de_zonas).nombre}\t|\t\t\t{impacto}\t\t\t\t|\n"
+    def calculate_total_number_of_attendees(self):
+        cantidad_de_asistentes_totales_x_evento = dict({})
+        for evento in self.lista_de_eventos:
+            cantidad_de_asistentes_totales_x_evento[evento] = len(evento.getListaDeAsistencia())
+        return cantidad_de_asistentes_totales_x_evento
 
+    def calculate_percentage_of_atendees_of_the_zone(self):
+        porcentaje_de_asistentes_de_la_zona_por_evento =dict({})
+        for evento in self.lista_de_eventos:
+            if self.calculate_total_number_of_attendees()[evento] != 0:
+                porcentaje_de_asistentes_de_la_zona_por_evento[evento] = round((self.calculate_number_of_attendees_per_zone_per_event()[evento]/self.calculate_total_number_of_attendees()[evento]) * 100, 1)
+            else:
+                porcentaje_de_asistentes_de_la_zona_por_evento[evento] = 0.0
+        return porcentaje_de_asistentes_de_la_zona_por_evento
 
-            # f"|\tPosicion\t|\tNombre del evento\t|\tZona\t|\tCantidad de personas\t|\n"
-            # f"|\t\t1\t\t|\t\t{eventos[0]}\t\t\t|\t{eventos[0].getZona(self.lista_de_zonas)}\t|\t\t\t{impacto[0]}\t\t\t\t|\n"
-            # f"|\t\t2\t\t|\t\t{eventos[1]}\t\t\t|\t{eventos[1].getZona(self.lista_de_zonas)}\t|\t\t\t{impacto[1]}\t\t\t\t|\n"
-            # f"|\t\t3\t\t|\t\t{eventos[2]}\t\t\t|\t{eventos[2].getZona(self.lista_de_zonas)}\t|\t\t\t{impacto[2]}\t\t\t\t|\n"
-            # f"|\t\t4\t\t|\t\t{eventos[3]}\t\t\t|\t{eventos[3].getZona(self.lista_de_zonas)}\t|\t\t\t{impacto[3]}\t\t\t\t|\n"
-            # f"|\t\t5\t\t|\t\t{eventos[4]}\t\t\t|\t{eventos[4].getZona(self.lista_de_zonas)}\t|\t\t\t{impacto[4]}\t\t\t\t|\n"
-
-        return rankingString
+    def calculate_positions_of_the_ranking(self, mayor_cantidad_de_asistentes_de_la_zona: bool = False, mayor_cantidad_de_asistentes: bool = False, mayor_porcentaje: bool = False):
+        """Calcula el ranking de eventos en orden descendente segun el parametro que elija"""
+        ranking = self.lista_de_eventos.copy()
+        if mayor_cantidad_de_asistentes_de_la_zona or not (mayor_cantidad_de_asistentes_de_la_zona and mayor_cantidad_de_asistentes and mayor_porcentaje):
+            ranking.sort(key=lambda x:self.calculate_number_of_attendees_per_zone_per_event()[x], reverse=True)# Ordena la lista de eventos poniendo en primer lugar al evento con mas asistentes de la zona
+            # self.calculate_number_of_attendees_per_zone_per_event()
+            return ranking
+        elif mayor_cantidad_de_asistentes:
+            ranking.sort(key=lambda x:self.calculate_total_number_of_attendees()[x], reverse=True)# Ordena la lista de eventos poniendo en primer lugar al evento con mas asistentes de la zona
+            return ranking
+        elif mayor_porcentaje:
+            ranking.sort(key=lambda x:self.calculate_percentage_of_atendees_of_the_zone()[x], reverse=True)# Ordena la lista de eventos poniendo en primer lugar al evento con mas asistentes de la zona
+            return ranking

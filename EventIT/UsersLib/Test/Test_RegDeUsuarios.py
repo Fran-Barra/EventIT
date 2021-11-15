@@ -29,7 +29,7 @@ class TestRegDeUsuarios(unittest.TestCase):
     def test_Manage_Admins(self):
         self.regDeUsuarios.Manage_Admins(self.admin3, True, 'Pepe')
         self.assertEqual(len(self.regDeUsuarios.Get_Admins()), 3)
-        self.regDeUsuarios.Manage_Admins(self.admin3, False, 'pepwe')
+        self.regDeUsuarios.Manage_Admins(self.admin3, False, 'Pepe')
         self.assertEqual(len(self.regDeUsuarios.Get_Admins()), 2)
 
 
