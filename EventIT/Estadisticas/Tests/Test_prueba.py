@@ -38,6 +38,8 @@ class TestPrueba(unittest.TestCase):
 
         self.estadisticas = Estadisticas(self.mapa1, self.datasetANSES, self.regDeEventos)
 
+
+
     # def test_create_the_attendees_list_with_ANSES_users(self):
 
     def test_add_events(self):
@@ -58,6 +60,10 @@ class TestPrueba(unittest.TestCase):
 
     def test_calculate_percentage_of_atendees_of_the_zone(self):
         self.assertEqual(self.estadisticas.calculate_percentage_of_atendees_of_the_zone()[self.evento1], 100)
+
+    def test_calculate_positions_of_the_ranking(self):
+        self.assertEqual(self.estadisticas.calculate_positions_of_the_ranking(), [self.evento1, self.evento2])
+        self.assertEqual(self.estadisticas.calculate_positions_of_the_ranking(mayor_porcentaje=True), [self.evento1, self.evento2])
 
 if __name__ == '__main__':
     unittest.main()
