@@ -6,7 +6,7 @@ from EventIT.DatasetANSES.DatasetANSES import DatasetANSES
 from EventIT.EventLib.RegDeEventosClass import RegDeEventos
 from EventIT.EventLib.EventoClass import Evento
 from EventIT.UsersLib.CitizenClass import Ciudadano
-from EventIT.Estadisticas.prueba import Estadisticas
+from EventIT.Estadisticas.Estadisticas import Estadisticas
 
 
 class TestPrueba(unittest.TestCase):
