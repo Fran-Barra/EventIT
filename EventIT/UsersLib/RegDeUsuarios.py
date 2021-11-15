@@ -32,14 +32,17 @@ class RegDeUsuarios:
     # def Manage_Ciudadanos(self):
     #     return self.__Ciudadanos
 
-    def Manage_Ciudadanos(self, ciudadano: Ciudadano, add: bool, keyname, bloquear: bool = False): #Raro el tema del bloqueo
+    def Manage_Ciudadanos(self, ciudadano: Ciudadano, add: bool, keyname): #Raro el tema del bloqueo
         """Permite agregar o eliminar un ciudadano del dicccionario de ciudadanos.\n
             add = True, para agregarlo.\n
             add = False, para eliminarlo"""
         if add:
-            self.__Ciudadanos[keyname] = [ciudadano, bloquear]
+            self.__Ciudadanos[keyname] = [ciudadano, 0]
         else:
             del self.__Ciudadanos[keyname]
+
+    def estado_de_bloqueo(self, bloquear: bool, keyname):
+        self.__Ciudadanos[keyname][1] = bloquear
 
     def searchCitizen(self, telCell: int = None, cuil: int = None, name: str = None):
         if cuil == None and telCell == None and name == None:
