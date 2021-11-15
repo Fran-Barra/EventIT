@@ -14,9 +14,9 @@ class CreateProfile:
         #avisando que algo salio mal
             try:
                 if type == "admin":
-                    CreateProfile.Create_Profile_Admin(name, regdeusuarios)
+                    return CreateProfile.Create_Profile_Admin(name, regdeusuarios)
                 elif type == "user":
-                    CreateProfile.Create_Profile_Citizen(name, name, telefono, cuil, regdeusuarios, datasetAnses)
+                    return CreateProfile.Create_Profile_Citizen(name, name, telefono, cuil, regdeusuarios, datasetAnses)
                 else:
                     raise UnexpectedValue
             except UnexpectedValue:
@@ -34,16 +34,19 @@ class CreateProfile:
 
     @classmethod
     def Create_Profile_Citizen(cls, Keyname, name, telefono, cuil, regdeusuario: RegDeUsuarios, datasetAnses: DatasetANSES):
-            if CreateProfile.ValidarUsuario(cuil, telefono, datasetAnses):
-                #Chequea que no existan usuarios con ese nombre clave
-                if Keyname not in regdeusuario.Get_Ciudadanos():
-                    #crea al usuario y lo añade al regdeusuarios
-                    regdeusuario.Manage_Ciudadanos(Ciudadano(name, telefono, cuil), True, Keyname)
-                else:
-                    alert_name = messagebox.showwarning(title = "Key Name", message= "key name already taken")
+        if CreateProfile.ValidarUsuario(cuil, telefono, datasetAnses):
+            #Chequea que no existan usuarios con ese nombre clave
+            if Keyname not in regdeusuario.Get_Ciudadanos():
+                #crea al usuario y lo añade al regdeusuarios
+                regdeusuario.Manage_Ciudadanos(Ciudadano(name, telefono, cuil), True, Keyname)
+                return True
             else:
-                #Manejar que los datos no existen
-                alert = messagebox.showwarning(title= "Data not found", message = "The data couldn be foun in ANSES")
+                alert_name = messagebox.showwarning(title = "Key Name", message= "key name already taken")
+                return False
+        else:
+            #Manejar que los datos no existen
+            alert = messagebox.showwarning(title= "Data not found", message = "The data couldn be foun in ANSES")
+            return False
 
     @classmethod
     def ValidarUsuario(cls, cuil, telefono, datasetANSES: DatasetANSES):

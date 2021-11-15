@@ -3,7 +3,7 @@ from tkinter import messagebox
 from EventIT.guiLib.UsersGui.RegisterUser import RegisterNewUserW
 from EventIT.UsersLib.RegDeUsuarios import RegDeUsuarios
 from EventIT.DatasetANSES.DatasetANSES import DatasetANSES
-from EventIT.guiLib.UsersGui.menuusers import MenuUsersr
+from EventIT.guiLib.UsersGui.menuusers import MenuUsers
 
 
 class LogUser(tk.Tk):
@@ -45,7 +45,7 @@ class LogUser(tk.Tk):
                 #cuenta desbloqueada
                 self.keyname = keyName
                 self.user = self.regDeUsuarios.Get_Ciudadanos()[keyName]
-                self.Open_Window(MenuUsersr)
+                self.Open_Window(MenuUsers)
             elif estado_de_cuenta == 1:
                 #cuenta bloqueada
                 self.mesage_estado = tk.messagebox.showwarning(message="your acount is block, try other day.",
@@ -58,7 +58,7 @@ class LogUser(tk.Tk):
     def Open_Window(self, window):
         if window ==  RegisterNewUserW:
             RegisterNewUserW(self.regDeUsuarios, self.data_anses)
-        if window == MenuUsersr:
-            MenuUsersr(self.regDeUsuarios, self.data_anses, self.user)
+        if window == MenuUsers:
+            MenuUsers(self.regDeUsuarios, self.data_anses, self.user)
         self.withdraw()
 

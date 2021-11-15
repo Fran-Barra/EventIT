@@ -4,7 +4,7 @@ from EventIT.DatasetANSES.DatasetANSES import DatasetANSES
 from EventIT.UsersLib.CitizenClass import Ciudadano
 
 
-class MenuUsersr(tk.Tk):
+class MenuUsers(tk.Tk):
     def __init__(self, regdeusuarios: RegDeUsuarios, data_anses: DatasetANSES, user: Ciudadano):
         super().__init__()
         self.wm_title("EventIT")
