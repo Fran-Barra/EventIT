@@ -8,3 +8,7 @@ class Usuario(ABC):
 
     def Get_Name(self):
         return self.__Name
+
+    def Mod_Name(self, name: str):
+        #Solo la puede llamar el AMB
+        self.__Name = name
