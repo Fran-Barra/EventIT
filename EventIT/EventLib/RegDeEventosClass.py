@@ -8,8 +8,14 @@ class RegDeEventos:
     def __repr__(self):
         return 'RegDeEventos'
 
-    def Set_Events(self):
-        return self.__Eventos
+    def Set_Events(self, evento: Evento, add: bool):
+        """Permite inscribirse o desinscribirse de un evento.\n
+            add = True, para agregarlo.\n
+            add = False, para eliminarlo"""
+        if add:
+            self.__Eventos.append(evento)
+        else:
+            self.__Eventos.remove(evento)
 
     def View_Events(self)-> list[Evento]:
         return self.__Eventos.copy()
