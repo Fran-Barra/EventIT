@@ -1,39 +1,38 @@
 class Frienship_Sistem:
-    def __init__(self):
-        self.personas_rechazadas = []
+    def __init__(self, RegDeUsuarios):
+        self.__RegDeUsuarios = RegDeUsuarios
 
-    def get_personas_rechazadas(self):
-        return self.personas_rechazadas
 
-    def EnviarSolicitud(self, ciudadanoSolicitante, ciudadanoDestinatario):
-        try:
-            if len(ciudadanoSolicitante.Get_ListaDeRechazos()) < 5:
-                if ciudadanoSolicitante not in ciudadanoDestinatario.Get_ListaDeSolicitudes():
-                    a = ciudadanoDestinatario.Mod_ListaDeSolicitudes()
-                    a.append(ciudadanoSolicitante)
-                else:
-                    return "Ya le enviaste una solicitud a este usuario"
-        except:
-            return "Tu usuario fue bloqueado por el sistema"
+    def EnviarSolicitud(self, CuilSolicitante, CuilDestinatario, CelSolicitante, CelDestinatario):
+        CiudadanoSolicitante = self.__RegDeUsuarios.searchCitizen(CelSolicitante,CuilSolicitante,None)
+        CiudadanoDestinatario = self.__RegDeUsuarios.searchCitizen(CelDestinatario,CuilDestinatario,None)
+        if CiudadanoSolicitante not in CiudadanoDestinatario.Get_ListaDeSolicitudes():
+            a = CiudadanoDestinatario.Mod_ListaDeSolicitudes()
+            a.append(CiudadanoSolicitante)
+        else:
+            return "Ya le enviaste una solicitud a este usuario"
 
-    def AceptarSolicitud(self, ciudadanoSolicitante, ciudadanoDestinatario):
-        try:
-            if len(ciudadanoDestinatario.Get_ListaDeRechazos()) < 5:
-                if ciudadanoSolicitante in ciudadanoDestinatario.Get_ListaDeSolicitudes():
-                    ciudadanoDestinatario.Mod_ContactosDeInteres().append(ciudadanoSolicitante)
-                    ciudadanoDestinatario.Mod_ListaDeSolicitudes().remove(ciudadanoSolicitante)
-                    ciudadanoSolicitante.Mod_ContactosDeInteres().append(ciudadanoDestinatario)
-                else:
-                    return "No tienes solicitudes de este usuario"
-        except:
-            return "Tu usuario fue bloqueado por el sistema"
+    def AceptarSolicitud(self, CuilSolicitante, CuilDestinatario, CelSolicitante, CelDestinatario):
+        CiudadanoSolicitante = self.__RegDeUsuarios.searchCitizen(CelSolicitante,CuilSolicitante,None)
+        CiudadanoDestinatario = self.__RegDeUsuarios.searchCitizen(CelDestinatario,CuilDestinatario,None)
+        if CiudadanoSolicitante in CiudadanoDestinatario.Get_ListaDeSolicitudes():
+            a = CiudadanoDestinatario.Mod_ContactosDeInteres()
+            a.append(CiudadanoSolicitante)
+            b = CiudadanoDestinatario.Mod_ListaDeSolicitudes()
+            b.remove(CiudadanoSolicitante)
+            c = CiudadanoSolicitante.Mod_ContactosDeInteres()
+            c.append(CiudadanoDestinatario)
+        else:
+            return "No tienes solicitudes de este usuario"
 
-    def RechazarSolicitud(self, ciudadanoSolicitante, ciudadanoDestinatario):
-        if ciudadanoSolicitante in ciudadanoDestinatario.Get_ListaDeSolicitudes():
-            self.personas_rechazadas.append(ciudadanoSolicitante)
-            a = ciudadanoDestinatario.Mod_ListaDeSolicitudes()
-            a.remove(ciudadanoSolicitante)
-            (ciudadanoSolicitante.Mod_ListaDeRechazos()).append(ciudadanoDestinatario)
+
+    def RechazarSolicitud(self, CuilSolicitante, CuilDestinatario, CelSolicitante, CelDestinatario):
+        CiudadanoSolicitante = self.__RegDeUsuarios.searchCitizen(CelSolicitante,CuilSolicitante,None)
+        CiudadanoDestinatario = self.__RegDeUsuarios.searchCitizen(CelDestinatario,CuilDestinatario,None)
+        if CiudadanoSolicitante in CiudadanoDestinatario.Get_ListaDeSolicitudes():
+            a = CiudadanoDestinatario.Mod_ListaDeSolicitudes()
+            a.remove(CiudadanoSolicitante)
+            (CiudadanoSolicitante.Mod_ListaDeRechazos()).append(CiudadanoDestinatario)
 
         else:
             return "No tienes solicitudes de este usuario"
