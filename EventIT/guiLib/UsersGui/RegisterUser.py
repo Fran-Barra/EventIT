@@ -37,7 +37,7 @@ class RegisterNewUserW(tk.Tk):
         self.phone.grid(row=2, column= 0)
         self.phone.insert(1, "Enter a phone")
         self.cuil.grid(row=3, column=0)
-        self.cuil.insert(2, "enter a cuil")
+        self.cuil.insert(0, "enter a cuil")
         self.register_btn.grid(row=4, column=0)
 
     def register_new_profile(self):
