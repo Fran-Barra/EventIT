@@ -1,53 +1,41 @@
 import unittest
-from EventIT.UsersLip.CitizenClass import Ciudadano
+from EventIT.UsersLib.CitizenClass import Ciudadano
 from EventIT.FriendshipSistem.FrienshiSist import Frienship_Sistem
+from EventIT.UsersLib.RegDeUsuarios import RegDeUsuarios
 
 
 
 class MyTestCase(unittest.TestCase):
     def test_enviar_solicitud(self):
-        Juan = Ciudadano("juan",555,123)
-        sist = Frienship_Sistem()
+        Juan = Ciudadano("juan",111,123)
         tom = Ciudadano("TOM",000,999)
-        sist.EnviarSolicitud(Juan,tom)
+        RegUsr = RegDeUsuarios()
+        RegUsr.Manage_Ciudadanos(Juan,True,'JUAN')
+        RegUsr.Manage_Ciudadanos(tom,True,"tom")
+        self.assertEqual(RegUsr.Get_Ciudadanos(),{'JUAN': [Juan, 0], 'tom': [tom, 0]})
+        Friendship = Frienship_Sistem(RegUsr)
+        Friendship.EnviarSolicitud(123,999,111,000)
         self.assertEqual(tom.Get_ListaDeSolicitudes(),[Juan])
 
 
     def test_aceptar_y_rechazar(self):
-        Marco = Ciudadano("Marcp",000,987)
-        Luis = Ciudadano('Luis',000,000)
-        Julio = Ciudadano("Julio",000,111)
-        sist = Frienship_Sistem()
-        sist.EnviarSolicitud(Marco,Julio)
-        sist.EnviarSolicitud(Marco,Luis)
-        sist.AceptarSolicitud(Marco,Julio)
-        self.assertEqual(Julio.Get_ListaDeSolicitudes(),[])
+        RegUsr =RegDeUsuarios()
+        Marco = Ciudadano("Marcp",100,987)
+        Luis = Ciudadano('Luis',200,000)
+        Julio = Ciudadano("Julio",300,111)
+        RegUsr.Manage_Ciudadanos(Marco,True,"Marco")
+        RegUsr.Manage_Ciudadanos(Luis,True,"Luis")
+        RegUsr.Manage_Ciudadanos(Julio,True,"Julio")
+        sist = Frienship_Sistem(RegUsr)
+        sist.EnviarSolicitud(987,111,100,300)
+        sist.EnviarSolicitud(987,000,100,200)
+        sist.AceptarSolicitud(987,111,100,300)
+        sist.RechazarSolicitud(987,000,100,200)
         self.assertEqual(Julio.Get_ContactosDeInteres(),[Marco])
-        sist.RechazarSolicitud(Marco,Luis)
-        self.assertEqual(sist.get_personas_rechazadas(),[Marco])
-
-    def test_bloqueo(self):
-        usr1 = Ciudadano("1",000,111)
-        usr2 = Ciudadano("2",000,111)
-        usr3 = Ciudadano("3",000,111)
-        usr4 = Ciudadano("4",000,111)
-        usr5 = Ciudadano("5",000,111)
-        usr6 = Ciudadano("6",000,111)
-        sist = Frienship_Sistem()
-        sist.EnviarSolicitud(usr1,usr2)
-        sist.EnviarSolicitud(usr1,usr3)
-        sist.EnviarSolicitud(usr1,usr4)
-        sist.EnviarSolicitud(usr1,usr5)
-        sist.EnviarSolicitud(usr1,usr6)
-        sist.RechazarSolicitud(usr1,usr2)
-        sist.RechazarSolicitud(usr1,usr3)
-        sist.RechazarSolicitud(usr1,usr4)
-        sist.RechazarSolicitud(usr1,usr5)
-        sist.RechazarSolicitud(usr1,usr6)
-        self.assertEqual(len(usr1.Get_ListaDeRechazos()),5)
-        sist.EnviarSolicitud(usr1,usr2)
-        self.assertEqual(usr2.Get_ListaDeSolicitudes(),[])
-
+        self.assertEqual(Marco.Get_ContactosDeInteres(),[Julio])
+        self.assertEqual(Marco.Get_ListaDeRechazos(),[Luis])
+        self.assertEqual(Luis.Get_ListaDeSolicitudes(),[])
+        self.assertEqual(Luis.Get_ContactosDeInteres(),[])
 
 
 

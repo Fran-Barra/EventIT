@@ -28,10 +28,6 @@ class Ciudadano(Usuario):
     def Get_ListaDeRechazos(self):
         return self.__ListaDeRechazos.copy()
 
-    def Mod_Name(self, name: str):
-        #Solo la puede llamar el AMB
-        self.__Name = name
-
     def Mod_Telefono(self, telefono: str):
         #Solo la puede llamar el AMB
         self.__Telefono = telefono

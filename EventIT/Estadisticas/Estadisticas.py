@@ -49,3 +49,8 @@ class Estadisticas:
         elif mayor_porcentaje:
             ranking.sort(key=lambda x:self.calculate_percentage_of_atendees_of_the_zone()[x], reverse=True)# Ordena la lista de eventos poniendo en primer lugar al evento con mas asistentes de la zona
             return ranking
+
+    def calculate_event_attendance_maximums(self):
+        """Calcula el evneto con mas asistentes en el momento (picos de asistencia)"""
+        return self.calculate_positions_of_the_ranking(mayor_cantidad_de_asistentes=True)[0]
+
