@@ -20,6 +20,7 @@ class FrienshipW(tk.Tk):
         self.phone_btn = tk.Button(self, text= "send by phone", command = lambda: self.send_friendship())
         self.cuil_btn = tk.Button(self, text= "send by cuil", command = lambda: self.send_friendship())
         self.keyname_btn = tk.Button(self, text= "send by key name", command = lambda: self.send_friendship())
+        self.seefriends_btn = tk.Button(self, text= "see list of friends", command = lambda: self.show_friends())
 
 
         #Impresion de widgets
@@ -28,6 +29,7 @@ class FrienshipW(tk.Tk):
         self.phone_btn.grid(row= 2, column= 0)
         self.cuil_btn.grid(row= 2, column= 1)
         self.keyname_btn.grid(row= 2, column= 2)
+        self.seefriends_btn.grid(row= 3, column=1)
 
 
 
@@ -48,8 +50,8 @@ class FrienshipW(tk.Tk):
 
     def show_friends(self):
         for friend in self.user.Get_ContactosDeInteres():
-            tk.Label(self.displayfrm, text = f"user name: {friend.Get_name()} user phone: {friend.Get_phone()}"
-                                             f" user cuil {friend.Get_Cuil}")
+            tk.Label(self.displayframe, text = f"user name: {friend.Get_Name()} user phone: {friend.Get_Telefono()}"
+                                             f" user cuil {friend.Get_Cuil()}").pack()
 
     def acept_friend(self):
         pass
@@ -62,6 +64,8 @@ class FrienshipW(tk.Tk):
 if __name__ == "__main__":
     user1 = Ciudadano("jorge", 1, 1)
     user2 = Ciudadano("Emilio", 2, 2)
+
+    user1.Mod_ContactosDeInteres().append(user2)
 
     regdeususarios = RegDeUsuarios()
 

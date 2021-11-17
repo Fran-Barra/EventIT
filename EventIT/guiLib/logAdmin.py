@@ -7,7 +7,7 @@ class LogAdmin(tk.Tk):
     def __init__(self, regdeusuarios: RegDeUsuarios):
         super().__init__()
         self.wm_title("EventIT")
-        self.wm_geometry("350x400")
+        self.wm_geometry(f"350x400+{550}+{150}")
         self.wm_resizable(0,0)
         self.regdeusuarios = regdeusuarios
         self.Create_Widgets()

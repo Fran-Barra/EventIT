@@ -7,6 +7,8 @@ from EventIT.MapsSist.MapClass import Map
 from EventIT.MapsSist.UbicacionClass import Ubicacion
 from EventIT.MapsSist.ZonaClass import Zona
 from EventIT.guiLib.Maingui import App
+from EventIT.Estadisticas.Estadisticas import Estadisticas
+from EventIT.EventLib.EventoClass import Evento
 
 
 if __name__ == "__main__":
@@ -54,8 +56,43 @@ if __name__ == "__main__":
     Zona4 = Zona(listadeubicaciones[3], 4, "Zona 4")
     Mapa = Map([Zona1, Zona2, Zona3, Zona4])
 
+
+
+
+
+    evento1 = Evento("fiesta", listadeubicaciones[0][2], "Evento 1")
+    evento2 = Evento("fiesta", listadeubicaciones[0][20], "Evento 2")
+    evento3 = Evento("fiesta", listadeubicaciones[1][2], "4")
+    evento4 = Evento("fiesta", listadeubicaciones[1][3], "5")
+    evento5 = Evento("fiesta", listadeubicaciones[2][2], "6")
+    evento6 = Evento("fiesta", listadeubicaciones[2][3], "7")
+    evento7 = Evento("fiesta", listadeubicaciones[2][4], "8")
+    evento8 = Evento("fiesta", listadeubicaciones[3][2], "9")
+    evento9 = Evento("fiesta", listadeubicaciones[3][3], "3")
+    evento10 = Evento("fiesta", listadeubicaciones[3][4], "10")
+
+
+    regdeeventos.Set_Events(evento1, True)
+    regdeeventos.Set_Events(evento2, True)
+    regdeeventos.Set_Events(evento3, True)
+    regdeeventos.Set_Events(evento4, True)
+    regdeeventos.Set_Events(evento5, True)
+    regdeeventos.Set_Events(evento6, True)
+    regdeeventos.Set_Events(evento7, True)
+    regdeeventos.Set_Events(evento8, True)
+    regdeeventos.Set_Events(evento9, True)
+    regdeeventos.Set_Events(evento10, True)
+
+    ranking = Estadisticas(Mapa, dataAnses, regdeeventos)
+
+
+
+
     #mainMenu
-    application = App(regdeusuarios, dataAnses, regdeeventos, Mapa)
+    application = App(regdeusuarios, dataAnses, regdeeventos, Mapa, ranking)
+
 
 
     application.mainloop()
+
+
