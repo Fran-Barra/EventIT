@@ -1,0 +1,5 @@
+Lista de usuarios registrados: 
+Keyname: Juan/Name: juan
+Keyname: Jose/Name: jose
+Keyname: Lucas/Name: lucas/Telefono Celular: 123456/Cuil: 789101112/Contactos: []/Lista de solicitudes: []/Lista de rechazos: []
+Keyname: Joaquin/Name: joaquin/Telefono Celular: 654321/Cuil: 121110987/Contactos: []/Lista de solicitudes: []/Lista de rechazos: []

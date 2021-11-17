@@ -34,11 +34,18 @@ class TestRegDeUsuarios(unittest.TestCase):
 
 
     def test_Manage_Ciudadanos(self):
-        pass
+        self.regDeUsuarios.Manage_Ciudadanos(self.ciudadano3, True, 'Santiago')
+        self.assertEqual(len(self.regDeUsuarios.Get_Ciudadanos()), 3)
+        self.regDeUsuarios.Manage_Ciudadanos(self.ciudadano3, False, 'Santiago')
+        self.assertEqual(len(self.regDeUsuarios.Get_Ciudadanos()), 2)
 
     def test_searchCitizen(self):
         self.assertEqual(self.result1, self.ciudadano2)
         self.assertEqual(self.result2, self.ciudadano1)
         self.assertEqual(self.result3, self.ciudadano1)
         self.assertEqual(self.result4, None)
+
+
+if __name__ == '__main__':
+    unittest.main()
 
