@@ -1,41 +1,40 @@
 import unittest
 from EventIT.UsersLib.CitizenClass import Ciudadano
-from EventIT.FriendshipSistem.FrienshiSist import Frienship_Sistem
+from EventIT.FrienshipSistem.FrienshipSist import Frienship_Sistem
 from EventIT.UsersLib.RegDeUsuarios import RegDeUsuarios
 
 
 
 class MyTestCase(unittest.TestCase):
+    def setUp(self):
+        self.RegUsr = RegDeUsuarios()
+        self.Juan = Ciudadano("juan",111,123)
+        self.tom = Ciudadano("TOM",000,999)
+        self.Marco = Ciudadano("Marco",100,987)
+
+        self.RegUsr.Manage_Ciudadanos(self.Juan,True,'JUAN')
+        self.RegUsr.Manage_Ciudadanos(self.tom,True,"tom")
+        self.RegUsr.Manage_Ciudadanos(self.Marco, True,"Marco")
+
+
     def test_enviar_solicitud(self):
-        Juan = Ciudadano("juan",111,123)
-        tom = Ciudadano("TOM",000,999)
-        RegUsr = RegDeUsuarios()
-        RegUsr.Manage_Ciudadanos(Juan,True,'JUAN')
-        RegUsr.Manage_Ciudadanos(tom,True,"tom")
-        self.assertEqual(RegUsr.Get_Ciudadanos(),{'JUAN': [Juan, 0], 'tom': [tom, 0]})
-        Friendship = Frienship_Sistem(RegUsr)
-        Friendship.EnviarSolicitud(123,999,111,000)
-        self.assertEqual(tom.Get_ListaDeSolicitudes(),[Juan])
+        Frienship_Sistem.EnviarSolicitud(self.RegUsr, 123,999,111,000)
+        self.assertEqual(self.RegUsr.Get_Ciudadanos(),{"Marco": [self.Marco, 0], 'JUAN': [self.Juan, 0], 'tom': [self.tom, 0]})
+        self.assertEqual(self.tom.Get_ListaDeSolicitudes(),[self.Juan])
 
 
     def test_aceptar_y_rechazar(self):
-        RegUsr =RegDeUsuarios()
-        Marco = Ciudadano("Marcp",100,987)
-        Luis = Ciudadano('Luis',200,000)
-        Julio = Ciudadano("Julio",300,111)
-        RegUsr.Manage_Ciudadanos(Marco,True,"Marco")
-        RegUsr.Manage_Ciudadanos(Luis,True,"Luis")
-        RegUsr.Manage_Ciudadanos(Julio,True,"Julio")
-        sist = Frienship_Sistem(RegUsr)
-        sist.EnviarSolicitud(987,111,100,300)
-        sist.EnviarSolicitud(987,000,100,200)
-        sist.AceptarSolicitud(987,111,100,300)
-        sist.RechazarSolicitud(987,000,100,200)
-        self.assertEqual(Julio.Get_ContactosDeInteres(),[Marco])
-        self.assertEqual(Marco.Get_ContactosDeInteres(),[Julio])
-        self.assertEqual(Marco.Get_ListaDeRechazos(),[Luis])
-        self.assertEqual(Luis.Get_ListaDeSolicitudes(),[])
-        self.assertEqual(Luis.Get_ContactosDeInteres(),[])
+        Frienship_Sistem.EnviarSolicitud(self.RegUsr, 123,999,111,000)#Juan le envia a Tomas
+        Frienship_Sistem.EnviarSolicitud(self.RegUsr, CuilSolicitante= 999, CuilDestinatario=987)#Tomas le envia a Marco
+
+        Frienship_Sistem.AceptarSolicitud(self.RegUsr, CelSolicitante=111, CelDestinatario=000)#Tomas acepta a Juan
+        Frienship_Sistem.RechazarSolicitud(self.RegUsr, CuilSolicitante=999, CuilDestinatario=987)#Marco rechaza a Tomas
+
+        self.assertEqual(self.Juan.Get_ContactosDeInteres(),[self.tom])
+        self.assertEqual(self.tom.Get_ContactosDeInteres(),[self.Juan])
+        self.assertEqual(self.tom.Get_ListaDeRechazos(),[self.Marco])
+        self.assertEqual(self.tom.Get_ListaDeSolicitudes(),[])
+        self.assertEqual(self.Marco.Get_ContactosDeInteres(),[])
 
 
 
