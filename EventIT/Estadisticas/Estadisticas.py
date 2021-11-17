@@ -8,7 +8,7 @@ class Estadisticas:
         self.lista_de_zonas = map.getListaDeZonas()
         self.lista_de_ciudadanos = datasetANSES.getListOfUsuariosANSES()
         self.lista_de_eventos = regDeEventos.View_Events()
-        self.datasetANSES =datasetANSES
+        self.datasetANSES = datasetANSES
 
     def calculate_number_of_attendees_per_zone_per_event(self):
         """Calcula la cantidad de asistentes que asistieron a un evento y que viven en la misma zona donde se realizo el evento"""
