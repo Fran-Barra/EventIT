@@ -27,8 +27,8 @@ class TestPrueba(unittest.TestCase):
 
         self.evento1 = Evento(None, Ubicacion(10, 10), 'evento1')
         self.evento2 = Evento(None, Ubicacion(30, 30), 'evento2')
-        self.regDeEventos.Set_Events().append(self.evento1)
-        self.regDeEventos.Set_Events().append(self.evento2)
+        self.regDeEventos.Set_Events(self.evento1, True)
+        self.regDeEventos.Set_Events(self.evento2, True)
 
         self.juan = Ciudadano('Juan.Perez', 1150042603, 43807968)
         self.jose = Ciudadano('Jose.Hernandez', 1133280846, 23224040)
@@ -38,7 +38,9 @@ class TestPrueba(unittest.TestCase):
 
         self.estadisticas = Estadisticas(self.mapa1, self.datasetANSES, self.regDeEventos)
 
-
+        self.rankingString = f"|\tPosicion\t|\tNombre del evento\t|\tZona\t|\tCantidad de personas por zona\t|\tCantidad de personas totales\t|\tPorcentaje de asistentes de la zona\t|\n"
+        for index, evento in enumerate(self.estadisticas.calculate_positions_of_the_ranking()): # arma el ranking en formato string para imprmirlo
+            self.rankingString += f"|\t\t{index}\t\t|\t\t{evento}\t\t\t|\t{evento.getZona(self.mapa1.getListaDeZonas())}\t|\t\t\t\t{self.estadisticas.calculate_number_of_attendees_per_zone_per_event()[evento]}\t\t\t\t\t|\t\t\t\t{self.estadisticas.calculate_total_number_of_attendees()[evento]}\t\t\t\t\t|\t\t\t\t{self.estadisticas.calculate_percentage_of_atendees_of_the_zone()[evento]}\t\t\t\t\t|\n"
 
     # def test_create_the_attendees_list_with_ANSES_users(self):
 

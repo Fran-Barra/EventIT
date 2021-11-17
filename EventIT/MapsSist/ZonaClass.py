@@ -8,7 +8,7 @@ class Zona:
         self.nombre = nombre
 
     def __repr__(self):
-        return f"{list(map(lambda x:x.Get_Coordinates(), self.__Ubicaciones))}"
+        return f"{self.nombre}"
 
     def Get_Ubicaciones(self):
         return self.__Ubicaciones
