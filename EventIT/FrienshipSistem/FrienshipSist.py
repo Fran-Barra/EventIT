@@ -1,4 +1,4 @@
-class Frienship_Sistem:
+class Frienship_System:
     def __init__(self, RegDeUsuarios):
         self.__RegDeUsuarios = RegDeUsuarios
 
