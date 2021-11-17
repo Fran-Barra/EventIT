@@ -40,7 +40,10 @@ class TestPrueba(unittest.TestCase):
 
         self.rankingString = f"|\tPosicion\t|\tNombre del evento\t|\tZona\t|\tCantidad de personas por zona\t|\tCantidad de personas totales\t|\tPorcentaje de asistentes de la zona\t|\n"
         for index, evento in enumerate(self.estadisticas.calculate_positions_of_the_ranking()): # arma el ranking en formato string para imprmirlo
-            self.rankingString += f"|\t\t{index}\t\t|\t\t{evento}\t\t\t|\t{evento.getZona(self.mapa1.getListaDeZonas())}\t|\t\t\t\t{self.estadisticas.calculate_number_of_attendees_per_zone_per_event()[evento]}\t\t\t\t\t|\t\t\t\t{self.estadisticas.calculate_total_number_of_attendees()[evento]}\t\t\t\t\t|\t\t\t\t{self.estadisticas.calculate_percentage_of_atendees_of_the_zone()[evento]}\t\t\t\t\t|\n"
+            self.rankingString += f"|\t\t{index}\t\t|\t\t{evento}\t\t\t|\t{evento.getZona(self.mapa1.getListaDeZonas())}\t|" \
+                                  f"\t\t\t\t{self.estadisticas.calculate_number_of_attendees_per_zone_per_event()[evento]}\t\t\t\t\t|" \
+                                  f"\t\t\t\t{self.estadisticas.calculate_total_number_of_attendees()[evento]}\t\t\t\t\t|" \
+                                  f"\t\t\t\t{self.estadisticas.calculate_percentage_of_atendees_of_the_zone()[evento]}\t\t\t\t\t|\n"
 
     # def test_create_the_attendees_list_with_ANSES_users(self):
 
