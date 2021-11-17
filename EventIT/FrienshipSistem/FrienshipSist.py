@@ -2,7 +2,7 @@ from tkinter import messagebox
 from EventIT.UsersLib.RegDeUsuarios import RegDeUsuarios
 
 
-class Frienship_Sistem:
+class Frienship_System:
 
     @staticmethod
     def EnviarSolicitud(regdeusuarios: RegDeUsuarios, CuilSolicitante= None, CuilDestinatario=None,
