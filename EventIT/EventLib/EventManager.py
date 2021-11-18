@@ -12,7 +12,7 @@ class EventManger:
 
     def alta_tiposDeEvento(self, TipoDeEvento, User):
         # El admin da de alta tipos de eventos, para que a la hora de crear eventos solo sean de los tipos de eventos aprobados.
-        if User.isinstance(Administrator) and TipoDeEvento not in self.__TipoDeEventos:
+        if isinstance(User,Administrator) and TipoDeEvento not in self.__TipoDeEventos:
             self.__TipoDeEventos.append(TipoDeEvento)
 
     def ver_tiposDeEvento (self):
@@ -32,12 +32,11 @@ class EventManger:
         if invitados is None:
             invitados = []
         if evento in self.__regdeeventos.View_Events():
-            evento.Set_Attendance().append(usuario)
+            evento.Set_Attendance(usuario,True)
             for invitado in invitados:
-                evento.Set_Attendance().append(invitado)
+                evento.Set_Attendance(invitado,True)
 
     def desinscribirse_evento(self, evento, usuario):
         # Si el evento esta en la lista y el usuario figura como invitado, se lo elimina de la lista de invitados.
-        if evento in self.__regdeeventos.View_Events() and usuario in evento.Set_Attendance():
-            evento.Set_Attendance().remove(usuario)
-
+        if evento in self.__regdeeventos.View_Events() and usuario in evento.getListaDeAsistencia():
+            evento.Set_Attendance(usuario,False)
