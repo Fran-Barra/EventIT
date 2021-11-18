@@ -1,38 +1,52 @@
-class Frienship_Sistem:
-    def __init__(self, RegDeUsuarios):
-        self.__RegDeUsuarios = RegDeUsuarios
+from tkinter import messagebox
+from EventIT.UsersLib.RegDeUsuarios import RegDeUsuarios
 
 
-    def EnviarSolicitud(self, CuilSolicitante, CuilDestinatario, CelSolicitante, CelDestinatario):
-        CiudadanoSolicitante = self.__RegDeUsuarios.searchCitizen(CelSolicitante,CuilSolicitante,None)
-        CiudadanoDestinatario = self.__RegDeUsuarios.searchCitizen(CelDestinatario,CuilDestinatario,None)
-        if CiudadanoSolicitante not in CiudadanoDestinatario.Get_ListaDeSolicitudes():
-            a = CiudadanoDestinatario.Mod_ListaDeSolicitudes()
-            a.append(CiudadanoSolicitante)
-        else:
-            return "Ya le enviaste una solicitud a este usuario"
+class Frienship_System:
 
-    def AceptarSolicitud(self, CuilSolicitante, CuilDestinatario, CelSolicitante, CelDestinatario):
-        CiudadanoSolicitante = self.__RegDeUsuarios.searchCitizen(CelSolicitante,CuilSolicitante,None)
-        CiudadanoDestinatario = self.__RegDeUsuarios.searchCitizen(CelDestinatario,CuilDestinatario,None)
-        if CiudadanoSolicitante in CiudadanoDestinatario.Get_ListaDeSolicitudes():
-            a = CiudadanoDestinatario.Mod_ContactosDeInteres()
-            a.append(CiudadanoSolicitante)
-            b = CiudadanoDestinatario.Mod_ListaDeSolicitudes()
-            b.remove(CiudadanoSolicitante)
-            c = CiudadanoSolicitante.Mod_ContactosDeInteres()
-            c.append(CiudadanoDestinatario)
-        else:
-            return "No tienes solicitudes de este usuario"
+    @staticmethod
+    def EnviarSolicitud(regdeusuarios: RegDeUsuarios, CuilSolicitante= None, CuilDestinatario=None,
+                        CelSolicitante=None, CelDestinatario= None):
+        try:
+            CiudadanoSolicitante = regdeusuarios.searchCitizen(CelSolicitante,CuilSolicitante,None)
+            CiudadanoDestinatario = regdeusuarios.searchCitizen(CelDestinatario,CuilDestinatario,None)
+            if CiudadanoSolicitante not in CiudadanoDestinatario.Get_ListaDeSolicitudes():
+                CiudadanoDestinatario.Mod_ListaDeSolicitudes().append(CiudadanoSolicitante)
+            else:
+                messagebox.showwarning(title= "already send", message= "you already sent a request to this user")
+        except AttributeError:
+            messagebox.showwarning(title="user not found", message="The user couldnt be found")
 
 
-    def RechazarSolicitud(self, CuilSolicitante, CuilDestinatario, CelSolicitante, CelDestinatario):
-        CiudadanoSolicitante = self.__RegDeUsuarios.searchCitizen(CelSolicitante,CuilSolicitante,None)
-        CiudadanoDestinatario = self.__RegDeUsuarios.searchCitizen(CelDestinatario,CuilDestinatario,None)
-        if CiudadanoSolicitante in CiudadanoDestinatario.Get_ListaDeSolicitudes():
-            a = CiudadanoDestinatario.Mod_ListaDeSolicitudes()
-            a.remove(CiudadanoSolicitante)
-            (CiudadanoSolicitante.Mod_ListaDeRechazos()).append(CiudadanoDestinatario)
+    @staticmethod
+    def AceptarSolicitud(regdeusuarios: RegDeUsuarios, CuilSolicitante= None, CuilDestinatario= None,
+                         CelSolicitante= None, CelDestinatario= None):
+        try:
+            CiudadanoSolicitante =  regdeusuarios.searchCitizen(CelSolicitante,CuilSolicitante,None)
+            CiudadanoDestinatario = regdeusuarios.searchCitizen(CelDestinatario,CuilDestinatario,None)
+            if CiudadanoSolicitante in CiudadanoDestinatario.Get_ListaDeSolicitudes():
+                CiudadanoDestinatario.Mod_ContactosDeInteres().append(CiudadanoSolicitante)
+                CiudadanoDestinatario.Mod_ListaDeSolicitudes().remove(CiudadanoSolicitante)
+                CiudadanoSolicitante.Mod_ContactosDeInteres().append(CiudadanoDestinatario)
+            else:
+                messagebox.showwarning(title= "no requests", message= "there is no a request from this user")
+        except AttributeError:
+            messagebox.showwarning(title="user not found", message="The user couldnt be found")
 
-        else:
-            return "No tienes solicitudes de este usuario"
+
+    @staticmethod
+    def RechazarSolicitud(regdeusuarios: RegDeUsuarios, CuilSolicitante= None, CuilDestinatario= None,
+                          CelSolicitante= None, CelDestinatario= None):
+        try:
+            CiudadanoSolicitante = regdeusuarios.searchCitizen(CelSolicitante,CuilSolicitante,None)
+            CiudadanoDestinatario = regdeusuarios.searchCitizen(CelDestinatario,CuilDestinatario,None)
+            if CiudadanoSolicitante in CiudadanoDestinatario.Get_ListaDeSolicitudes():
+                CiudadanoDestinatario.Mod_ListaDeSolicitudes().remove(CiudadanoSolicitante)
+                CiudadanoSolicitante.Mod_ListaDeRechazos().append(CiudadanoDestinatario)
+
+            else:
+                messagebox.showwarning(title= "no requests", message= "there is no a request from this user")
+        except AttributeError:
+            messagebox.showwarning(title="user not found", message="The user couldnt be found")
+
+
