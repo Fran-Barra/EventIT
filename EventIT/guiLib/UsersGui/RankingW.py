@@ -3,18 +3,20 @@ from EventIT.UsersLib.RegDeUsuarios import RegDeUsuarios
 from EventIT.UsersLib.CitizenClass import Ciudadano
 from EventIT.DatasetANSES.DatasetANSES import DatasetANSES
 from EventIT.Estadisticas.Estadisticas import Estadisticas
+from EventIT.MapsSist.MapClass import Map
 
 
 
 
 class RankingW(tk.Tk):
-    def __init__(self, regdeusuarios: RegDeUsuarios, dataanses: DatasetANSES, ranking: Estadisticas, user: Ciudadano):
+    def __init__(self, regdeusuarios: RegDeUsuarios, dataanses: DatasetANSES, mapa: Map, ranking: Estadisticas, user: Ciudadano):
         super().__init__()
         self.wm_title("EventIT")
-        self.wm_geometry("900x400")
-        self.wm_resizable(0, 0)
+        self.wm_geometry("1350x400")
+        self.wm_resizable(1, 1)
         self.dataanses = dataanses
         self.regdeusuarios = regdeusuarios
+        self.mapa = mapa
         self.ranking = ranking
         self.user = user
         self.Create_Widgets()
@@ -38,23 +40,34 @@ class RankingW(tk.Tk):
         self.rank_asis_max_btn.grid(row=1, column=0)
         self.rank_asis_porcent_btn.grid(row= 2, column= 0)
 
+        """       #Experimental
+        self.displayinfo = tk.Canvas(self, width= 50, height= 50)
+        self.displayinfo.grid(row=0, column= 1)
+        scroll = tk.Scrollbar(self.displayinfo)
+        scroll.pack(side='right', fill='y')
+        self.txtRes= tk.Text(self.displayinfo, width=50, height=50, yscrollcommand=scroll.set)
+        self.txtRes.pack(side='left')
+        scroll.config(command = self.txtRes.yview)"""
+
 
         #CANVAS
-        global displayinfo
-        global vsb
-        global displayframe
-        displayinfo = tk.Canvas(self, width=600, height=400, bg="white")
-        displayinfo.grid(row=0, column= 3, rowspan = 20)
+        self.displayinfo = tk.Canvas(self, width=1000, height=400, bg="white")
+        self.displayinfo.grid(row=0, column= 3, rowspan = 20)
+
+        self.vsb = tk.Scrollbar(self, orient= "vertical")
+        self.vsb.grid(row=0, column= 4, rowspan= 20, sticky= "ns")
 
 
-        vsb = tk.Scrollbar(self, orient= "vertical", command= displayinfo.yview())
-        vsb.grid(row=0, column= 4, rowspan= 20, sticky= "ns")
+        self.displayframe = tk.Frame(self.displayinfo, bg="white")
 
-        displayinfo.config(yscrollcommand = vsb.set)
-        displayinfo.bind('<Configure>', lambda e: displayinfo.config(scrollregion = displayinfo.bbox("all")))
+        self.displayinfo.config(yscrollcommand = self.vsb.set)
+        self.displayinfo.bind('<Configure>', lambda e: self.displayinfo.config(scrollregion = self.displayinfo.bbox("all")))
 
-        displayframe = tk.Frame(displayinfo, bg="white")
-        displayinfo.create_window((10, 0), window= displayframe, anchor="nw")
+
+        self.displayinfo.create_window((10, 0), window= self.displayframe, anchor="nw")
+
+        self.vsb.config(command= self.displayinfo.yview)
+
 
 
 
@@ -68,9 +81,18 @@ class RankingW(tk.Tk):
             ranking = self.ranking.calculate_positions_of_the_ranking(mayor_porcentaje=True)
         else:
             ranking = []
-        print(ranking)
-        for evento in ranking:
-            tk.Label(displayframe, text= f"Evento: {evento}").pack()
+
+
+        tk.Label(self.displayinfo, text=f"|\tPosicion\t\t|\tNombre del evento\t|\tZona\t|\tCantidad de personas por zona\t|"
+                                        f"\tCantidad de personas totales\t|\tPorcentaje de asistentes de la zona\t|\n").pack()
+        for index, evento in enumerate(self.ranking.calculate_positions_of_the_ranking()):
+            tk.Label(self.displayinfo, text=f"|\t{index}\t\t|\t\t{evento}\t\t|\t{evento.getZona(self.mapa.getListaDeZonas())}"
+                     f"\t|\t\t\t{self.ranking.calculate_number_of_attendees_per_zone_per_event()[evento]}"
+                     f"\t\t|\t\t{self.ranking.calculate_total_number_of_attendees()[evento]}"
+                     f"\t\t\t|\t\t{self.ranking.calculate_percentage_of_atendees_of_the_zone()[evento]}"
+                     f"\t\t\t|\n").pack()
+
+
 
 
 
