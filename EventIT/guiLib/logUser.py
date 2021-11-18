@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 from EventIT.guiLib.UsersGui.RegisterUser import RegisterNewUserW
 from EventIT.UsersLib.RegDeUsuarios import RegDeUsuarios
+from EventIT.EventLib.EventManager import EventManger
 from EventIT.DatasetANSES.DatasetANSES import DatasetANSES
 from EventIT.guiLib.UsersGui.menuusers import MenuUsers
 from EventIT.EventLib.RegDeEventosClass import RegDeEventos
@@ -9,7 +10,8 @@ from EventIT.MapsSist.MapClass import Map
 from EventIT.Estadisticas.Estadisticas import Estadisticas
 
 class LogUser(tk.Tk):
-    def __init__(self, regdeusuarios: RegDeUsuarios, dataanses: DatasetANSES, regdeeventos: RegDeEventos, mapa: Map, ranking: Estadisticas):
+    def __init__(self, regdeusuarios: RegDeUsuarios, dataanses: DatasetANSES, regdeeventos: RegDeEventos,
+                 eventmanager: EventManger, mapa: Map, ranking: Estadisticas):
         super().__init__()
         self.wm_title("EventIT")
         self.wm_geometry(f"350x400+{550}+{150}")
@@ -17,6 +19,7 @@ class LogUser(tk.Tk):
         self.dataanses = dataanses
         self.regdeusuarios = regdeusuarios
         self.regdeeventos = regdeeventos
+        self.eventmanager = eventmanager
         self.mapa = mapa
         self.ranking = ranking
         self.Create_Widgets()
@@ -62,8 +65,8 @@ class LogUser(tk.Tk):
 
     def Open_Window(self, window):
         if window ==  RegisterNewUserW:
-            RegisterNewUserW(self.regdeusuarios, self.dataanses, self.regdeeventos, self.mapa, self.ranking)
+            RegisterNewUserW(self.regdeusuarios, self.dataanses, self.regdeeventos, self. eventmanager, self.mapa, self.ranking)
         if window == MenuUsers:
-            MenuUsers(self.regdeusuarios, self.dataanses, self.regdeeventos, self.mapa, self.ranking, self.user)
+            MenuUsers(self.regdeusuarios, self.dataanses, self.regdeeventos, self.eventmanager, self.mapa, self.ranking, self.user)
         self.withdraw()
 

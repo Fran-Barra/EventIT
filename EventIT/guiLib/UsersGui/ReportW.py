@@ -8,7 +8,7 @@ from EventIT.EventLib.RegDeEventosClass import RegDeEventos
 from EventIT.EventLib.EventManager import EventManger
 from EventIT.MapsSist.MapClass import Map
 
-class MenuUsers(tk.Tk):
+class ReportW(tk.Tk):
     def __init__(self, regdeusuarios: RegDeUsuarios, data_anses: DatasetANSES, regdeeventos: RegDeEventos,
                  eventmanager: EventManger, mapa: Map, user: Ciudadano):
         super().__init__()
