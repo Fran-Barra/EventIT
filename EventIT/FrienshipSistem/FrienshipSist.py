@@ -13,9 +13,9 @@ class Frienship_System:
             if CiudadanoSolicitante not in CiudadanoDestinatario.Get_ListaDeSolicitudes():
                 CiudadanoDestinatario.Mod_ListaDeSolicitudes().append(CiudadanoSolicitante)
             else:
-                messagebox.showwarning(title= "already send", message= "you already sent a request to this user")
+                messagebox.showwarning(title= "Already sent", message= "You already sent a request to this user")
         except AttributeError:
-            messagebox.showwarning(title="user not found", message="The user couldnt be found")
+            messagebox.showwarning(title="User not found", message="The user couldn't be found")
 
 
     @staticmethod
@@ -29,9 +29,9 @@ class Frienship_System:
                 CiudadanoDestinatario.Mod_ListaDeSolicitudes().remove(CiudadanoSolicitante)
                 CiudadanoSolicitante.Mod_ContactosDeInteres().append(CiudadanoDestinatario)
             else:
-                messagebox.showwarning(title= "no requests", message= "there is no a request from this user")
+                messagebox.showwarning(title= "No requests", message= "You do not have requests from this user")
         except AttributeError:
-            messagebox.showwarning(title="user not found", message="The user couldnt be found")
+            messagebox.showwarning(title="User not found", message="The user couldn't be found")
 
 
     @staticmethod
@@ -45,8 +45,8 @@ class Frienship_System:
                 CiudadanoSolicitante.Mod_ListaDeRechazos().append(CiudadanoDestinatario)
 
             else:
-                messagebox.showwarning(title= "no requests", message= "there is no a request from this user")
+                messagebox.showwarning(title= "No requests", message= "You do not have requests from this user")
         except AttributeError:
-            messagebox.showwarning(title="user not found", message="The user couldnt be found")
+            messagebox.showwarning(title="User not found", message="The user couldn't be found")
 
 
