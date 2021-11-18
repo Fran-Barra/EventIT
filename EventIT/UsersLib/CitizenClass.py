@@ -36,15 +36,34 @@ class Ciudadano(Usuario):
         #Solo la puede llamar el AMB
         self.__CUIL = cuil
 
-    def Mod_ContactosDeInteres(self):
-        #Solo accedible por FrienshipSistem
-        return self.__ContactosDeInteres
+    def Mod_ContactosDeInteres(self, ciudadano, add: bool):
+        """Permite agregar o eliminar un contacto.\n
+            add = True, para agregarlo.\n
+            add = False, para eliminarlo
+            *Solo accedible por FrienshipSistem"""
+        if add:
+            self.__ContactosDeInteres.append(ciudadano)
+        else:
+            self.__ContactosDeInteres.remove(ciudadano)
 
-    def Mod_ListaDeSolicitudes(self):
-        #Solo accedible por FrienshipSistem
-        return self.__ListaDeSolicitudes
-    
-    def Mod_ListaDeRechazos(self):
-        #Solo accedible por FrienshipSistem
-        return self.__ListaDeRechazos
+    def Mod_ListaDeSolicitudes(self, ciudadano, add: bool):
+        """Permite agregar o eliminar un ciudadano a la lista de solicitudes.\n
+            add = True, para agregarlo.\n
+            add = False, para eliminarlo
+            *Solo accedible por FrienshipSistem"""
+        if add:
+            self.__ListaDeSolicitudes.append(ciudadano)
+        else:
+            self.__ListaDeSolicitudes.remove(ciudadano)
+
+    def Mod_ListaDeRechazos(self, ciudadano, add: bool):
+        """Permite agregar o eliminar un ciudadano a la lista de rechazos.\n
+            add = True, para agregarlo.\n
+            add = False, para eliminarlo
+            *Solo accedible por FrienshipSistem"""
+        if add:
+            self.__ListaDeRechazos.append(ciudadano)
+        else:
+            self.__ListaDeRechazos.remove(ciudadano)
+
         

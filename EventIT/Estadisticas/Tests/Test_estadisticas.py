@@ -44,7 +44,7 @@ class TestPrueba(unittest.TestCase):
                                   f"\t\t\t\t{self.estadisticas.calculate_number_of_attendees_per_zone_per_event()[evento]}\t\t\t\t\t|" \
                                   f"\t\t\t\t{self.estadisticas.calculate_total_number_of_attendees()[evento]}\t\t\t\t\t|" \
                                   f"\t\t\t\t{self.estadisticas.calculate_percentage_of_atendees_of_the_zone()[evento]}\t\t\t\t\t|\n"
-
+        # print(self.rankingString)
     # def test_create_the_attendees_list_with_ANSES_users(self):
 
     def test_add_events(self):

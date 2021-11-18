@@ -1,5 +1,6 @@
 from EventIT.DatasetANSES.UsuarioANSES import UsuarioANSES
 from EventIT.MapsSist.UbicacionClass import Ubicacion
+import os
 
 
 class DatasetANSES:
@@ -11,7 +12,7 @@ class DatasetANSES:
         return "DatasetANSES"
 
     def makeListOfUsers(self):
-        with open(r"C:\Users\lucky\PycharmProjects\EventIT\EventIT\DatasetANSES\usuarios_ANSES.txt", "r") as usuarios_ANSES:
+        with open(os.path.dirname(os.path.realpath(__file__)) + r"\usuarios_ANSES.txt", "r") as usuarios_ANSES:
             # usuarios_ANSES = open('usuarios_ANSES.txt', 'r')
             for linea in usuarios_ANSES.readlines():
                 name = linea.split('/')[0]
