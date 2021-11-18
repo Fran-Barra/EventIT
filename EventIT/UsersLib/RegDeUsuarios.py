@@ -100,12 +100,15 @@ class RegDeUsuarios:
     def estado_de_bloqueo(self, bloquear: bool, keyname):
         self.__Ciudadanos[keyname][1] = bloquear
 
-    def searchCitizen(self, telCell: int = None, cuil: int = None, name: str = None):
+    def searchCitizen(self, telCell: int = None, cuil: int = None, name: str = None, returnKey: bool = False):
         if cuil == None and telCell == None and name == None:
             alert = tk.messagebox.showwarning(title="Falta de argumentos", text="Para buscar un ciudadano es necesario que introduzca al menos un argumento")
-        for ciudadano in list(map(lambda x:x[0], list(self.__Ciudadanos.values()))):
+        ciudadanos = list(map(lambda x:x[0], list(self.__Ciudadanos.values())))
+        keynames = list(self.__Ciudadanos.keys())
+        zipCitizenWithHisKey = list(zip(ciudadanos, keynames))
+        for ciudadano, keyname in zipCitizenWithHisKey:
             cuilAux = ciudadano.Get_Cuil() if cuil == None else cuil
             telCellAux = ciudadano.Get_Telefono() if telCell == None else telCell
             nameAux = ciudadano.Get_Name() if name == None else name
             if ciudadano.Get_Cuil() == cuilAux and ciudadano.Get_Telefono() == telCellAux and ciudadano.Get_Name() == nameAux:
-                return ciudadano
+                return ciudadano if not returnKey else keyname
