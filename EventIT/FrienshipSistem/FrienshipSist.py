@@ -1,7 +1,6 @@
 from tkinter import messagebox
 from EventIT.UsersLib.RegDeUsuarios import RegDeUsuarios
 
-
 class Frienship_System:
 
     @staticmethod
@@ -10,10 +9,13 @@ class Frienship_System:
         try:
             CiudadanoSolicitante = regdeusuarios.searchCitizen(CelSolicitante,CuilSolicitante,NameSolicitante)
             CiudadanoDestinatario = regdeusuarios.searchCitizen(CelDestinatario,CuilDestinatario,NameDestinatario)
-            if CiudadanoSolicitante not in CiudadanoDestinatario.Get_ListaDeSolicitudes():
-                CiudadanoDestinatario.Mod_ListaDeSolicitudes().append(CiudadanoSolicitante)
+            if len(CiudadanoSolicitante.Get_ListaDeRechazos()) < 5:
+                if CiudadanoSolicitante not in CiudadanoDestinatario.Get_ListaDeSolicitudes():
+                    CiudadanoDestinatario.Mod_ListaDeSolicitudes().append(CiudadanoSolicitante)
+                else:
+                    messagebox.showwarning(title= "Already sent", message= "You already sent a request to this user")
             else:
-                messagebox.showwarning(title= "Already sent", message= "You already sent a request to this user")
+                messagebox.showwarning(title= "User banned", message= "Your user was banned from the system")
         except AttributeError:
             messagebox.showwarning(title="User not found", message="The user couldn't be found")
         except KeyError:
@@ -26,12 +28,15 @@ class Frienship_System:
         try:
             CiudadanoSolicitante = regdeusuarios.searchCitizen(CelSolicitante,CuilSolicitante,NameSolicitante)
             CiudadanoDestinatario = regdeusuarios.searchCitizen(CelDestinatario,CuilDestinatario,NameDestinatario)
-            if CiudadanoSolicitante in CiudadanoDestinatario.Get_ListaDeSolicitudes():
-                CiudadanoDestinatario.Mod_ContactosDeInteres().append(CiudadanoSolicitante)
-                CiudadanoDestinatario.Mod_ListaDeSolicitudes().remove(CiudadanoSolicitante)
-                CiudadanoSolicitante.Mod_ContactosDeInteres().append(CiudadanoDestinatario)
+            if len(CiudadanoSolicitante.Get_ListaDeRechazos()) < 5:
+                if CiudadanoSolicitante in CiudadanoDestinatario.Get_ListaDeSolicitudes():
+                    CiudadanoDestinatario.Mod_ContactosDeInteres().append(CiudadanoSolicitante)
+                    CiudadanoDestinatario.Mod_ListaDeSolicitudes().remove(CiudadanoSolicitante)
+                    CiudadanoSolicitante.Mod_ContactosDeInteres().append(CiudadanoDestinatario)
+                else:
+                    messagebox.showwarning(title= "No requests", message= "You do not have requests from this user")
             else:
-                messagebox.showwarning(title= "No requests", message= "You do not have requests from this user")
+                messagebox.showwarning(title= "User banned", message= "Your user was banned from the system")
         except AttributeError:
             messagebox.showwarning(title="User not found", message="The user couldn't be found")
         except KeyError:
@@ -54,3 +59,4 @@ class Frienship_System:
             messagebox.showwarning(title="User not found", message="The user couldn't be found")
         except KeyError:
             messagebox.showwarning(title='Invalid Name', message="There are no users with this name")
+
