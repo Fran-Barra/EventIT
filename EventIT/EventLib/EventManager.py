@@ -1,8 +1,8 @@
 from tkinter import messagebox
 
 from EventIT.UsersLib.AdminClass import Administrator
-from RegDeEventosClass import RegDeEventos
-from EventoClass import Evento
+from EventIT.EventLib.RegDeEventosClass import RegDeEventos
+from EventIT.EventLib.EventoClass import Evento
 
 class EventManger:
 
