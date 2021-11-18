@@ -2,6 +2,7 @@ import unittest
 from EventIT.UsersLib.AdminClass import Administrator
 from EventIT.UsersLib.CitizenClass import Ciudadano
 from EventIT.UsersLib.RegDeUsuarios import RegDeUsuarios
+from EventIT.UsersLib.ABM import ABM
 
 
 class TestRegDeUsuarios(unittest.TestCase):
@@ -26,6 +27,10 @@ class TestRegDeUsuarios(unittest.TestCase):
         self.result3 = self.regDeUsuarios.searchCitizen(name='lucas')
         self.result4 = self.regDeUsuarios.searchCitizen(name='pepe')
 
+        self.regDeUsuarios.estado_de_bloqueo(bloquear=True, keyname='Lucas')
+
+        ABM.modificar_tel(888888, self.ciudadano1)
+
     def test_Manage_Admins(self):
         self.regDeUsuarios.Manage_Admins(self.admin3, True, 'Pepe')
         self.assertEqual(len(self.regDeUsuarios.Get_Admins()), 3)
@@ -44,6 +49,11 @@ class TestRegDeUsuarios(unittest.TestCase):
         self.assertEqual(self.result2, self.ciudadano1)
         self.assertEqual(self.result3, self.ciudadano1)
         self.assertEqual(self.result4, None)
+
+    def test_estado_de_bloqueo(self):
+        self.assertEqual(self.regDeUsuarios.Get_Ciudadanos()['Lucas'][1], 1)
+        self.regDeUsuarios.estado_de_bloqueo(bloquear=False, keyname='Lucas')
+        self.assertEqual(self.regDeUsuarios.Get_Ciudadanos()['Lucas'][1], 0)
 
 
 if __name__ == '__main__':

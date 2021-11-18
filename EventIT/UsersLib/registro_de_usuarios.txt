@@ -1,8 +1,0 @@
-Admin/Juan/juan/
-Admin/Jose/jose/
-Ciudadano/Lucas/lucas/123456/789101112/[]/[]/[]/
-Ciudadano/Joaquin/joaquin/654321/121110987/[]/[]/[]/
-Admin/Juan/juan/
-Admin/Jose/jose/
-Ciudadano/Lucas/lucas/123456/789101112/[]/[]/[]/
-Ciudadano/Joaquin/joaquin/654321/121110987/[]/[]/[]/
