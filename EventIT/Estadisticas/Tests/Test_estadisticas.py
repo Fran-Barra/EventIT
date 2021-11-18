@@ -36,14 +36,14 @@ class TestPrueba(unittest.TestCase):
         self.evento1.Set_Attendance(self.juan, True)
         self.evento1.Set_Attendance(self.jose, True)
 
-        self.estadisticas = Estadisticas(self.mapa1, self.datasetANSES, self.regDeEventos)
+        # self.estadisticas = Estadisticas(self.mapa1, self.datasetANSES, self.regDeEventos)
 
         self.rankingString = f"|\tPosicion\t|\tNombre del evento\t|\tZona\t|\tCantidad de personas por zona\t|\tCantidad de personas totales\t|\tPorcentaje de asistentes de la zona\t|\n"
-        for index, evento in enumerate(self.estadisticas.calculate_positions_of_the_ranking()): # arma el ranking en formato string para imprmirlo
+        for index, evento in enumerate(Estadisticas.calculate_positions_of_the_ranking(self.mapa1, self.datasetANSES, self.regDeEventos)): # arma el ranking en formato string para imprmirlo
             self.rankingString += f"|\t\t{index}\t\t|\t\t{evento}\t\t\t|\t{evento.getZona(self.mapa1.getListaDeZonas())}\t|" \
-                                  f"\t\t\t\t{self.estadisticas.calculate_number_of_attendees_per_zone_per_event()[evento]}\t\t\t\t\t|" \
-                                  f"\t\t\t\t{self.estadisticas.calculate_total_number_of_attendees()[evento]}\t\t\t\t\t|" \
-                                  f"\t\t\t\t{self.estadisticas.calculate_percentage_of_atendees_of_the_zone()[evento]}\t\t\t\t\t|\n"
+                                  f"\t\t\t\t{Estadisticas.calculate_number_of_attendees_per_zone_per_event(self.mapa1, self.datasetANSES, self.regDeEventos)[evento]}\t\t\t\t\t|" \
+                                  f"\t\t\t\t{Estadisticas.calculate_total_number_of_attendees(self.mapa1, self.datasetANSES, self.regDeEventos)[evento]}\t\t\t\t\t|" \
+                                  f"\t\t\t\t{Estadisticas.calculate_percentage_of_atendees_of_the_zone(self.mapa1, self.datasetANSES, self.regDeEventos)[evento]}\t\t\t\t\t|\n"
         # print(self.rankingString)
     # def test_create_the_attendees_list_with_ANSES_users(self):
 
@@ -58,17 +58,17 @@ class TestPrueba(unittest.TestCase):
         self.assertEqual(self.evento1.getListaDeAsistencia(), [self.juan])
 
     def test_calculate_number_of_attendees_per_zone_per_event(self):
-        self.assertEqual(self.estadisticas.calculate_number_of_attendees_per_zone_per_event()[self.evento1], 2)
+        self.assertEqual(Estadisticas.calculate_number_of_attendees_per_zone_per_event(self.mapa1, self.datasetANSES, self.regDeEventos)[self.evento1], 2)
 
     def test_calculate_total_number_of_attendees(self):
-        self.assertEqual(self.estadisticas.calculate_total_number_of_attendees()[self.evento1], 2)
+        self.assertEqual(Estadisticas.calculate_total_number_of_attendees(self.mapa1, self.datasetANSES, self.regDeEventos)[self.evento1], 2)
 
     def test_calculate_percentage_of_atendees_of_the_zone(self):
-        self.assertEqual(self.estadisticas.calculate_percentage_of_atendees_of_the_zone()[self.evento1], 100)
+        self.assertEqual(Estadisticas.calculate_percentage_of_atendees_of_the_zone(self.mapa1, self.datasetANSES, self.regDeEventos)[self.evento1], 100)
 
     def test_calculate_positions_of_the_ranking(self):
-        self.assertEqual(self.estadisticas.calculate_positions_of_the_ranking(), [self.evento1, self.evento2])
-        self.assertEqual(self.estadisticas.calculate_positions_of_the_ranking(mayor_porcentaje=True), [self.evento1, self.evento2])
+        self.assertEqual(Estadisticas.calculate_positions_of_the_ranking(self.mapa1, self.datasetANSES, self.regDeEventos), [self.evento1, self.evento2])
+        self.assertEqual(Estadisticas.calculate_positions_of_the_ranking(map=self.mapa1, datasetANSES=self.datasetANSES, regDeEventos=self.regDeEventos, mayor_porcentaje=True), [self.evento1, self.evento2])
 
 if __name__ == '__main__':
     unittest.main()
