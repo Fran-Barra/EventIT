@@ -38,8 +38,6 @@ class ABM():
             reg_de_usuarios.Manage_Admins(admin, True, name)
 
     @classmethod
-    def bloquear_desbloquear(cls, bloq: bool, reg_de_usuarios: RegDeUsuarios, ciudadano: Ciudadano):
+    def bloquear_desbloquear(cls, bloq: bool, reg_de_usuarios: RegDeUsuarios, keyname):
         if bloq:
-            reg_de_usuarios.Manage_Ciudadanos(ciudadano, True, 1) # Bloqueado
-        else:
-            reg_de_usuarios.Manage_Ciudadanos(ciudadano, False, 0) # Desbloqueado
+            reg_de_usuarios.estado_de_bloqueo(bloq, keyname)
