@@ -1,4 +1,5 @@
 from EventIT.UsersLib.Users import Usuario
+import os
 
 
 class Ciudadano(Usuario):
@@ -30,10 +31,40 @@ class Ciudadano(Usuario):
 
     def Mod_Telefono(self, telefono: str):
         #Solo la puede llamar el AMB
+        path = os.path.dirname(os.path.realpath(__file__)) + r'\registro_de_usuarios.txt'
+        with open(path,'r') as f:
+            replacement = ""
+            # using the for loop
+            for line in f:
+                line = line.strip()
+                changes = line.replace(str(self.__Telefono), str(telefono))
+                replacement = replacement + changes + "\n"
+
+            f.close()
+        # opening the file in write mode
+        with open(path,'w') as f:
+            f.write(replacement)
+            f.close()
+
         self.__Telefono = telefono
+
 
     def Mod_CUIL(self, cuil: str):
         #Solo la puede llamar el AMB
+        path = os.path.dirname(os.path.realpath(__file__)) + r'\registro_de_usuarios.txt'
+        with open(path,'r') as f:
+            replacement = ""
+            # using the for loop
+            for line in f:
+                line = line.strip()
+                changes = line.replace(str(self.__CUIL), str(cuil))
+                replacement = replacement + changes + "\n"
+
+            f.close()
+        # opening the file in write mode
+        with open(path,'w') as f:
+            f.write(replacement)
+            f.close()
         self.__CUIL = cuil
 
     def Mod_ContactosDeInteres(self, ciudadano, add: bool):
