@@ -27,6 +27,8 @@ class TestRegDeUsuarios(unittest.TestCase):
         self.result3 = self.regDeUsuarios.searchCitizen(name='lucas')
         self.result4 = self.regDeUsuarios.searchCitizen(name='pepe')
 
+        self.result5 = self.regDeUsuarios.searchCitizen(cuil=121110987, returnKey=True)
+
         self.regDeUsuarios.estado_de_bloqueo(bloquear=True, keyname='Lucas')
 
         self.ciudadano1.Mod_Telefono('888888') # Para probar que se modifique en el archivo de texto
@@ -49,6 +51,7 @@ class TestRegDeUsuarios(unittest.TestCase):
         self.assertEqual(self.result2, self.ciudadano1)
         self.assertEqual(self.result3, self.ciudadano1)
         self.assertEqual(self.result4, None)
+        self.assertEqual(self.result5, 'Joaquin')
 
     def test_estado_de_bloqueo(self):
         self.assertEqual(self.regDeUsuarios.Get_Ciudadanos()['Lucas'][1], 1)
