@@ -6,24 +6,26 @@ class Frienship_System:
 
     @staticmethod
     def EnviarSolicitud(regdeusuarios: RegDeUsuarios, CuilSolicitante= None, CuilDestinatario=None,
-                        CelSolicitante=None, CelDestinatario= None):
+                        CelSolicitante=None, CelDestinatario= None, NameSolicitante= None, NameDestinatario= None):
         try:
-            CiudadanoSolicitante = regdeusuarios.searchCitizen(CelSolicitante,CuilSolicitante,None)
-            CiudadanoDestinatario = regdeusuarios.searchCitizen(CelDestinatario,CuilDestinatario,None)
+            CiudadanoSolicitante = regdeusuarios.searchCitizen(CelSolicitante,CuilSolicitante,NameSolicitante)
+            CiudadanoDestinatario = regdeusuarios.searchCitizen(CelDestinatario,CuilDestinatario,NameDestinatario)
             if CiudadanoSolicitante not in CiudadanoDestinatario.Get_ListaDeSolicitudes():
                 CiudadanoDestinatario.Mod_ListaDeSolicitudes().append(CiudadanoSolicitante)
             else:
                 messagebox.showwarning(title= "Already sent", message= "You already sent a request to this user")
         except AttributeError:
             messagebox.showwarning(title="User not found", message="The user couldn't be found")
+        except KeyError:
+            messagebox.showwarning(title='Invalid Name', message="There are no users with this name")
 
 
     @staticmethod
     def AceptarSolicitud(regdeusuarios: RegDeUsuarios, CuilSolicitante= None, CuilDestinatario= None,
-                         CelSolicitante= None, CelDestinatario= None):
+                         CelSolicitante= None, CelDestinatario= None, NameSolicitante= None, NameDestinatario= None):
         try:
-            CiudadanoSolicitante =  regdeusuarios.searchCitizen(CelSolicitante,CuilSolicitante,None)
-            CiudadanoDestinatario = regdeusuarios.searchCitizen(CelDestinatario,CuilDestinatario,None)
+            CiudadanoSolicitante = regdeusuarios.searchCitizen(CelSolicitante,CuilSolicitante,NameSolicitante)
+            CiudadanoDestinatario = regdeusuarios.searchCitizen(CelDestinatario,CuilDestinatario,NameDestinatario)
             if CiudadanoSolicitante in CiudadanoDestinatario.Get_ListaDeSolicitudes():
                 CiudadanoDestinatario.Mod_ContactosDeInteres().append(CiudadanoSolicitante)
                 CiudadanoDestinatario.Mod_ListaDeSolicitudes().remove(CiudadanoSolicitante)
@@ -32,14 +34,16 @@ class Frienship_System:
                 messagebox.showwarning(title= "No requests", message= "You do not have requests from this user")
         except AttributeError:
             messagebox.showwarning(title="User not found", message="The user couldn't be found")
+        except KeyError:
+            messagebox.showwarning(title='Invalid Name', message="There are no users with this name")
 
 
     @staticmethod
     def RechazarSolicitud(regdeusuarios: RegDeUsuarios, CuilSolicitante= None, CuilDestinatario= None,
-                          CelSolicitante= None, CelDestinatario= None):
+                          CelSolicitante= None, CelDestinatario= None, NameSolicitante= None, NameDestinatario= None):
         try:
-            CiudadanoSolicitante = regdeusuarios.searchCitizen(CelSolicitante,CuilSolicitante,None)
-            CiudadanoDestinatario = regdeusuarios.searchCitizen(CelDestinatario,CuilDestinatario,None)
+            CiudadanoSolicitante = regdeusuarios.searchCitizen(CelSolicitante,CuilSolicitante,NameSolicitante)
+            CiudadanoDestinatario = regdeusuarios.searchCitizen(CelDestinatario,CuilDestinatario,NameDestinatario)
             if CiudadanoSolicitante in CiudadanoDestinatario.Get_ListaDeSolicitudes():
                 CiudadanoDestinatario.Mod_ListaDeSolicitudes().remove(CiudadanoSolicitante)
                 CiudadanoSolicitante.Mod_ListaDeRechazos().append(CiudadanoDestinatario)
@@ -48,5 +52,5 @@ class Frienship_System:
                 messagebox.showwarning(title= "No requests", message= "You do not have requests from this user")
         except AttributeError:
             messagebox.showwarning(title="User not found", message="The user couldn't be found")
-
-
+        except KeyError:
+            messagebox.showwarning(title='Invalid Name', message="There are no users with this name")
