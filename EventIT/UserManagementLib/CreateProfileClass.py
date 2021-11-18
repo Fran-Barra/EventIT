@@ -20,7 +20,7 @@ class CreateProfile:
                 else:
                     raise UnexpectedValue
             except UnexpectedValue:
-                pass
+                messagebox.showwarning(title= "Error CP", messagebox= "A sistem erreor in de use of CP")
 
     @classmethod
     def Create_Profile_Admin(cls, name, regdeusuarios: RegDeUsuarios):

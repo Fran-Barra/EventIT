@@ -33,7 +33,7 @@ class App(tk.Tk):
 
     def OpenWindow(self, NewWindow):
         if NewWindow == LogUser:
-            LogUser(self.regdeusuarios, self.dataanses, self.regdeeventos, self.mapa, self.ranking)
+            LogUser(self.regdeusuarios, self.dataanses, self.regdeeventos, self.eventmanager, self.mapa, self.ranking)
         elif NewWindow == LogAdmin:
             LogAdmin(self.regdeusuarios)
         elif NewWindow == LogSensor:

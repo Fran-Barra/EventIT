@@ -1,9 +1,10 @@
 import tkinter as tk
 from EventIT.UsersLib.RegDeUsuarios import RegDeUsuarios
 from EventIT.UsersLib.AdminClass import Administrator
-from EventIT.guiLib.AdminsGui.NewAdminW import New_AdminW
+from EventIT.UserManagementLib.CreateProfileClass import CreateProfile
 
-class AdminMenu(tk.Tk):
+
+class New_AdminW(tk.Tk):
     def __init__(self, regdeusuarios: RegDeUsuarios, admin: Administrator):
         super().__init__()
         self.wm_title("EventIT")
@@ -16,17 +17,20 @@ class AdminMenu(tk.Tk):
 
     def Create_Widgets(self):
         #creacion de widgets
-        self.new_adminW_btn = tk.Button(self, text= "New admin", command= lambda: self.Open_Window(New_AdminW))
+        self.name_admin = tk.Entry(self)
+        self.create_btn = tk.Button(self, text= "crete admin", command= self.create_admin)
 
 
 
 
         #impresion de widgets
-        self.new_adminW_btn.grid(row= 0, column= 0)
+        self.name_admin.insert(0, "name")
+        self.name_admin.grid(row= 0, column= 0)
+        self.create_btn.grid(row= 1, column= 0)
+
+    def create_admin(self):
+        name = self.name_admin.get()
+        CreateProfile.Create_Profile_Admin(name, self.regdeusuarios)
 
 
-
-    def Open_Window(self, window):
-        if window == New_AdminW:
-            New_AdminW(self.regdeusuarios, self.admin)
 

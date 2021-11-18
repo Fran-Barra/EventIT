@@ -65,16 +65,16 @@ class FrienshipW(tk.Tk):
 
 
     def show_requests(self):
-        for solicitante in self.user.Get_ListaDeSolicitudes():
-            tk.Label(self.displayframe, text = f"user name: {solicitante.Get_Name()} user phone: {solicitante.Get_Telefono()}"
+            for solicitante in self.user.Get_ListaDeSolicitudes():
+                tk.Label(self.displayframe, text = f"user name: {solicitante.Get_Name()} user phone: {solicitante.Get_Telefono()}"
                                              f" user cuil {solicitante.Get_Cuil()}").pack()
 
 
-
     def show_friends(self):
-        for friend in self.user.Get_ContactosDeInteres():
-            tk.Label(self.displayframe, text = f"user name: {friend.Get_Name()} user phone: {friend.Get_Telefono()}"
+            for friend in self.user.Get_ContactosDeInteres():
+                tk.Label(self.displayframe, text = f"user name: {friend.Get_Name()} user phone: {friend.Get_Telefono()}"
                                              f" user cuil {friend.Get_Cuil()}").pack()
+
 
     def accept_friend(self, by):
         try:
@@ -131,8 +131,8 @@ if __name__ == "__main__":
 
 
 
-    user1.Mod_ContactosDeInteres().append(user2)
-    user1.Mod_ListaDeSolicitudes().append(user3)
+    user1.Mod_ContactosDeInteres(user2, True)
+    user1.Mod_ListaDeSolicitudes(user3, True)
 
 
 

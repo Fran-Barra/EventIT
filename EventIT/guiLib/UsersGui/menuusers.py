@@ -54,7 +54,7 @@ class MenuUsers(tk.Tk):
         self.rank_btn.grid(row = 0, column = 0)
         self.frien_btn.grid(row = 1, column = 0)
         self.map_of_events_btn.grid(row= 2, column = 0)
-        self.report_btn.grid(row= 0, column= 0)
+        self.report_btn.grid(row= 3, column= 0)
 
 
 

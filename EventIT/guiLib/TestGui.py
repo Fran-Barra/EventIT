@@ -9,6 +9,7 @@ from EventIT.MapsSist.ZonaClass import Zona
 from EventIT.guiLib.Maingui import App
 from EventIT.Estadisticas.Estadisticas import Estadisticas
 from EventIT.EventLib.EventoClass import Evento
+from EventIT.EventLib.EventManager import EventManger
 
 
 if __name__ == "__main__":
@@ -17,6 +18,7 @@ if __name__ == "__main__":
     regdeeventos = RegDeEventos()
     regdeusuarios.Manage_Ciudadanos(Ciudadano("ADMIN", 1,1),True,"ADMIN")
     regdeusuarios.Manage_Admins(Administrator("ADMIN"), True,"ADMIN")
+    eventmanager  = EventManger(regdeeventos)
 
 
     def crear_ubicaciones():
@@ -88,8 +90,9 @@ if __name__ == "__main__":
 
 
 
+
     #mainMenu
-    application = App(regdeusuarios, dataAnses, regdeeventos, Mapa, ranking)
+    application = App(regdeusuarios, dataAnses, regdeeventos, eventmanager, Mapa, ranking)
 
 
 

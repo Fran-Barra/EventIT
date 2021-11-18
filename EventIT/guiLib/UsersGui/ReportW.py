@@ -34,7 +34,7 @@ class ReportW(tk.Tk):
         self.report_e = tk.Button(self, text= "Report event", command= lambda: self.report_event())
 
         self.a_name = tk.Entry(self)
-        self.invitados = tk.Entry(self)
+        self.invitados = tk.Entry(self, width= 25)
 
         self.asist_btn = tk.Button(self, text= "Asist to event", command= self.asistir_evento)
 

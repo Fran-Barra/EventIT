@@ -19,6 +19,7 @@ class RegisterNewUserW(tk.Tk):
         self.dataanses = data_anses
         self.regdeusuarios = regdeusuarios
         self.regdeeventos = regdeeventos
+        self.eventmanager = eventmanager
         self.mapa = mapa
         self.ranking = ranking
         self.Create_Widgets()
@@ -52,7 +53,7 @@ class RegisterNewUserW(tk.Tk):
             messagebox.showwarning(title= "Existing account", message= "An acount with this data already exist")
         else:
             if CreateProfile.Create_Profile("user", key_name, phone, cuil, self.regdeusuarios, self.dataanses):
-                self.user = self.regdeusuarios.Get_Ciudadanos()[key_name]
+                self.user = self.regdeusuarios.Get_Ciudadanos()[key_name][0]
                 self.Open_window(MenuUsers)
 
 
