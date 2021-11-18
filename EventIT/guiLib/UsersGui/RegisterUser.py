@@ -3,13 +3,15 @@ from tkinter import messagebox
 from EventIT.UsersLib.RegDeUsuarios import RegDeUsuarios
 from EventIT.UserManagementLib.CreateProfileClass import CreateProfile
 from EventIT.DatasetANSES.DatasetANSES import DatasetANSES
+from EventIT.EventLib.EventManager import EventManger
 from EventIT.guiLib.UsersGui.menuusers import  MenuUsers
 from EventIT.EventLib.RegDeEventosClass import RegDeEventos
 from EventIT.MapsSist.MapClass import Map
 from EventIT.Estadisticas.Estadisticas import Estadisticas
 
 class RegisterNewUserW(tk.Tk):
-    def __init__(self, regdeusuarios: RegDeUsuarios, data_anses: DatasetANSES, regdeeventos: RegDeEventos, mapa: Map, ranking: Estadisticas):
+    def __init__(self, regdeusuarios: RegDeUsuarios, data_anses: DatasetANSES, regdeeventos: RegDeEventos,
+                 eventmanager: EventManger, mapa: Map, ranking: Estadisticas):
         super().__init__()
         self.wm_title("EventIT")
         self.wm_geometry(f"350x400+{550}+{150}")
@@ -57,5 +59,5 @@ class RegisterNewUserW(tk.Tk):
 
     def Open_window(self, window):
         if window == MenuUsers:
-            MenuUsers(self.regdeusuarios, self.dataanses, self.regdeeventos, self.mapa, self.ranking, self.user)
+            MenuUsers(self.regdeusuarios, self.dataanses, self.regdeeventos, self.eventmanager, self.mapa, self.ranking, self.user)
         self.withdraw()

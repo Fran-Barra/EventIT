@@ -10,3 +10,12 @@ class Map:
 
     def getListaDeZonas(self):
         return self.__Zonas.copy()
+
+    def search_ubicacion(self, latitud, longitud):
+        for zona in self.__Zonas:
+            ubicaciones = zona.Get_Ubicaciones()
+            for ubicacion in ubicaciones:
+                latubi, lonubi = ubicacion.Get_Coordinates()
+                if latubi == latitud and lonubi == longitud:
+                    return ubicacion
+        return False

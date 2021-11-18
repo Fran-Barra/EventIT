@@ -19,3 +19,10 @@ class RegDeEventos:
 
     def View_Events(self)-> list[Evento]:
         return self.__Eventos.copy()
+
+    def Search_events(self, name):
+        for evento in self.__Eventos:
+            if evento.getname() == name:
+                return evento
+        return False
+

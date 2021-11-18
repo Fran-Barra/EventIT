@@ -7,13 +7,15 @@ from logUser import LogUser
 from EventIT.UsersLib.RegDeUsuarios import RegDeUsuarios
 from EventIT.DatasetANSES.DatasetANSES import DatasetANSES
 from EventIT.EventLib.RegDeEventosClass import RegDeEventos
+from EventIT.EventLib.EventManager import EventManger
 from EventIT.MapsSist.MapClass import Map
 from EventIT.Estadisticas.Estadisticas import Estadisticas
 
 
 
 class App(tk.Tk):
-    def __init__(self, reg_de_usuarios: RegDeUsuarios, data_anses: DatasetANSES, regdeeventos: RegDeEventos, mapa: Map, ranking: Estadisticas):
+    def __init__(self, reg_de_usuarios: RegDeUsuarios, data_anses: DatasetANSES, regdeeventos: RegDeEventos,
+                 eventmanager: EventManger, mapa: Map, ranking: Estadisticas):
         super().__init__()
         self.wm_title("EventIT")
         self.wm_geometry(f"350x400+{550}+{150}")
@@ -21,6 +23,7 @@ class App(tk.Tk):
         self.dataanses = data_anses
         self.regdeusuarios = reg_de_usuarios
         self.regdeeventos = regdeeventos
+        self.eventmanager = eventmanager
         self.mapa = mapa
         self.ranking = ranking
         self.Create_Widgets()
