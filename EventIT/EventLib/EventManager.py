@@ -34,7 +34,7 @@ class EventManger:
         if evento in self.__regdeeventos.View_Events():
             evento.Set_Attendance().append(usuario)
             for invitado in invitados:
-                evento.Ser_Attendance().append(invitado)
+                evento.Set_Attendance().append(invitado)
 
     def desinscribirse_evento(self, evento, usuario):
         # Si el evento esta en la lista y el usuario figura como invitado, se lo elimina de la lista de invitados.
