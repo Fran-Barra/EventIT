@@ -5,8 +5,9 @@ from EventIT.UsersLib.CitizenClass import Ciudadano
 from EventIT.MapsSist.GraficarMapa import Graficar_Mapa
 from EventIT.EventLib.RegDeEventosClass import RegDeEventos
 from EventIT.MapsSist.MapClass import Map
-from .RankingW import RankingW
+from EventIT.guiLib.UsersGui.RankingW import RankingW
 from EventIT.Estadisticas.Estadisticas import Estadisticas
+from EventIT.guiLib.UsersGui.FriendshipW import FrienshipW
 
 
 class MenuUsers(tk.Tk):
@@ -28,14 +29,16 @@ class MenuUsers(tk.Tk):
 
     def Open_Window(self, window):
         if window == RankingW:
-            RankingW(self.regdeusuarios, self.dataanses, self.ranking, self.user)
+            RankingW(self.regdeusuarios, self.dataanses, self.mapa, self.ranking, self.user)
+        if window == FrienshipW:
+            FrienshipW(self.regdeusuarios, self.user)
 
 
 
     def Create_Widgets(self):
         #creacion de widgets
         self.rank_btn = tk.Button(self, text="Ranking", command= lambda: self.Open_Window(RankingW))
-        self.frien_btn = tk.Button(self, text="Friend")
+        self.frien_btn = tk.Button(self, text="Friend", command= lambda: self.Open_Window(FrienshipW))
         self.map_of_events_btn = tk.Button(self, text= "map", command= lambda: Graficar_Mapa.graficar(self.mapa, self.regdeeventos))
 
 
