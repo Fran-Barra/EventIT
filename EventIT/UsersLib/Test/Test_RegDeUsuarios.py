@@ -29,7 +29,7 @@ class TestRegDeUsuarios(unittest.TestCase):
 
         self.regDeUsuarios.estado_de_bloqueo(bloquear=True, keyname='Lucas')
 
-        ABM.modificar_tel(888888, self.ciudadano1)
+        self.ciudadano1.Mod_Telefono('888888') # Para probar que se modifique en el archivo de texto
 
     def test_Manage_Admins(self):
         self.regDeUsuarios.Manage_Admins(self.admin3, True, 'Pepe')
