@@ -1,7 +1,7 @@
 import unittest
-from ZonaClass import Zona
-from UbicacionClass import Ubicacion
-# from MapClass import Map
+from EventIT.MapsSist.ZonaClass import Zona
+from EventIT.MapsSist.UbicacionClass import Ubicacion
+from EventIT.MapsSist.MapClass import Map
 
 class TestMapa(unittest.TestCase):
     def test_ubic(self):
@@ -46,6 +46,19 @@ class TestMapa(unittest.TestCase):
 
         self.assertEqual(ListZonas[0].Get_Ubicaciones(),[a,b,c])
         self.assertEqual(ListZonas[1].Get_Ubicaciones(),[d,e,f])
+
+    def test_search_ubi(self):
+        ubi1 = Ubicacion(0,0)
+        Zona1 = Zona([ubi1, Ubicacion(1,1)], 1, "Zona 1")
+        Zona2 = Zona([Ubicacion(2,2), Ubicacion(3,3)], 2, "Zona 2")
+        mapa = Map([Zona1, Zona2])
+        ubicacion1 = mapa.search_ubicacion(0,0)
+        ubicacion2 = mapa.search_ubicacion(5,5)
+        self.assertEqual(ubicacion1, ubi1)
+        self.assertEqual(ubicacion2, False)
+
+
+
 
 
 if __name__ == '__main__':

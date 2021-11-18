@@ -40,6 +40,7 @@ class MenuUsers(tk.Tk):
         self.rank_btn = tk.Button(self, text="Ranking", command= lambda: self.Open_Window(RankingW))
         self.frien_btn = tk.Button(self, text="Friend", command= lambda: self.Open_Window(FrienshipW))
         self.map_of_events_btn = tk.Button(self, text= "map", command= lambda: Graficar_Mapa.graficar(self.mapa, self.regdeeventos))
+        self.report_btn = tk.Button(self, text= "Report Event", command= lambda: self.Open_Window())
 
 
 

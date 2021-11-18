@@ -26,6 +26,9 @@ class Evento:
             if self.__Ubicacion.Get_Coordinates() in list(map(lambda x:x.Get_Coordinates(), zona.Get_Ubicaciones())): #la idea es ver si esa ubicacion es parte de la zona PROBAR
                 return zona
 
+    def getname(self):
+        return self.__nombre
+
     def Set_Attendance(self, ciudadano: Ciudadano, inscribirse: bool):
         """Permite inscribirse o desinscribirse de un evento.\n
             inscribirse = True, para inscribirse.\n
