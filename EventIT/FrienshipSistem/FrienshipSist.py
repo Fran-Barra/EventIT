@@ -15,6 +15,7 @@ class Frienship_System:
                 else:
                     messagebox.showwarning(title= "Already sent", message= "You already sent a request to this user")
             else:
+                regdeusuarios.Get_Ciudadanos()[regdeusuarios.searchCitizen(cuil=CuilSolicitante, returnKey=True)][1] = True
                 messagebox.showwarning(title= "User banned", message= "Your user was banned from the system")
         except AttributeError:
             messagebox.showwarning(title="User not found", message="The user couldn't be found")
@@ -50,7 +51,7 @@ class Frienship_System:
             CiudadanoSolicitante = regdeusuarios.searchCitizen(CelSolicitante,CuilSolicitante,NameSolicitante)
             CiudadanoDestinatario = regdeusuarios.searchCitizen(CelDestinatario,CuilDestinatario,NameDestinatario)
             if CiudadanoSolicitante in CiudadanoDestinatario.Get_ListaDeSolicitudes():
-                CiudadanoDestinatario.Mod_ListaDeSolicitudes(CiudadanoSolicitante, True)
+                CiudadanoDestinatario.Mod_ListaDeSolicitudes(CiudadanoSolicitante, False)
                 CiudadanoSolicitante.Mod_ListaDeRechazos(CiudadanoDestinatario, True)
 
             else:
