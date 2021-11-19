@@ -1,23 +1,16 @@
 from EventIT.UsersLib.RegDeUsuarios import RegDeUsuarios
 from EventIT.UsersLib.CitizenClass import Ciudadano
 from EventIT.UsersLib.AdminClass import Administrator
-from EventIT.ExeptionLib.UnexpectedValueClass import UnexpectedValue
 
 
 class ABM():
 
     @classmethod
-    def dar_alta(cls, type: str, name: str, tel: str, cuil: str, reg_de_usuarios: RegDeUsuarios):
-        try:
-            if type == "user":
-                reg_de_usuarios.Manage_Ciudadanos(Ciudadano(name, tel, cuil), True, name)
-            else:
-                raise UnexpectedValue
-        except:
-            pass
+    def dar_alta(cls, name: str, tel, cuil, reg_de_usuarios: RegDeUsuarios):
+        reg_de_usuarios.Manage_Ciudadanos(Ciudadano(name, tel,cuil), True, name)
 
     @classmethod
-    def dar_baja(cls, name: str, tel: str, cuil: str, reg_de_usuarios: RegDeUsuarios):
+    def dar_baja(cls, name: str, tel, cuil, reg_de_usuarios: RegDeUsuarios):
         reg_de_usuarios.Manage_Ciudadanos(Ciudadano(name, tel, cuil), False, name)
 
     @classmethod
