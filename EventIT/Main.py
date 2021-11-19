@@ -70,3 +70,4 @@ evento2 = Evento('Sanitario', Mapa.search_ubicacion(0,0), 'Evento2')
 evento3 = Evento('Social', Mapa.search_ubicacion(0,0), 'Evento3')
 evento4 = Evento('Privado', Mapa.search_ubicacion(0,0), 'Evento4')
 
+regDeUsuarios.Get_Ciudadanos()['Lucas'][0].Mod_ListaDeSolicitudes(regDeUsuarios.Get_Ciudadanos()['Joaquin'][0], True)
