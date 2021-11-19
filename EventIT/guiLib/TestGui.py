@@ -10,6 +10,7 @@ from EventIT.MapsSist.ZonaClass import Zona
 from EventIT.guiLib.Maingui import App
 from EventIT.EventLib.EventoClass import Evento
 from EventIT.EventLib.EventManager import EventManger
+from EventIT.sensorLib.sensor import Sensor
 
 
 if __name__ == "__main__":
@@ -17,7 +18,8 @@ if __name__ == "__main__":
     dataAnses= DatasetANSES()
     regdeeventos = RegDeEventos()
     regdeusuarios.Manage_Ciudadanos(Ciudadano("ADMIN", 1,1),True,"ADMIN")
-    regdeusuarios.Manage_Admins(Administrator("ADMIN"), True,"ADMIN")
+    admin = Administrator("ADMIN")
+    regdeusuarios.Manage_Admins(admin, True,"ADMIN")
     eventmanager  = EventManger(regdeeventos)
     regdesensores = RegDeSensores()
 
@@ -85,6 +87,12 @@ if __name__ == "__main__":
     regdeeventos.Set_Events(evento8, True)
     regdeeventos.Set_Events(evento9, True)
     regdeeventos.Set_Events(evento10, True)
+
+    sensor1 = Sensor(Mapa.search_ubicacion(1,1), "fiesta", "sensor1,1")
+    regdesensores.Set_Sensors(sensor1, True)
+    eventmanager.alta_tiposDeEvento("fiesta", admin)
+
+
 
 
 

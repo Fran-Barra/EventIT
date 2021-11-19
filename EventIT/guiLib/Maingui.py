@@ -2,7 +2,6 @@ import tkinter as tk
 
 
 from logAdmin import LogAdmin
-from logSensor import LogSensor
 from logUser import LogUser
 from EventIT.UsersLib.RegDeUsuarios import RegDeUsuarios
 from EventIT.DatasetANSES.DatasetANSES import DatasetANSES
@@ -10,6 +9,7 @@ from EventIT.EventLib.RegDeEventosClass import RegDeEventos
 from EventIT.EventLib.EventManager import EventManger
 from EventIT.sensorLib.RegDeSensores import RegDeSensores
 from EventIT.MapsSist.MapClass import Map
+from EventIT.guiLib.SensorGui.Sensormenu import MenuSensors
 
 
 
@@ -36,8 +36,8 @@ class App(tk.Tk):
             LogUser(self.regdeusuarios, self.dataanses, self.regdeeventos, self.eventmanager, self.mapa)
         elif NewWindow == LogAdmin:
             LogAdmin(self.regdeusuarios, self.eventmanager, self.regdesensores, self.mapa)
-        elif NewWindow == LogSensor:
-            LogSensor()
+        elif NewWindow == MenuSensors:
+            MenuSensors(self.regdeeventos, self.eventmanager, self.regdesensores, self.mapa)
         self.withdraw()
 
 
@@ -48,7 +48,7 @@ class App(tk.Tk):
         self.name = tk.Label(self, text="EventIT")
         self.citizendLogBtn = tk.Button(self, text="Log as citizen", command = lambda: self.OpenWindow(LogUser))
         self.adminLogBtn = tk.Button(self, text="Log as admin", command = lambda: self.OpenWindow(LogAdmin))
-        self.sensorLogBtn = tk.Button(self, text="sensor", command = lambda: self.OpenWindow(LogSensor))
+        self.sensorLogBtn = tk.Button(self, text="sensor", command = lambda: self.OpenWindow(MenuSensors))
 
         #Impresion de widgets
         centerW = 150
