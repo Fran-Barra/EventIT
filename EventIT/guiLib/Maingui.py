@@ -1,8 +1,8 @@
 import tkinter as tk
 
 
-from logAdmin import LogAdmin
-from logUser import LogUser
+from EventIT.guiLib.logAdmin import LogAdmin
+from EventIT.guiLib.logUser import LogUser
 from EventIT.UsersLib.RegDeUsuarios import RegDeUsuarios
 from EventIT.DatasetANSES.DatasetANSES import DatasetANSES
 from EventIT.EventLib.RegDeEventosClass import RegDeEventos

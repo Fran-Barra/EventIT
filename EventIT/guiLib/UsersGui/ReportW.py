@@ -97,7 +97,7 @@ class ReportW(tk.Tk):
         if evento == False:
             messagebox.showwarning(title= "Event not found", message= "there ist a event with that name")
         else:
-            invitadosstr = self.invitadosget()
+            invitadosstr = self.invitados.get()
             if "," in invitadosstr:
                 keyname_invitados = invitadosstr.split(",")
 
@@ -108,7 +108,7 @@ class ReportW(tk.Tk):
                         user_not_found = True
                         keyname_not_in += 1
                 if keyname_not_in:
-                    messagebox.showwarning(title= "Users not found", messagebox= f"We couldt found {keyname_not_in} of the users")
+                    messagebox.showwarning(title= "Users not found", message= f"We couldt found {keyname_not_in} of the users")
                 else:
                     invitados = []
                     for keyname in keyname_invitados:

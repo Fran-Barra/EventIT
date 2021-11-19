@@ -14,7 +14,7 @@ class Estadisticas:
             cantidad_de_asistentes_x_zona_x_evento[evento] = 0
         for evento in lista_de_eventos:
             for asistente in evento.getListaDeAsistencia():
-                if evento.getZona(lista_de_zonas) == datasetANSES.searchUser(asistente.Get_Telefono(), asistente.Get_Cuil()).getZona(lista_de_zonas): #compara la zona del evento con la zona del asistente obtenida en el datasetANSES
+                if evento.getZona(lista_de_zonas) == datasetANSES.searchUser(int(asistente.Get_Telefono()), int(asistente.Get_Cuil())).getZona(lista_de_zonas): #compara la zona del evento con la zona del asistente obtenida en el datasetANSES
                     cantidad_de_asistentes_x_zona_x_evento[evento] += 1
         return cantidad_de_asistentes_x_zona_x_evento
 

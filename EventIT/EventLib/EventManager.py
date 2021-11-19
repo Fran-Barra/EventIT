@@ -37,9 +37,11 @@ class EventManger:
     def asistir_evento(self, evento, usuario, invitados= None):
         # Si el evento existe en la lista de eventos, se agrega a la lista de invitados el nuevo invitado.
         if invitados is None:
-            invitados = []
-        if evento in self.__regdeeventos.View_Events():
-            evento.Set_Attendance(usuario,True)
+            if evento in self.__regdeeventos.View_Events():
+                evento.Set_Attendance(usuario,True)
+        else:
+            if evento in self.__regdeeventos.View_Events():
+                evento.Set_Attendance(usuario,True)
             for invitado in invitados:
                 evento.Set_Attendance(invitado,True)
 

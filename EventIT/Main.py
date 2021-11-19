@@ -8,6 +8,8 @@ from EventIT.sensorLib.RegDeSensores import RegDeSensores
 from EventIT.MapsSist.UbicacionClass import Ubicacion
 from EventIT.MapsSist.ZonaClass import Zona
 from EventIT.MapsSist.MapClass import Map
+from EventIT.guiLib.Maingui import App
+import _tkinter as tk
 
 regDeUsuarios = RegDeUsuarios()
 datasetANSES = DatasetANSES()
@@ -71,3 +73,7 @@ evento3 = Evento('Social', Mapa.search_ubicacion(0,0), 'Evento3')
 evento4 = Evento('Privado', Mapa.search_ubicacion(0,0), 'Evento4')
 
 regDeUsuarios.Get_Ciudadanos()['Lucas'][0].Mod_ListaDeSolicitudes(regDeUsuarios.Get_Ciudadanos()['Joaquin'][0], True)
+
+
+app = App(regDeUsuarios, datasetANSES, regDeEventos, eventManager, regDeSensores, Mapa)
+app.mainloop()
