@@ -50,7 +50,7 @@ class Frienship_System:
             CiudadanoSolicitante = regdeusuarios.searchCitizen(CelSolicitante,CuilSolicitante,NameSolicitante)
             CiudadanoDestinatario = regdeusuarios.searchCitizen(CelDestinatario,CuilDestinatario,NameDestinatario)
             if CiudadanoSolicitante in CiudadanoDestinatario.Get_ListaDeSolicitudes():
-                CiudadanoDestinatario.Mod_ListaDeSolicitudes(CiudadanoSolicitante, True)
+                CiudadanoDestinatario.Mod_ListaDeSolicitudes(CiudadanoSolicitante, False)
                 CiudadanoSolicitante.Mod_ListaDeRechazos(CiudadanoDestinatario, True)
 
             else:
