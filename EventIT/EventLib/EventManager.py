@@ -30,6 +30,7 @@ class EventManger:
             for evento in self.__regdeeventos.View_Events():
                 if nombre == evento.getName():
                     messagebox.showwarning(title= "Name taken", message= "This name is already taken")
+                    break
                 else:
                     self.__regdeeventos.Set_Events(Evento(tipo, ubicacion, nombre), True)
 

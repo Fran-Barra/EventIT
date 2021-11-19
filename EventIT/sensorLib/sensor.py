@@ -25,4 +25,4 @@ class Sensor:
         if self.__tipo in eventManager.ver_tiposDeEvento():
                 regdeeventos.Set_Events(Evento(self.__tipo, self.__ubicacion, nombre), True)
         else:
-            tk.messagebox.showwarning(title="Tipo de evento no permitido", text="Los eventos deben ser de alguno de los tipos avalados por el EventManager")
+            tk.messagebox.showwarning(title="Type of event not alowd", message="The event type should be abled by the administrators")
