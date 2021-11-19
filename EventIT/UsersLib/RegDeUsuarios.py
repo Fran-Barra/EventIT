@@ -22,9 +22,9 @@ class RegDeUsuarios:
                     name = linea.split('/')[2]
                     telCell = linea.split('/')[3]
                     cuil = linea.split('/')[4]
-                    contactosDeInteres = list(linea.split('/')[5])
-                    listaDeSolicitudes = list(linea.split('/')[6])
-                    listaDeRechazos = list(linea.split('/')[7])
+                    contactosDeInteres = list(map(lambda x:self.searchCitizen(cuil=x), list(linea.split('/')[5])))
+                    listaDeSolicitudes = list(map(lambda x:self.searchCitizen(cuil=x), list(linea.split('/')[6])))
+                    listaDeRechazos = list(map(lambda x:self.searchCitizen(cuil=x), list(linea.split('/')[7])))
                     self.__Ciudadanos[keyname] = [Ciudadano(name, telCell, cuil), 0]
                     [self.__Ciudadanos[keyname][0].Mod_ContactosDeInteres(contacto, True) for contacto in contactosDeInteres]
                     [self.__Ciudadanos[keyname][0].Mod_ListaDeSolicitudes(ciudadano, True) for ciudadano in listaDeSolicitudes]
@@ -74,9 +74,12 @@ class RegDeUsuarios:
         """Permite agregar o eliminar un ciudadano del dicccionario de ciudadanos.\n
             add = True, para agregarlo.\n
             add = False, para eliminarlo"""
+        cuils_de_contactos = list(map(lambda x:x.Get_Cuil(), ciudadano.Get_ContactosDeInteres()))
+        cuils_de_solicitudes = list(map(lambda x:x.Get_Cuil(), ciudadano.Get_ListaDeSolicitudes()))
+        cuils_de_rechazos = list(map(lambda x:x.Get_Cuil(), ciudadano.Get_ListaDeRechazos()))
         user_line = (f'Ciudadano/{keyname}/{ciudadano.Get_Name()}/{ciudadano.Get_Telefono()}/'
-                        f'{ciudadano.Get_Cuil()}/{ciudadano.Get_ContactosDeInteres()}/'
-                        f'{ciudadano.Get_ListaDeSolicitudes()}/{ciudadano.Get_ListaDeRechazos()}/\n')
+                        f'{ciudadano.Get_Cuil()}/{cuils_de_contactos}/'
+                        f'{cuils_de_solicitudes}/{cuils_de_rechazos}/\n')
         path = os.path.dirname(os.path.realpath(__file__)) + r'\registro_de_usuarios.txt'
         if add:
             self.__Ciudadanos[keyname] = [ciudadano, 0]

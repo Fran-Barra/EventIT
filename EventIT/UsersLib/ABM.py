@@ -27,7 +27,7 @@ class ABM():
 
     @classmethod
     def agregar_admin(cls, name: str, reg_de_usuarios: RegDeUsuarios, admin: Administrator):
-        if name not in list(map(lambda x:x.Get_Name(), reg_de_usuarios.Get_Admins())):
+        if name not in list(map(lambda x:x.Get_Name(), reg_de_usuarios.Get_Admins().values())):
             reg_de_usuarios.Manage_Admins(admin, True, name)
 
     @classmethod

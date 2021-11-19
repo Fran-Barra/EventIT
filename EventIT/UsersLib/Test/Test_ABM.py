@@ -3,7 +3,7 @@ import unittest
 from EventIT.UsersLib.ABM import ABM
 from EventIT.UsersLib.RegDeUsuarios import RegDeUsuarios
 from EventIT.UsersLib.CitizenClass import Ciudadano
-# from EventIT.UsersLib.AdminClass import Administrator
+from EventIT.UsersLib.AdminClass import Administrator
 
 
 class Test_Modificar(unittest.TestCase):
@@ -95,6 +95,10 @@ class test_dar_baja_o_alta(unittest.TestCase):
         ABM.dar_alta("Pablo", 3, 3214, self.reg_de_usuarios)
 
         self.assertEqual(len(self.reg_de_usuarios.Get_Ciudadanos()), 3)
+
+        admin1 = Administrator('Tomas')
+        ABM.agregar_admin('Tomas', self.reg_de_usuarios, admin1)
+        self.assertEqual(self.reg_de_usuarios.Get_Admins()['Tomas'].Get_Name(), 'Tomas')
 
 
 if __name__=='__main__':
