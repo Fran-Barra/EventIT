@@ -87,18 +87,22 @@ class RegDeUsuarios:
                 f.write(user_line)
                 f.close()
         else:
-            del self.__Ciudadanos[keyname]
-            with open(path,'r') as f: # codigo para borrar usuarios
-                lineas = f.readlines()
-                with open(path,'w') as f:
-                    f.write('')
+            try:
+                del self.__Ciudadanos[keyname]
+                with open(path,'r') as f: # codigo para borrar usuarios
+                    lineas = f.readlines()
+                    with open(path,'w') as f:
+                        f.write('')
+                        f.close()
+                    for linea in lineas:
+                        if linea != user_line:
+                            with open(path,'a') as f:
+                                f.write(linea)
+                                f.close()
                     f.close()
-                for linea in lineas:
-                    if linea != user_line:
-                        with open(path,'a') as f:
-                            f.write(linea)
-                            f.close()
-                f.close()
+            except KeyError:
+                alert = tk.messagebox.showwarning(title="Error en el Keyname", text="El keyname que ingreso no pertenece a ningún administrador.")
+
 
     def estado_de_bloqueo(self, bloquear: bool, keyname):
             self.__Ciudadanos[keyname][1] = bloquear
