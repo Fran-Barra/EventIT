@@ -7,11 +7,10 @@ from EventIT.DatasetANSES.DatasetANSES import DatasetANSES
 from EventIT.guiLib.UsersGui.menuusers import MenuUsers
 from EventIT.EventLib.RegDeEventosClass import RegDeEventos
 from EventIT.MapsSist.MapClass import Map
-from EventIT.Estadisticas.Estadisticas import Estadisticas
 
 class LogUser(tk.Tk):
     def __init__(self, regdeusuarios: RegDeUsuarios, dataanses: DatasetANSES, regdeeventos: RegDeEventos,
-                 eventmanager: EventManger, mapa: Map, ranking: Estadisticas):
+                 eventmanager: EventManger, mapa: Map):
         super().__init__()
         self.wm_title("EventIT")
         self.wm_geometry(f"350x400+{550}+{150}")
@@ -21,7 +20,6 @@ class LogUser(tk.Tk):
         self.regdeeventos = regdeeventos
         self.eventmanager = eventmanager
         self.mapa = mapa
-        self.ranking = ranking
         self.Create_Widgets()
 
 
@@ -65,8 +63,8 @@ class LogUser(tk.Tk):
 
     def Open_Window(self, window):
         if window ==  RegisterNewUserW:
-            RegisterNewUserW(self.regdeusuarios, self.dataanses, self.regdeeventos, self. eventmanager, self.mapa, self.ranking)
+            RegisterNewUserW(self.regdeusuarios, self.dataanses, self.regdeeventos, self. eventmanager, self.mapa)
         if window == MenuUsers:
-            MenuUsers(self.regdeusuarios, self.dataanses, self.regdeeventos, self.eventmanager, self.mapa, self.ranking, self.user)
+            MenuUsers(self.regdeusuarios, self.dataanses, self.regdeeventos, self.eventmanager, self.mapa, self.user)
         self.withdraw()
 

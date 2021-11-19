@@ -88,6 +88,8 @@ class FrienshipW(tk.Tk):
                                                   CuilDestinatario= self.user.Get_Cuil())
             if by == "key":
                 keyname = self.data.get()
+                Frienship_System.AceptarSolicitud(self.regdeusuarios, NameSolicitante= keyname,
+                                                  NameDestinatario= self.user.Get_Name())
 
 
         except ValueError:
@@ -106,6 +108,8 @@ class FrienshipW(tk.Tk):
                                                  CuilDestinatario= cuil)
             if by == "keyname":
                 keyname = self.data.get()
+                Frienship_System.EnviarSolicitud(self.regdeusuarios, NameSolicitante= self.user.Get_Name(),
+                                                 NameDestinatario= keyname)
 
         except ValueError:
             messagebox.showwarning(title= "Value error", message= "if you want to look by phone or cuil, use numbers")
