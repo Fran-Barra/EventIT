@@ -1,15 +1,17 @@
 import tkinter as tk
 from tkinter import messagebox
 from EventIT.UsersLib.RegDeUsuarios import RegDeUsuarios
+from EventIT.EventLib.EventManager import EventManger
 from EventIT.guiLib.AdminsGui.Adminmenu import AdminMenu
 
 class LogAdmin(tk.Tk):
-    def __init__(self, regdeusuarios: RegDeUsuarios):
+    def __init__(self, regdeusuarios: RegDeUsuarios, eventmanager: EventManger):
         super().__init__()
         self.wm_title("EventIT")
         self.wm_geometry(f"350x400+{550}+{150}")
         self.wm_resizable(0,0)
         self.regdeusuarios = regdeusuarios
+        self.eventmanager = eventmanager
         self.Create_Widgets()
 
 
@@ -39,5 +41,5 @@ class LogAdmin(tk.Tk):
 
     def Open_Window(self, window):
         if window == AdminMenu:
-            AdminMenu(self.regdeusuarios, self.admin)
+            AdminMenu(self.regdeusuarios, self.eventmanager, self.admin)
         self.withdraw()

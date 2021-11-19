@@ -101,7 +101,7 @@ class RegDeUsuarios:
                 f.close()
 
     def estado_de_bloqueo(self, bloquear: bool, keyname):
-        self.__Ciudadanos[keyname][1] = bloquear
+            self.__Ciudadanos[keyname][1] = bloquear
 
     def searchCitizen(self, telCell: int = None, cuil: int = None, name: str = None, returnKey: bool = False):
         if cuil == None and telCell == None and name == None:

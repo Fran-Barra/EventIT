@@ -33,7 +33,7 @@ class App(tk.Tk):
         if NewWindow == LogUser:
             LogUser(self.regdeusuarios, self.dataanses, self.regdeeventos, self.eventmanager, self.mapa)
         elif NewWindow == LogAdmin:
-            LogAdmin(self.regdeusuarios)
+            LogAdmin(self.regdeusuarios, self.eventmanager)
         elif NewWindow == LogSensor:
             LogSensor()
         self.withdraw()

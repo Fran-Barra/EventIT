@@ -6,13 +6,13 @@ from EventIT.UsersLib.AdminClass import Administrator
 from EventIT.UserManagementLib.CreateProfileClass import CreateProfile
 
 class AbmW(tk.Tk):
-    def __init__(self, reg_de_usuarios: RegDeUsuarios, user: Administrator):
+    def __init__(self, reg_de_usuarios: RegDeUsuarios, admin: Administrator):
         super().__init__()
         self.wm_title("EventIT")
         self.wm_geometry(f"450x400+{550}+{150}")
         self.wm_resizable(1, 1)
         self.regdeusuarios = reg_de_usuarios
-        self.user = user
+        self.admin = admin
         self.Create_Widgets()
 
     def Create_Widgets(self):
@@ -29,7 +29,10 @@ class AbmW(tk.Tk):
         self.daralta_btn = tk.Button(self, text= "register user", command= self.register)
         self.darbaja_btn = tk.Button(self, text= "unsubscribe", command= self.dardebaja)
 
-        self.text = tk.Label(self, text= "register use all parameters\nunsubscribe only keyname")
+        self.text = tk.Label(self, text= "register use all parameters\nunsubscribe and \ndes/bloq use only keyname")
+
+        self.bloq_btn = tk.Button(self, text= "Bloq", command= lambda: self.bloqueo(True))
+        self.desbloq_btn = tk.Button(self, text= "unlock", command= lambda: self.boqueo(False))
 
 
 
@@ -53,10 +56,29 @@ class AbmW(tk.Tk):
 
         self.text.grid(row= 4, column= 0)
 
+        self.bloq_btn.grid(row= 5, column= 1)
+        self.desbloq_btn.grid(row= 5, column= 2)
+
 
     def modify_profile(self, parameter):
-        if parameter == "phone":
-            pass
+        try:
+            previouscuil = self.regdeusuarios.Get_Ciudadanos()[self.keynameentry.get()][0].Get_Cuil()
+            user = self.regdeusuarios.searchCitizen(cuil= previouscuil)
+            if parameter == "phone":
+                phone = self.phoneentry.get()
+                int(phone)#lanza un error para prevenir que se lance algo que no sea un numero
+                user.Mod_Telefono(phone)
+            if parameter == "cuil":
+                cuil = self.cuilentry.get()
+                int(cuil)#lanza un error para asegurar que sea un numero
+                user.Mod_CUIL(cuil)
+            if parameter == "name":
+                name = self.nameentry
+                user.Mod_Name(name)
+        except ValueError:
+            messagebox.showwarning(title= "Use numbers", message= "Remember to use only numbers in when chainging phone or cuil")
+        except KeyError:
+            messagebox.showwarning(title= "User not found", message= "The user with that key name couldnt be found")
 
 
     def register(self):
@@ -72,6 +94,13 @@ class AbmW(tk.Tk):
     def dardebaja(self):
         key_name = self.keynameentry.get()
         self.regdeusuarios.Manage_Ciudadanos(None, False, key_name)
+
+    def boqueo(self, bool):
+        keyname = self.keynameentry.get()
+        if keyname in self.regdeusuarios.Get_Ciudadanos():
+            self.regdeusuarios.estado_de_bloqueo(bool, keyname)
+        else:
+            messagebox.showwarning(title= "User not found", message= "A user with this key name couldnt be found")
 
 
 

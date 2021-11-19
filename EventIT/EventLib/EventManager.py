@@ -15,6 +15,12 @@ class EventManger:
         if isinstance(User,Administrator) and TipoDeEvento not in self.__TipoDeEventos:
             self.__TipoDeEventos.append(TipoDeEvento)
 
+    def darbaja_tipodeevent(self, tipodeevento):
+        if tipodeevento in self.__TipoDeEventos:
+            self.__TipoDeEventos.remove(tipodeevento)
+        else:
+            messagebox.showwarning(title= "Type of event", message= "The type of event couldnt be found")
+
     def ver_tiposDeEvento (self):
         return self.__TipoDeEventos.copy()
 
