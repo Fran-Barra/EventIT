@@ -7,14 +7,13 @@ from EventIT.EventLib.RegDeEventosClass import RegDeEventos
 from EventIT.MapsSist.MapClass import Map
 from EventIT.EventLib.EventManager import EventManger
 from EventIT.guiLib.UsersGui.RankingW import RankingW
-from EventIT.Estadisticas.Estadisticas import Estadisticas
 from EventIT.guiLib.UsersGui.FriendshipW import FrienshipW
 from EventIT.guiLib.UsersGui.ReportW import ReportW
 
 
 class MenuUsers(tk.Tk):
     def __init__(self, regdeusuarios: RegDeUsuarios, data_anses: DatasetANSES, regdeeventos: RegDeEventos,
-                 eventmanager: EventManger, mapa: Map, ranking: Estadisticas, user: Ciudadano):
+                 eventmanager: EventManger, mapa: Map, user: Ciudadano):
         super().__init__()
         self.wm_title("EventIT")
         self.wm_geometry(f"350x400+{550}+{150}")
@@ -22,7 +21,6 @@ class MenuUsers(tk.Tk):
         self.dataanses = data_anses
         self.regdeusuarios = regdeusuarios
         self.regdeeventos = regdeeventos
-        self.ranking = ranking
         self.eventmanager = eventmanager
         self.mapa = mapa
         self.user = user
@@ -32,7 +30,7 @@ class MenuUsers(tk.Tk):
 
     def Open_Window(self, window):
         if window == RankingW:
-            RankingW(self.regdeusuarios, self.dataanses, self.mapa, self.ranking, self.user)
+            RankingW(self.regdeusuarios, self.dataanses, self.regdeeventos ,self.mapa, self.user)
         if window == FrienshipW:
             FrienshipW(self.regdeusuarios, self.user)
         if window == ReportW:

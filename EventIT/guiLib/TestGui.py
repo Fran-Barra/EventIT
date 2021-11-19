@@ -7,7 +7,6 @@ from EventIT.MapsSist.MapClass import Map
 from EventIT.MapsSist.UbicacionClass import Ubicacion
 from EventIT.MapsSist.ZonaClass import Zona
 from EventIT.guiLib.Maingui import App
-from EventIT.Estadisticas.Estadisticas import Estadisticas
 from EventIT.EventLib.EventoClass import Evento
 from EventIT.EventLib.EventManager import EventManger
 
@@ -85,14 +84,13 @@ if __name__ == "__main__":
     regdeeventos.Set_Events(evento9, True)
     regdeeventos.Set_Events(evento10, True)
 
-    ranking = Estadisticas(Mapa, dataAnses, regdeeventos)
 
 
 
 
 
     #mainMenu
-    application = App(regdeusuarios, dataAnses, regdeeventos, eventmanager, Mapa, ranking)
+    application = App(regdeusuarios, dataAnses, regdeeventos, eventmanager, Mapa)
 
 
 

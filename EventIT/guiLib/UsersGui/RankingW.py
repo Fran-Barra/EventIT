@@ -1,5 +1,6 @@
 import tkinter as tk
 from EventIT.UsersLib.RegDeUsuarios import RegDeUsuarios
+from EventIT.EventLib.RegDeEventosClass import RegDeEventos
 from EventIT.UsersLib.CitizenClass import Ciudadano
 from EventIT.DatasetANSES.DatasetANSES import DatasetANSES
 from EventIT.Estadisticas.Estadisticas import Estadisticas
@@ -9,15 +10,15 @@ from EventIT.MapsSist.MapClass import Map
 
 
 class RankingW(tk.Tk):
-    def __init__(self, regdeusuarios: RegDeUsuarios, dataanses: DatasetANSES, mapa: Map, ranking: Estadisticas, user: Ciudadano):
+    def __init__(self, regdeusuarios: RegDeUsuarios, dataanses: DatasetANSES, regdeeventos: RegDeEventos,mapa: Map, user: Ciudadano):
         super().__init__()
         self.wm_title("EventIT")
         self.wm_geometry("1350x400")
         self.wm_resizable(1, 1)
         self.dataanses = dataanses
         self.regdeusuarios = regdeusuarios
+        self.regdeeventos =regdeeventos
         self.mapa = mapa
-        self.ranking = ranking
         self.user = user
         self.Create_Widgets()
 
@@ -74,22 +75,25 @@ class RankingW(tk.Tk):
 
     def show_ranking(self, por):
         if por == "zona":
-            ranking = self.ranking.calculate_positions_of_the_ranking(mayor_cantidad_de_asistentes_de_la_zona=True)
+            ranking = Estadisticas.calculate_positions_of_the_ranking(self.mapa, self.dataanses, self.regdeeventos,
+                                                                      mayor_cantidad_de_asistentes_de_la_zona=True)
         elif por == "max":
-            ranking = self.ranking.calculate_positions_of_the_ranking(mayor_cantidad_de_asistentes=True)
+            ranking = Estadisticas.calculate_positions_of_the_ranking(self.mapa, self.dataanses, self.regdeeventos,
+                                                                      mayor_cantidad_de_asistentes=True)
         elif por == "porcentaje":
-            ranking = self.ranking.calculate_positions_of_the_ranking(mayor_porcentaje=True)
+            ranking = Estadisticas.calculate_positions_of_the_ranking(self.mapa, self.dataanses, self.regdeeventos,
+                                                                      mayor_porcentaje=True)
         else:
             ranking = []
 
 
         tk.Label(self.displayinfo, text=f"|\tPosicion\t\t|\tNombre del evento\t|\tZona\t|\tCantidad de personas por zona\t|"
                                         f"\tCantidad de personas totales\t|\tPorcentaje de asistentes de la zona\t|\n").pack()
-        for index, evento in enumerate(self.ranking.calculate_positions_of_the_ranking()):
+        for index, evento in enumerate(ranking):
             tk.Label(self.displayinfo, text=f"|\t{index}\t\t|\t\t{evento}\t\t|\t{evento.getZona(self.mapa.getListaDeZonas())}"
-                     f"\t|\t\t\t{self.ranking.calculate_number_of_attendees_per_zone_per_event()[evento]}"
-                     f"\t\t|\t\t{self.ranking.calculate_total_number_of_attendees()[evento]}"
-                     f"\t\t\t|\t\t{self.ranking.calculate_percentage_of_atendees_of_the_zone()[evento]}"
+                     f"\t|\t\t\t{Estadisticas.calculate_number_of_attendees_per_zone_per_event(self.mapa, self.dataanses, self.regdeeventos)[evento]}"
+                     f"\t\t|\t\t{Estadisticas.calculate_total_number_of_attendees(self.mapa, self.dataanses, self.regdeeventos)[evento]}"
+                     f"\t\t\t|\t\t{Estadisticas.calculate_percentage_of_atendees_of_the_zone(self.mapa, self.dataanses, self.regdeeventos)[evento]}"
                      f"\t\t\t|\n").pack()
 
 
