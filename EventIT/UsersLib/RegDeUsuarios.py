@@ -70,7 +70,7 @@ class RegDeUsuarios:
     # def Manage_Ciudadanos(self):
     #     return self.__Ciudadanos
 
-    def Manage_Ciudadanos(self, ciudadano: Ciudadano, add: bool, keyname): #Raro el tema del bloqueo
+    def Manage_Ciudadanos(self, ciudadano: Ciudadano, add: bool, keyname):
         """Permite agregar o eliminar un ciudadano del dicccionario de ciudadanos.\n
             add = True, para agregarlo.\n
             add = False, para eliminarlo"""
