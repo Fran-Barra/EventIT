@@ -120,5 +120,4 @@ class RegDeUsuarios:
             if ciudadano.Get_Cuil() == cuilAux and ciudadano.Get_Telefono() == telCellAux and ciudadano.Get_Name() == nameAux:
                 return ciudadano if not returnKey else keyname
 
-reg = RegDeUsuarios()
-print(reg.Get_Ciudadanos()['Lucas'][0].Get_ContactosDeInteres())
+
