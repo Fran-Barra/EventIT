@@ -22,7 +22,7 @@ class RegDeUsuarios:
                     name = linea.split('/')[2]
                     telCell = linea.split('/')[3]
                     cuil = linea.split('/')[4]
-                    contactosDeInteres = list(map(lambda x:self.searchCitizen(cuil=x), list(linea.split('/')[5].split('[')[1].split(']')[0].split(','))))
+                    contactosDeInteres = list(map(lambda x:self.searchCitizen(cuil=int(x)), list(linea.split('/')[5].split('[')[1].split(']')[0].split(','))))
                     listaDeSolicitudes = list(map(lambda x:self.searchCitizen(cuil=x), list(linea.split('/')[6].split('[')[1].split(']')[0].split(','))))
                     listaDeRechazos = list(map(lambda x:self.searchCitizen(cuil=x), list(linea.split('/')[7].split('[')[1].split(']')[0].split(','))))
                     self.__Ciudadanos[keyname] = [Ciudadano(name, telCell, cuil), 0]
@@ -120,3 +120,5 @@ class RegDeUsuarios:
             if ciudadano.Get_Cuil() == cuilAux and ciudadano.Get_Telefono() == telCellAux and ciudadano.Get_Name() == nameAux:
                 return ciudadano if not returnKey else keyname
 
+reg = RegDeUsuarios()
+print(reg.Get_Ciudadanos()['Lucas'][0].Get_ContactosDeInteres())

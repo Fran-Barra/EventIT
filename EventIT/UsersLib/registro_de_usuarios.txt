@@ -1,5 +1,5 @@
 Admin/Juan/juan/
 Admin/Jose/jose/
-Ciudadano/Lucas/lucas/1111/12121212/[13131313]/[]/[]/
+Ciudadano/Lucas/lucas/1111/12121212/[]/[]/[]/
 Ciudadano/Joaquin/joaquin/2222/13131313/[12121212]/[]/[]/
 Ciudadano/Facundo/facundo/3333/14141414/[]/[]/[12121212]/
