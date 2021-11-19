@@ -3,8 +3,7 @@ from EventIT.EventLib.EventoClass import Evento
 from EventIT.EventLib.RegDeEventosClass import RegDeEventos
 from EventIT.EventLib.EventManager import EventManger
 import tkinter as tk
-
-
+from tkinter import messagebox
 
 
 class Sensor:
