@@ -15,6 +15,7 @@ class Frienship_System:
                 else:
                     messagebox.showwarning(title= "Already sent", message= "You already sent a request to this user")
             else:
+                regdeusuarios.Get_Ciudadanos()[regdeusuarios.searchCitizen(cuil=CuilSolicitante, returnKey=True)][1] = True
                 messagebox.showwarning(title= "User banned", message= "Your user was banned from the system")
         except AttributeError:
             messagebox.showwarning(title="User not found", message="The user couldn't be found")
