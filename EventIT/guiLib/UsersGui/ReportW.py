@@ -13,7 +13,7 @@ class ReportW(tk.Tk):
                  eventmanager: EventManger, mapa: Map, user: Ciudadano):
         super().__init__()
         self.wm_title("EventIT")
-        self.wm_geometry(f"350x400+{550}+{150}")
+        self.wm_geometry(f"500x400+{550}+{150}")
         self.wm_resizable(0,0)
         self.dataanses = data_anses
         self.regdeusuarios = regdeusuarios
@@ -25,6 +25,19 @@ class ReportW(tk.Tk):
 
 
     def Create_Widgets(self):
+        #CANVAS
+        self.displayinfo = tk.Canvas(self, width=300, height=400, bg="white")
+        self.displayinfo.grid(row=0, column= 3, rowspan = 20)
+
+        self.vsb = tk.Scrollbar(self, orient= "vertical", command= self.displayinfo.yview())
+        self.vsb.grid(row=0, column= 4, rowspan= 20, sticky= "ns")
+
+        self.displayinfo.config(yscrollcommand = self.vsb.set)
+
+        self.displayframe = tk.Frame(self.displayinfo, bg="white")
+        self.displayinfo.create_window((10, 0), window= self.displayframe, anchor="nw")
+
+
         #creacion de widgets
         self.tipo = tk.Entry(self)
         self.ubicacion = tk.Entry(self)
@@ -60,7 +73,7 @@ class ReportW(tk.Tk):
     def see_type_Events(self):
         type_e = self.eventmanager.ver_tiposDeEvento()
         for type in type_e:
-            tk.Label(self, text= f"type: {type}").pack()
+            tk.Label(self.displayframe, text= f"type: {type}").pack()
 
     def report_event(self):
         try:
@@ -99,7 +112,8 @@ class ReportW(tk.Tk):
                 else:
                     invitados = []
                     for keyname in keyname_invitados:
-                        invitado = self.regdeusuarios.Get_Ciudadanos()[keyname]
+                        invitadoname = self.regdeusuarios.Get_Ciudadanos()[keyname][0].Get_Name()
+                        invitado = self.regdeusuarios.searchCitizen(name= invitadoname)
                         invitados.append(invitado)
                     self.eventmanager.asistir_evento(evento, self.user, invitados)
 
@@ -107,7 +121,7 @@ class ReportW(tk.Tk):
                 self.eventmanager.asistir_evento(evento, self.user)
             else:
                 messagebox.showwarning(title="Manage guests", message= "if you dont have guests write none or remember to use ,"
-                                                                       "between eack keyname")
+                                                                       "between each keyname")
 
 
 
