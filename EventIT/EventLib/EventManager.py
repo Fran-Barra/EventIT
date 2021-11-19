@@ -28,7 +28,7 @@ class EventManger:
         # Se guardan nuevos eventos en lista de eventos del RegDeEventos
         if tipo in self.__TipoDeEventos:
             for evento in self.__regdeeventos.View_Events():
-                if nombre == evento.getname():
+                if nombre == evento.getName():
                     messagebox.showwarning(title= "Name taken", message= "This name is already taken")
                 else:
                     self.__regdeeventos.Set_Events(Evento(tipo, ubicacion, nombre), True)

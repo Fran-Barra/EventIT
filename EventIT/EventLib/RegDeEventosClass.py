@@ -22,7 +22,7 @@ class RegDeEventos:
 
     def Search_events(self, name):
         for evento in self.__Eventos:
-            if evento.getname() == name:
+            if evento.getName() == name:
                 return evento
         return False
 

@@ -6,10 +6,13 @@ from EventIT.EventLib.RegDeEventosClass import RegDeEventos
 
 
 class Sensor:
-    def __init__(self, ubicacion, tipo):
+    def __init__(self, ubicacion, tipo, name):
         self.__ubicacion: Ubicacion = ubicacion
-        self.__tipo: str  = tipo
+        self.__tipo: str = tipo
+        self.__name = name
 
+    def get_name(self):
+        return self.__name
 
     def get_ubicacion(self):
         return self.__ubicacion
