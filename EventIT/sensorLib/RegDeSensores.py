@@ -1,4 +1,6 @@
 from EventIT.sensorLib.sensor import Sensor
+import tkinter as tk
+from tkinter import messagebox
 
 
 class RegDeSensores:
@@ -13,7 +15,11 @@ class RegDeSensores:
             add = True, para agregarlo.\n
             add = False, para eliminarlo"""
         if add:
-            self.__sensores.append(sensor)
+            if sensor.get_name() not in list(map(lambda x:x.get_name(), self.__sensores)):
+                self.__sensores.append(sensor)
+            else:
+                tk.messagebox.showwarning(title="Sensor invalido", text="El sensor que intenta agregar ya se encuentra en el registro")
+
         else:
             self.__sensores.remove(sensor)
 
