@@ -2,7 +2,6 @@ import unittest
 from EventIT.UsersLib.AdminClass import Administrator
 from EventIT.UsersLib.CitizenClass import Ciudadano
 from EventIT.UsersLib.RegDeUsuarios import RegDeUsuarios
-from EventIT.UsersLib.ABM import ABM
 
 
 class TestRegDeUsuarios(unittest.TestCase):
