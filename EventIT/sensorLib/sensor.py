@@ -2,6 +2,7 @@ from EventIT.MapsSist.UbicacionClass import Ubicacion
 from EventIT.EventLib.EventoClass import Evento
 from EventIT.EventLib.RegDeEventosClass import RegDeEventos
 from EventIT.EventLib.EventManager import EventManger
+import tkinter as tk
 
 
 
