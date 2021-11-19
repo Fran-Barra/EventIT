@@ -26,7 +26,7 @@ class RegDeSensores:
     def View_Sensors(self)-> list[Sensor]:
         return self.__sensores.copy()
 
-    def Search_events(self, name):
+    def Search_sensor(self, name):
         for sensor in self.__sensores:
             if sensor.get_name() == name:
                 return sensor

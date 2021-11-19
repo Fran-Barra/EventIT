@@ -8,13 +8,14 @@ from EventIT.UsersLib.RegDeUsuarios import RegDeUsuarios
 from EventIT.DatasetANSES.DatasetANSES import DatasetANSES
 from EventIT.EventLib.RegDeEventosClass import RegDeEventos
 from EventIT.EventLib.EventManager import EventManger
+from EventIT.sensorLib.RegDeSensores import RegDeSensores
 from EventIT.MapsSist.MapClass import Map
 
 
 
 class App(tk.Tk):
     def __init__(self, reg_de_usuarios: RegDeUsuarios, data_anses: DatasetANSES, regdeeventos: RegDeEventos,
-                 eventmanager: EventManger, mapa: Map):
+                 eventmanager: EventManger, regdesensores: RegDeSensores, mapa: Map):
         super().__init__()
         self.wm_title("EventIT")
         self.wm_geometry(f"350x400+{550}+{150}")
@@ -23,6 +24,7 @@ class App(tk.Tk):
         self.regdeusuarios = reg_de_usuarios
         self.regdeeventos = regdeeventos
         self.eventmanager = eventmanager
+        self.regdesensores = regdesensores
         self.mapa = mapa
         self.Create_Widgets()
 
@@ -33,7 +35,7 @@ class App(tk.Tk):
         if NewWindow == LogUser:
             LogUser(self.regdeusuarios, self.dataanses, self.regdeeventos, self.eventmanager, self.mapa)
         elif NewWindow == LogAdmin:
-            LogAdmin(self.regdeusuarios, self.eventmanager)
+            LogAdmin(self.regdeusuarios, self.eventmanager, self.regdesensores, self.mapa)
         elif NewWindow == LogSensor:
             LogSensor()
         self.withdraw()

@@ -3,6 +3,7 @@ from EventIT.UsersLib.CitizenClass import Ciudadano
 from EventIT.UsersLib.AdminClass import Administrator
 from EventIT.DatasetANSES.DatasetANSES import DatasetANSES
 from EventIT.EventLib.RegDeEventosClass import RegDeEventos
+from EventIT.sensorLib.RegDeSensores import RegDeSensores
 from EventIT.MapsSist.MapClass import Map
 from EventIT.MapsSist.UbicacionClass import Ubicacion
 from EventIT.MapsSist.ZonaClass import Zona
@@ -18,6 +19,7 @@ if __name__ == "__main__":
     regdeusuarios.Manage_Ciudadanos(Ciudadano("ADMIN", 1,1),True,"ADMIN")
     regdeusuarios.Manage_Admins(Administrator("ADMIN"), True,"ADMIN")
     eventmanager  = EventManger(regdeeventos)
+    regdesensores = RegDeSensores()
 
 
     def crear_ubicaciones():
@@ -90,7 +92,7 @@ if __name__ == "__main__":
 
 
     #mainMenu
-    application = App(regdeusuarios, dataAnses, regdeeventos, eventmanager, Mapa)
+    application = App(regdeusuarios, dataAnses, regdeeventos, eventmanager, regdesensores, Mapa)
 
 
 

@@ -2,7 +2,6 @@ from EventIT.MapsSist.UbicacionClass import Ubicacion
 from EventIT.EventLib.EventoClass import Evento
 from EventIT.EventLib.RegDeEventosClass import RegDeEventos
 from EventIT.EventLib.EventManager import EventManger
-from EventIT.sensorLib.RegDeSensores import RegDeSensores
 import tkinter as tk
 from tkinter import messagebox
 
