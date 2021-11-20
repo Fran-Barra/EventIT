@@ -61,9 +61,9 @@ class CreateSensorW(tk.Tk):
                         tipo = self.tipoentry.get()
                         self.regdesensores.Set_Sensors(Sensor(ubicacion, tipo, name), True)
                     else:
-                        messagebox.showwarning(title= "Not location", messagebox= "We couldnt found a location with those valuese")
+                        messagebox.showwarning(title= "Not location", message= "We couldnt found a location with those valuese")
             except ValueError:
-                messagebox.showwarning(title= "Wrong values", messagebox= "only numbers should be in latitude, longitude")
+                messagebox.showwarning(title= "Wrong values", message= "only numbers should be in latitude, longitude")
         else:
             sensor = self.regdesensores.Search_sensor(name)
             if sensor != False:

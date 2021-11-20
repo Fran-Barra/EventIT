@@ -18,7 +18,7 @@ class RegDeSensores:
             if sensor.get_name() not in list(map(lambda x:x.get_name(), self.__sensores)):
                 self.__sensores.append(sensor)
             else:
-                tk.messagebox.showwarning(title="Sensor invalido", text="El sensor que intenta agregar ya se encuentra en el registro")
+                tk.messagebox.showwarning(title="Sensor invalido", message= "El sensor que intenta agregar ya se encuentra en el registro")
 
         else:
             self.__sensores.remove(sensor)

@@ -89,6 +89,7 @@ class ReportW(tk.Tk):
                     messagebox.showwarning(title= "Not found", message= "The location couldnt be found")
                 else:
                     self.eventmanager.report_evento(tipo, ubicacion, nombre)
+
         except ValueError:
             messagebox.showwarning(title= "Wrong values", messagebox= "only numbers should be in latitude, longitude")
 
@@ -97,31 +98,34 @@ class ReportW(tk.Tk):
         if evento == False:
             messagebox.showwarning(title= "Event not found", message= "there ist a event with that name")
         else:
-            invitadosstr = self.invitados.get()
-            if "," in invitadosstr:
-                keyname_invitados = invitadosstr.split(",")
-
-                keyname_not_in = 0
-                user_not_found = False
-                for keyname in keyname_invitados:
-                    if keyname not in self.regdeusuarios.Get_Ciudadanos():
-                        user_not_found = True
-                        keyname_not_in += 1
-                if keyname_not_in:
-                    messagebox.showwarning(title= "Users not found", message= f"We couldt found {keyname_not_in} of the users")
-                else:
-                    invitados = []
-                    for keyname in keyname_invitados:
-                        invitadoname = self.regdeusuarios.Get_Ciudadanos()[keyname][0].Get_Name()
-                        invitado = self.regdeusuarios.searchCitizen(name= invitadoname)
-                        invitados.append(invitado)
-                    self.eventmanager.asistir_evento(evento, self.user, invitados)
-
-            elif invitadosstr == "none":
-                self.eventmanager.asistir_evento(evento, self.user)
+            if self.user in evento.getListaDeAsistencia():
+                messagebox.showwarning(title= "Subscibed", message= "the user is already subscribed")
             else:
-                messagebox.showwarning(title="Manage guests", message= "if you dont have guests write none or remember to use ,"
-                                                                       "between each keyname")
+                invitadosstr = self.invitados.get()
+                if "," in invitadosstr:
+                    keyname_invitados = invitadosstr.split(",")
+
+                    keyname_not_in = 0
+                    user_not_found = False
+                    for keyname in keyname_invitados:
+                        if keyname not in self.regdeusuarios.Get_Ciudadanos():
+                            user_not_found = True
+                            keyname_not_in += 1
+                    if keyname_not_in:
+                        messagebox.showwarning(title= "Users not found", message= f"We couldt found {keyname_not_in} of the users")
+                    else:
+                        invitados = []
+                        for keyname in keyname_invitados:
+                            invitadoname = self.regdeusuarios.Get_Ciudadanos()[keyname][0].Get_Name()
+                            invitado = self.regdeusuarios.searchCitizen(name= invitadoname)
+                            invitados.append(invitado)
+                        self.eventmanager.asistir_evento(evento, self.user, invitados)
+
+                elif invitadosstr == "none":
+                    self.eventmanager.asistir_evento(evento, self.user)
+                else:
+                    messagebox.showwarning(title="Manage guests", message= "if you dont have guests write none or remember to use ,"
+                                                                           "between each keyname")
 
 
 

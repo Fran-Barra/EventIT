@@ -31,7 +31,6 @@ if __name__ == "__main__":
                     ParaZona3.append(Ubicacion(x, y))
                 else:
                     ParaZona4.append(Ubicacion(x,y))
-                print(x,y)
                 x += 1
                 cantidad_en_fila += 1
             cantidad_en_fila = 0
@@ -49,8 +48,18 @@ if __name__ == "__main__":
     Mapa = Map([Zona1, Zona2, Zona3, Zona4])
 
     evento1 = Evento("fiesta", listadeubicaciones[0][2], "L")
+    evento1.Set_Attendance("enrique", True)
+
     evento2 = Evento("fiesta", listadeubicaciones[0][20], "L")
+    evento2.Set_Attendance("e", True)
+    evento2.Set_Attendance("g", True)
+    evento2.Set_Attendance("r", True)
+
+
     evento3 = Evento("fiesta", listadeubicaciones[1][2], "L")
+    evento3.Set_Attendance("m", True)
+    evento3.Set_Attendance("h", True)
+
     evento4 = Evento("fiesta", listadeubicaciones[1][3], "L")
     evento5 = Evento("fiesta", listadeubicaciones[2][2], "L")
     evento6 = Evento("fiesta", listadeubicaciones[2][3], "L")
@@ -60,16 +69,16 @@ if __name__ == "__main__":
     evento10 = Evento("fiesta", listadeubicaciones[3][4], "L")
 
     regdeeventos = RegDeEventos()
-    regdeeventos.Set_Events().append(evento1)
-    regdeeventos.Set_Events().append(evento2)
-    regdeeventos.Set_Events().append(evento3)
-    regdeeventos.Set_Events().append(evento4)
-    regdeeventos.Set_Events().append(evento5)
-    regdeeventos.Set_Events().append(evento6)
-    regdeeventos.Set_Events().append(evento7)
-    regdeeventos.Set_Events().append(evento8)
-    regdeeventos.Set_Events().append(evento9)
-    regdeeventos.Set_Events().append(evento10)
+    regdeeventos.Set_Events(evento1, True)
+    regdeeventos.Set_Events(evento2, True)
+    regdeeventos.Set_Events(evento3, True)
+    regdeeventos.Set_Events(evento4, True)
+    regdeeventos.Set_Events(evento5, True)
+    regdeeventos.Set_Events(evento6, True)
+    regdeeventos.Set_Events(evento7, True)
+    regdeeventos.Set_Events(evento8, True)
+    regdeeventos.Set_Events(evento9, True)
+    regdeeventos.Set_Events(evento10, True)
 
 
     Graficar_Mapa.graficar(Mapa, regdeeventos)

@@ -27,12 +27,14 @@ class EventManger:
     def report_evento(self, tipo, ubicacion, nombre):
         # Se guardan nuevos eventos en lista de eventos del RegDeEventos
         if tipo in self.__TipoDeEventos:
+            eventosnames = []
             for evento in self.__regdeeventos.View_Events():
-                if nombre == evento.getName():
-                    messagebox.showwarning(title= "Name taken", message= "This name is already taken")
-                    break
-                else:
-                    self.__regdeeventos.Set_Events(Evento(tipo, ubicacion, nombre), True)
+                eventosnames.append(evento.getName())
+            if nombre in eventosnames:
+                messagebox.showwarning(title= "Name taken", message= "This name is already taken")
+            else:
+                self.__regdeeventos.Set_Events(Evento(tipo, ubicacion, nombre), True)
+
 
     def asistir_evento(self, evento, usuario, invitados= None):
         # Si el evento existe en la lista de eventos, se agrega a la lista de invitados el nuevo invitado.

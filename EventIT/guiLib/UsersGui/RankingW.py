@@ -90,7 +90,7 @@ class RankingW(tk.Tk):
         tk.Label(self.displayinfo, text=f"|\tPosicion\t\t|\tNombre del evento\t|\tZona\t|\tCantidad de personas por zona\t|"
                                         f"\tCantidad de personas totales\t|\tPorcentaje de asistentes de la zona\t|\n").pack()
         for index, evento in enumerate(ranking):
-            tk.Label(self.displayinfo, text=f"|\t{index}\t\t|\t\t{evento}\t\t|\t{evento.getZona(self.mapa.getListaDeZonas())}"
+            tk.Label(self.displayinfo, text=f"|\t{index+1}\t\t|\t\t{evento}\t\t|\t{evento.getZona(self.mapa.getListaDeZonas())}"
                      f"\t|\t\t\t{Estadisticas.calculate_number_of_attendees_per_zone_per_event(self.mapa, self.dataanses, self.regdeeventos)[evento]}"
                      f"\t\t|\t\t{Estadisticas.calculate_total_number_of_attendees(self.mapa, self.dataanses, self.regdeeventos)[evento]}"
                      f"\t\t\t|\t\t{Estadisticas.calculate_percentage_of_atendees_of_the_zone(self.mapa, self.dataanses, self.regdeeventos)[evento]}"
