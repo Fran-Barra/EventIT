@@ -32,5 +32,5 @@ class DatasetANSES:
 
     def searchUser(self, telCell, cuil):
         for usuario in self.__usuariosANSES:
-            if usuario.getCuil() == cuil and usuario.getTelCell() == telCell:
+            if int(usuario.getCuil()) == int(cuil) and int(usuario.getTelCell()) == int(telCell):
                 return usuario

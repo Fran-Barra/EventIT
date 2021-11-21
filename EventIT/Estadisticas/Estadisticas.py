@@ -19,7 +19,7 @@ class Estadisticas:
         return cantidad_de_asistentes_x_zona_x_evento
 
     @classmethod
-    def calculate_total_number_of_attendees(cls, map: Map, datasetANSES: DatasetANSES, regDeEventos: RegDeEventos):
+    def calculate_total_number_of_attendees(cls, regDeEventos: RegDeEventos):
         lista_de_eventos = regDeEventos.View_Events()
         cantidad_de_asistentes_totales_x_evento = dict({})
         for evento in lista_de_eventos:
@@ -31,7 +31,7 @@ class Estadisticas:
         lista_de_eventos = regDeEventos.View_Events()
         porcentaje_de_asistentes_de_la_zona_por_evento =dict({})
         for evento in lista_de_eventos:
-            if cls.calculate_total_number_of_attendees(map, datasetANSES, regDeEventos)[evento] != 0:
+            if cls.calculate_total_number_of_attendees(regDeEventos)[evento] != 0:
                 porcentaje_de_asistentes_de_la_zona_por_evento[evento] = round((cls.calculate_number_of_attendees_per_zone_per_event(map, datasetANSES, regDeEventos)[evento]/cls.calculate_total_number_of_attendees(map, datasetANSES, regDeEventos)[evento]) * 100, 1)
             else:
                 porcentaje_de_asistentes_de_la_zona_por_evento[evento] = 0.0
@@ -41,15 +41,26 @@ class Estadisticas:
     def calculate_positions_of_the_ranking(cls,  map: Map, datasetANSES: DatasetANSES, regDeEventos: RegDeEventos, mayor_cantidad_de_asistentes_de_la_zona: bool = False, mayor_cantidad_de_asistentes: bool = False, mayor_porcentaje: bool = False):
         """Calcula el ranking de eventos en orden descendente segun el parametro que elija"""
         ranking = regDeEventos.View_Events()
-        if mayor_cantidad_de_asistentes_de_la_zona or not (mayor_cantidad_de_asistentes_de_la_zona and mayor_cantidad_de_asistentes and mayor_porcentaje):
+        if mayor_cantidad_de_asistentes_de_la_zona or not (mayor_cantidad_de_asistentes_de_la_zona or mayor_cantidad_de_asistentes or mayor_porcentaje):
             ranking.sort(key=lambda x:cls.calculate_number_of_attendees_per_zone_per_event(map, datasetANSES, regDeEventos)[x], reverse=True)# Ordena la lista de eventos poniendo en primer lugar al evento con mas asistentes de la zona
             return ranking
         elif mayor_cantidad_de_asistentes:
-            ranking.sort(key=lambda x:cls.calculate_total_number_of_attendees(map, datasetANSES, regDeEventos)[x], reverse=True)# Ordena la lista de eventos poniendo en primer lugar al evento con mas asistentes de la zona
+            ranking.sort(key=lambda x:cls.calculate_total_number_of_attendees(regDeEventos)[x], reverse=True)# Ordena la lista de eventos poniendo en primer lugar al evento con mas asistentes de la zona
             return ranking
         elif mayor_porcentaje:
             ranking.sort(key=lambda x:cls.calculate_percentage_of_atendees_of_the_zone(map, datasetANSES, regDeEventos)[x], reverse=True)# Ordena la lista de eventos poniendo en primer lugar al evento con mas asistentes de la zona
             return ranking
+
+    @classmethod
+    def calculate_ranking(cls, map: Map, datasetANSES: DatasetANSES, regDeEventos: RegDeEventos):
+        rankingString = f"|\tPosicion\t|\tNombre del evento\t|\tZona\t|\tCantidad de personas por zona\t|\tCantidad de personas totales\t|\tPorcentaje de asistentes de la zona\t|\n"
+        for index, evento in enumerate(Estadisticas.calculate_positions_of_the_ranking(map, datasetANSES, regDeEventos, False, False, True)): # arma el ranking en formato string para imprmirlo
+            rankingString += f"|\t\t{index + 1}\t\t|\t\t{evento}\t\t\t|\t{evento.getZona(map.getListaDeZonas())}\t|" \
+                                  f"\t\t\t\t{Estadisticas.calculate_number_of_attendees_per_zone_per_event(map, datasetANSES, regDeEventos)[evento]}\t\t\t\t\t|" \
+                                  f"\t\t\t\t{Estadisticas.calculate_total_number_of_attendees(regDeEventos)[evento]}\t\t\t\t\t|" \
+                                  f"\t\t\t\t{Estadisticas.calculate_percentage_of_atendees_of_the_zone(map, datasetANSES, regDeEventos)[evento]}\t\t\t\t\t|\n"
+        return rankingString
+
 
 
     @classmethod
