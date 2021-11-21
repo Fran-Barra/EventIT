@@ -92,13 +92,16 @@ class TestPrueba(unittest.TestCase):
 
         # self.estadisticas = Estadisticas(self.mapa1, self.datasetANSES, self.regDeEventos)
 
-        self.rankingString = f"|\tPosicion\t|\tNombre del evento\t|\tZona\t|\tCantidad de personas por zona\t|\tCantidad de personas totales\t|\tPorcentaje de asistentes de la zona\t|\n"
-        for index, evento in enumerate(Estadisticas.calculate_positions_of_the_ranking(self.Mapa, self.datasetANSES, self.regDeEventos, False, False, True)): # arma el ranking en formato string para imprmirlo
-            self.rankingString += f"|\t\t{index + 1}\t\t|\t\t{evento}\t\t\t|\t{evento.getZona(self.Mapa.getListaDeZonas())}\t|" \
-                                  f"\t\t\t\t{Estadisticas.calculate_number_of_attendees_per_zone_per_event(self.Mapa, self.datasetANSES, self.regDeEventos)[evento]}\t\t\t\t\t|" \
-                                  f"\t\t\t\t{Estadisticas.calculate_total_number_of_attendees(self.Mapa, self.datasetANSES, self.regDeEventos)[evento]}\t\t\t\t\t|" \
-                                  f"\t\t\t\t{Estadisticas.calculate_percentage_of_atendees_of_the_zone(self.Mapa, self.datasetANSES, self.regDeEventos)[evento]}\t\t\t\t\t|\n"
-        print(self.rankingString)
+        # self.rankingString = f"|\tPosicion\t|\tNombre del evento\t|\tZona\t|\tCantidad de personas por zona\t|\tCantidad de personas totales\t|\tPorcentaje de asistentes de la zona\t|\n"
+        # for index, evento in enumerate(Estadisticas.calculate_positions_of_the_ranking(self.Mapa, self.datasetANSES, self.regDeEventos, False, False, True)): # arma el ranking en formato string para imprmirlo
+        #     self.rankingString += f"|\t\t{index + 1}\t\t|\t\t{evento}\t\t\t|\t{evento.getZona(self.Mapa.getListaDeZonas())}\t|" \
+        #                           f"\t\t\t\t{Estadisticas.calculate_number_of_attendees_per_zone_per_event(self.Mapa, self.datasetANSES, self.regDeEventos)[evento]}\t\t\t\t\t|" \
+        #                           f"\t\t\t\t{Estadisticas.calculate_total_number_of_attendees(self.Mapa, self.datasetANSES, self.regDeEventos)[evento]}\t\t\t\t\t|" \
+        #                           f"\t\t\t\t{Estadisticas.calculate_percentage_of_atendees_of_the_zone(self.Mapa, self.datasetANSES, self.regDeEventos)[evento]}\t\t\t\t\t|\n"
+        # print(self.rankingString)
+
+        print(Estadisticas.calculate_ranking(self.Mapa, self.datasetANSES, self.regDeEventos))
+
     # def test_create_the_attendees_list_with_ANSES_users(self):
 
     def test_add_events(self):
