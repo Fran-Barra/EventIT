@@ -58,7 +58,7 @@ class Estadisticas:
             rankingString += f"|\t{index + 1}\t|\t{evento}\t\t|\t{evento.getZona(map.getListaDeZonas())}\t|" \
                                   f"\t\t{Estadisticas.calculate_number_of_attendees_per_zone_per_event(map, datasetANSES, regDeEventos)[evento]}\t\t\t|" \
                                   f"\t\t{Estadisticas.calculate_total_number_of_attendees(regDeEventos)[evento]}\t\t\t|" \
-                                  f"\t\t{Estadisticas.calculate_percentage_of_atendees_of_the_zone(map, datasetANSES, regDeEventos)[evento]}t\t\t\t|\n"
+                                  f"\t\t{Estadisticas.calculate_percentage_of_atendees_of_the_zone(map, datasetANSES, regDeEventos)[evento]}%\t\t\t|\n"
         return rankingString
 
 
