@@ -1,5 +1,4 @@
 from EventIT.UsersLib.RegDeUsuarios import RegDeUsuarios
-from EventIT.UsersLib.CitizenClass import Ciudadano
 from EventIT.UsersLib.AdminClass import Administrator
 from EventIT.DatasetANSES.DatasetANSES import DatasetANSES
 from EventIT.EventLib.RegDeEventosClass import RegDeEventos

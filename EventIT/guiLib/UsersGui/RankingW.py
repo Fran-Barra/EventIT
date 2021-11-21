@@ -75,26 +75,20 @@ class RankingW(tk.Tk):
 
     def show_ranking(self, por):
         if por == "zona":
-            ranking = Estadisticas.calculate_positions_of_the_ranking(self.mapa, self.dataanses, self.regdeeventos,
-                                                                      mayor_cantidad_de_asistentes_de_la_zona=True)
+            ranking = Estadisticas.calculate_ranking(self.mapa, self.dataanses, self.regdeeventos,
+                                                    mayor_cantidad_de_asistentes_de_la_zona=True)
         elif por == "max":
-            ranking = Estadisticas.calculate_positions_of_the_ranking(self.mapa, self.dataanses, self.regdeeventos,
+            ranking = Estadisticas.calculate_ranking(self.mapa, self.dataanses, self.regdeeventos,
                                                                       mayor_cantidad_de_asistentes=True)
         elif por == "porcentaje":
-            ranking = Estadisticas.calculate_positions_of_the_ranking(self.mapa, self.dataanses, self.regdeeventos,
+            ranking = Estadisticas.calculate_ranking(self.mapa, self.dataanses, self.regdeeventos,
                                                                       mayor_porcentaje=True)
         else:
-            ranking = []
+            ranking = ""
 
 
-        tk.Label(self.displayinfo, text=f"|\tPosicion\t\t|\tNombre del evento\t|\tZona\t|\tCantidad de personas por zona\t|"
-                                        f"\tCantidad de personas totales\t|\tPorcentaje de asistentes de la zona\t|\n").pack()
-        for index, evento in enumerate(ranking):
-            tk.Label(self.displayinfo, text=f"|\t{index+1}\t\t|\t\t{evento}\t\t|\t{evento.getZona(self.mapa.getListaDeZonas())}"
-                     f"\t|\t\t\t{Estadisticas.calculate_number_of_attendees_per_zone_per_event(self.mapa, self.dataanses, self.regdeeventos)[evento]}"
-                     f"\t\t|\t\t{Estadisticas.calculate_total_number_of_attendees(self.mapa, self.dataanses, self.regdeeventos)[evento]}"
-                     f"\t\t\t|\t\t{Estadisticas.calculate_percentage_of_atendees_of_the_zone(self.mapa, self.dataanses, self.regdeeventos)[evento]}"
-                     f"\t\t\t|\n").pack()
+        tk.Label(self.displayinfo, text=f"{ranking}").pack()
+
 
 
 
