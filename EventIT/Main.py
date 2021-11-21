@@ -1,19 +1,16 @@
-from EventIT.EventLib.RegDeEventosClass import RegDeEventos
-from EventIT.EventLib.EventManager import EventManger
-from EventIT.EventLib.EventoClass import Evento
 from EventIT.UsersLib.RegDeUsuarios import RegDeUsuarios
+from EventIT.UsersLib.CitizenClass import Ciudadano
+from EventIT.UsersLib.AdminClass import Administrator
 from EventIT.DatasetANSES.DatasetANSES import DatasetANSES
-from EventIT.sensorLib.sensor import Sensor
+from EventIT.EventLib.RegDeEventosClass import RegDeEventos
 from EventIT.sensorLib.RegDeSensores import RegDeSensores
+from EventIT.MapsSist.MapClass import Map
 from EventIT.MapsSist.UbicacionClass import Ubicacion
 from EventIT.MapsSist.ZonaClass import Zona
-from EventIT.MapsSist.MapClass import Map
-
-regDeUsuarios = RegDeUsuarios()
-datasetANSES = DatasetANSES()
-regDeEventos = RegDeEventos()
-eventManager = EventManger(regDeEventos)
-regDeSensores = RegDeSensores()
+from EventIT.guiLib.Maingui import App
+from EventIT.EventLib.EventoClass import Evento
+from EventIT.EventLib.EventManager import EventManger
+from EventIT.sensorLib.sensor import Sensor
 
 
 
@@ -47,27 +44,56 @@ def crear_ubicaciones():
 
     return [ParaZona1, ParaZona2, ParaZona3, ParaZona4]
 
-listadeubicaciones = crear_ubicaciones()
-Zona1 = Zona(listadeubicaciones[0], 1, "Zona 1")
-Zona2 = Zona(listadeubicaciones[1], 2, "Zona 2")
-Zona3 = Zona(listadeubicaciones[2], 3, "Zona 3")
-Zona4 = Zona(listadeubicaciones[3], 4, "Zona 4")
-Mapa = Map([Zona1, Zona2, Zona3, Zona4])
+
+if __name__ == "__main__":
+    regdeusuarios = RegDeUsuarios()
+    dataAnses= DatasetANSES()
+    regdeeventos = RegDeEventos()
+    admin = Administrator("ADMIN")
+    eventmanager  = EventManger(regdeeventos)
+    regdesensores = RegDeSensores()
 
 
-sensor1 = Sensor(Mapa.search_ubicacion(0,0), 'Fiesta', 'sensor1')
-sensor2 = Sensor(Mapa.search_ubicacion(0,11), 'Sanitario', 'sensor2')
-sensor3 = Sensor(Mapa.search_ubicacion(11,0), 'Social', 'sensor3')
-sensor4 = Sensor(Mapa.search_ubicacion(11,11), 'Privado', 'sensor4')
 
-eventManager.alta_tiposDeEvento('Fiesta', regDeUsuarios.Get_Admins()['Juan'])
-eventManager.alta_tiposDeEvento('Sanitario', regDeUsuarios.Get_Admins()['Juan'])
-eventManager.alta_tiposDeEvento('Social', regDeUsuarios.Get_Admins()['Juan'])
-eventManager.alta_tiposDeEvento('Privado', regDeUsuarios.Get_Admins()['Juan'])
 
-evento1 = Evento('Fiesta', Mapa.search_ubicacion(0,0), 'Evento1')
-evento2 = Evento('Sanitario', Mapa.search_ubicacion(0,0), 'Evento2')
-evento3 = Evento('Social', Mapa.search_ubicacion(0,0), 'Evento3')
-evento4 = Evento('Privado', Mapa.search_ubicacion(0,0), 'Evento4')
+    listadeubicaciones = crear_ubicaciones()
+    Zona1 = Zona(listadeubicaciones[0], 1, "Zona 1")
+    Zona2 = Zona(listadeubicaciones[1], 2, "Zona 2")
+    Zona3 = Zona(listadeubicaciones[2], 3, "Zona 3")
+    Zona4 = Zona(listadeubicaciones[3], 4, "Zona 4")
+    Mapa = Map([Zona1, Zona2, Zona3, Zona4])
 
-regDeUsuarios.Get_Ciudadanos()['Lucas'][0].Mod_ListaDeSolicitudes(regDeUsuarios.Get_Ciudadanos()['Joaquin'][0], True)
+
+
+
+
+    evento1 = Evento("fiesta", listadeubicaciones[0][2], "Evento 1")
+    evento2 = Evento("fiesta", listadeubicaciones[0][20], "Evento 2")
+    evento3 = Evento("fiesta", listadeubicaciones[3][3], "Evento 3")
+
+
+
+
+    regdeeventos.Set_Events(evento1, True)
+    regdeeventos.Set_Events(evento2, True)
+    regdeeventos.Set_Events(evento3, True)
+
+    sensor1 = Sensor(Mapa.search_ubicacion(1,1), "fiesta", "sensor1,1")
+    regdesensores.Set_Sensors(sensor1, True)
+    eventmanager.alta_tiposDeEvento("fiesta", admin)
+
+
+
+
+
+
+
+
+    #mainMenu
+    application = App(regdeusuarios, dataAnses, regdeeventos, eventmanager, regdesensores, Mapa)
+
+
+
+    application.mainloop()
+
+

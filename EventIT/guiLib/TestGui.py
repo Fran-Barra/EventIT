@@ -76,6 +76,8 @@ if __name__ == "__main__":
     evento9 = Evento("fiesta", listadeubicaciones[3][3], "3")
     evento10 = Evento("fiesta", listadeubicaciones[3][4], "10")
 
+    
+
 
     regdeeventos.Set_Events(evento1, True)
     regdeeventos.Set_Events(evento2, True)
