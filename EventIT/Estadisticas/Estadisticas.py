@@ -32,7 +32,7 @@ class Estadisticas:
         porcentaje_de_asistentes_de_la_zona_por_evento =dict({})
         for evento in lista_de_eventos:
             if cls.calculate_total_number_of_attendees(regDeEventos)[evento] != 0:
-                porcentaje_de_asistentes_de_la_zona_por_evento[evento] = round((cls.calculate_number_of_attendees_per_zone_per_event(map, datasetANSES, regDeEventos)[evento]/cls.calculate_total_number_of_attendees(map, datasetANSES, regDeEventos)[evento]) * 100, 1)
+                porcentaje_de_asistentes_de_la_zona_por_evento[evento] = round((cls.calculate_number_of_attendees_per_zone_per_event(map, datasetANSES, regDeEventos)[evento]/cls.calculate_total_number_of_attendees(regDeEventos)[evento]) * 100, 1)
             else:
                 porcentaje_de_asistentes_de_la_zona_por_evento[evento] = 0.0
         return porcentaje_de_asistentes_de_la_zona_por_evento
