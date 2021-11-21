@@ -111,13 +111,13 @@ class ReportW(tk.Tk):
                         if keyname not in self.regdeusuarios.Get_Ciudadanos():
                             user_not_found = True
                             keyname_not_in += 1
-                    if keyname_not_in:
+                    if user_not_found:
                         messagebox.showwarning(title= "Users not found", message= f"We couldt found {keyname_not_in} of the users")
                     else:
                         invitados = []
                         for keyname in keyname_invitados:
-                            invitadoname = self.regdeusuarios.Get_Ciudadanos()[keyname][0].Get_Name()
-                            invitado = self.regdeusuarios.searchCitizen(name= invitadoname)
+                            invitadocuil = self.regdeusuarios.Get_Ciudadanos()[keyname][0].Get_Cuil()
+                            invitado = self.regdeusuarios.searchCitizen(cuil= invitadocuil)
                             invitados.append(invitado)
                         self.eventmanager.asistir_evento(evento, self.user, invitados)
 
