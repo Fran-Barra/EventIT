@@ -124,8 +124,12 @@ class ReportW(tk.Tk):
                 elif invitadosstr == "none":
                     self.eventmanager.asistir_evento(evento, self.user)
                 else:
-                    messagebox.showwarning(title="Manage guests", message= "if you dont have guests write none or remember to use ,"
-                                                                           "between each keyname")
+                    keyname = self.invitados.get()
+                    if keyname in self.regdeusuarios.Get_Ciudadanos():
+                        self.eventmanager.asistir_evento(evento, self.user, [keyname])
+                    else:
+                        messagebox.showwarning(title= "Users not found", message= f"We couldt found the user: {keyname}")
+
 
 
 
