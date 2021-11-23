@@ -103,7 +103,7 @@ class TestPrueba(unittest.TestCase):
         # print(Estadisticas.calculate_ranking(self.Mapa, self.datasetANSES, self.regDeEventos))
 
     def test_ranking(self):
-        print(Estadisticas.calculate_ranking(self.Mapa, self.datasetANSES, self.regDeEventos))
+        print(Estadisticas.calculate_ranking(map=self.Mapa, datasetANSES=self.datasetANSES, regDeEventos=self.regDeEventos, mayor_cantidad_de_asistentes=True))
 
     # def test_create_the_attendees_list_with_ANSES_users(self):
 

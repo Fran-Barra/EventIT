@@ -55,10 +55,10 @@ class Estadisticas:
     def calculate_ranking(cls, map: Map, datasetANSES: DatasetANSES, regDeEventos: RegDeEventos, mayor_cantidad_de_asistentes_de_la_zona: bool = False, mayor_cantidad_de_asistentes: bool = False, mayor_porcentaje: bool = False):
         rankingString = f"|\tPosicion\t|\tNombre del evento\t|\tZona\t|\tCantidad de personas por zona\t|\tCantidad de personas totales\t|\tPorcentaje de asistentes de la zona\t|\n"
         for index, evento in enumerate(Estadisticas.calculate_positions_of_the_ranking(map, datasetANSES, regDeEventos, mayor_cantidad_de_asistentes_de_la_zona, mayor_cantidad_de_asistentes, mayor_porcentaje)): # arma el ranking en formato string para imprmirlo
-            rankingString += f"|\t{index + 1}\t|\t{evento}\t\t|\t{evento.getZona(map.getListaDeZonas())}\t|" \
-                                  f"\t\t{Estadisticas.calculate_number_of_attendees_per_zone_per_event(map, datasetANSES, regDeEventos)[evento]}\t\t\t|" \
-                                  f"\t\t{Estadisticas.calculate_total_number_of_attendees(regDeEventos)[evento]}\t\t\t|" \
-                                  f"\t\t{Estadisticas.calculate_percentage_of_atendees_of_the_zone(map, datasetANSES, regDeEventos)[evento]}%\t\t\t|\n"
+            rankingString += f"|\t\t{index + 1}\t\t|\t\t{evento}\t\t\t|\t{evento.getZona(map.getListaDeZonas())}\t|" \
+                                  f"\t\t\t\t{Estadisticas.calculate_number_of_attendees_per_zone_per_event(map, datasetANSES, regDeEventos)[evento]}\t\t\t\t\t|" \
+                                  f"\t\t\t\t{Estadisticas.calculate_total_number_of_attendees(regDeEventos)[evento]}\t\t\t\t\t|" \
+                                  f"\t\t\t\t{Estadisticas.calculate_percentage_of_atendees_of_the_zone(map, datasetANSES, regDeEventos)[evento]}%\t\t\t\t\t|\n"
         return rankingString
 
 
