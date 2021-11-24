@@ -1,5 +1,8 @@
 from EventIT.MapsSist.UbicacionClass import Ubicacion
 from EventIT.UsersLib.CitizenClass import Ciudadano
+import os
+import tkinter as tk
+from tkinter import messagebox
 
 
 class Evento:
@@ -33,12 +36,56 @@ class Evento:
         """Permite inscribirse o desinscribirse de un evento.\n
             inscribirse = True, para inscribirse.\n
             inscribirse = False, para desinscribirse"""
-        if inscribirse:
-            self.__ListaAsistentes.append(ciudadano)
-        else:
-            self.__ListaAsistentes.remove(ciudadano)
+        # if inscribirse:
+        #     self.__ListaAsistentes.append(ciudadano)
+        # else:
+        #     self.__ListaAsistentes.remove(ciudadano)
             # for asistente, index in enumerate(self.__ListaAsistentes):
             #     if asistente == ciudadano:
             #         del self.__ListaAsistentes[index]
 
 
+        path = os.path.dirname(os.path.realpath(__file__)) + r'\registro_de_eventos.txt'
+        with open(path,'r') as f:
+            replacement = ""
+            # using the for loop
+            for line in f:
+                line = line.strip()
+                # if self es igual al evento de la linea:
+                name = line.split('/')[2]
+                if self.getName() == name:
+                    if inscribirse:
+                        oldList = self.getListaDeAsistencia()
+                        oldListCuils = list(map(lambda x:x.Get_Cuil(), oldList))
+                        newList = self.getListaDeAsistencia()
+                        newList.append(ciudadano)
+                        newListCuils = list(map(lambda x:x.Get_Cuil(), newList))
+
+                        changes = line.replace(str(oldListCuils), str(newListCuils))
+                    else:
+                        try:
+                            oldList = self.getListaDeAsistencia()
+                            oldListCuils = list(map(lambda x:x.Get_Cuil(), oldList))
+                            newList = self.getListaDeAsistencia()
+                            newList.remove(ciudadano)
+                            newListCuils = list(map(lambda x:x.Get_Cuil(), newList))
+
+                            changes = line.replace(str(oldListCuils), str(newListCuils))
+                        except ValueError:
+                            pass
+                    replacement = replacement + changes + "\n"
+                else:
+                    replacement = replacement + line + "\n"
+            f.close()
+        # opening the file in write mode
+        with open(path,'w') as f:
+            f.write(replacement)
+            f.close()
+
+        if inscribirse:
+            self.__ListaAsistentes.append(ciudadano)
+        else:
+            try:
+                self.__ListaAsistentes.remove(ciudadano)
+            except ValueError:
+                alert = tk.messagebox.showwarning(title="Error al desinscribirse", text="Para poder desinscribirse, antes debe pertenecer a la lista de asistentes")

@@ -13,10 +13,10 @@ from EventIT.UsersLib.RegDeUsuarios import RegDeUsuarios
 
 class TestPrueba(unittest.TestCase):
     def setUp(self):
-        self.regDeEventos = RegDeEventos()
+        self.regDeUsuarios = RegDeUsuarios()
+        self.regDeEventos = RegDeEventos(self.regDeUsuarios)
         self.eventManager = EventManger(self.regDeEventos)
         self.datasetANSES = DatasetANSES()
-        self.regDeUsuarios = RegDeUsuarios()
 
         def crear_ubicaciones():
             ParaZona1 = []

@@ -20,15 +20,21 @@ class RegDeUsuarios:
                 elif linea.split('/')[0] == 'Ciudadano':
                     keyname = linea.split('/')[1]
                     name = linea.split('/')[2]
-                    telCell = linea.split('/')[3]
-                    cuil = linea.split('/')[4]
-                    contactosDeInteres = list(map(lambda x:self.searchCitizen(cuil=int(x)), list(filter(lambda x:x!='', list(linea.split('/')[5].split('[')[1].split(']')[0].split(','))))))
-                    listaDeSolicitudes = list(map(lambda x:self.searchCitizen(cuil=int(x)), list(filter(lambda x:x!='', list(linea.split('/')[6].split('[')[1].split(']')[0].split(','))))))
-                    listaDeRechazos = list(map(lambda x:self.searchCitizen(cuil=int(x)), list(filter(lambda x:x!='', list(linea.split('/')[7].split('[')[1].split(']')[0].split(','))))))
+                    telCell = int(linea.split('/')[3])
+                    cuil = int(linea.split('/')[4])
                     self.__Ciudadanos[keyname] = [Ciudadano(name, telCell, cuil), 0]
+        f.close()
+        with open(path,'r') as f:
+            for linea in f.readlines():
+                if linea.split('/')[0] == 'Ciudadano':
+                    keyname = linea.split('/')[1]
+                    contactosDeInteres = list(map(lambda x:self.searchCitizen(cuil=int(x)), list(filter(lambda x:x!='', list(linea.split('/')[5][1:-1].split(','))))))
+                    listaDeSolicitudes = list(map(lambda x:self.searchCitizen(cuil=int(x)), list(filter(lambda x:x!='', list(linea.split('/')[6][1:-1].split(','))))))
+                    listaDeRechazos = list(map(lambda x:self.searchCitizen(cuil=int(x)), list(filter(lambda x:x!='', list(linea.split('/')[7][1:-1].split(','))))))
                     [self.__Ciudadanos[keyname][0].Mod_ContactosDeInteres(contacto, True) for contacto in contactosDeInteres]
                     [self.__Ciudadanos[keyname][0].Mod_ListaDeSolicitudes(ciudadano, True) for ciudadano in listaDeSolicitudes]
                     [self.__Ciudadanos[keyname][0].Mod_ListaDeRechazos(ciudadano, True) for ciudadano in listaDeRechazos]
+        f.close()
 
     def Get_Admins(self):
         return self.__Admins.copy()
@@ -121,3 +127,5 @@ class RegDeUsuarios:
                 return ciudadano if not returnKey else keyname
 
 
+# reg = RegDeUsuarios()
+# print(reg.Get_Ciudadanos())
