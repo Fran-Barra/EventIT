@@ -36,15 +36,6 @@ class Evento:
         """Permite inscribirse o desinscribirse de un evento.\n
             inscribirse = True, para inscribirse.\n
             inscribirse = False, para desinscribirse"""
-        # if inscribirse:
-        #     self.__ListaAsistentes.append(ciudadano)
-        # else:
-        #     self.__ListaAsistentes.remove(ciudadano)
-            # for asistente, index in enumerate(self.__ListaAsistentes):
-            #     if asistente == ciudadano:
-            #         del self.__ListaAsistentes[index]
-
-
         path = os.path.dirname(os.path.realpath(__file__)) + r'\registro_de_eventos.txt'
         with open(path,'r') as f:
             replacement = ""
@@ -54,25 +45,18 @@ class Evento:
                 # if self es igual al evento de la linea:
                 name = line.split('/')[2]
                 if self.getName() == name:
+                    oldList = self.getListaDeAsistencia()
+                    oldListCuils = list(map(lambda x:x.Get_Cuil(), oldList))
+                    newList = self.getListaDeAsistencia()
                     if inscribirse:
-                        oldList = self.getListaDeAsistencia()
-                        oldListCuils = list(map(lambda x:x.Get_Cuil(), oldList))
-                        newList = self.getListaDeAsistencia()
                         newList.append(ciudadano)
-                        newListCuils = list(map(lambda x:x.Get_Cuil(), newList))
-
-                        changes = line.replace(str(oldListCuils), str(newListCuils))
                     else:
                         try:
-                            oldList = self.getListaDeAsistencia()
-                            oldListCuils = list(map(lambda x:x.Get_Cuil(), oldList))
-                            newList = self.getListaDeAsistencia()
                             newList.remove(ciudadano)
-                            newListCuils = list(map(lambda x:x.Get_Cuil(), newList))
-
-                            changes = line.replace(str(oldListCuils), str(newListCuils))
                         except ValueError:
                             pass
+                    newListCuils = list(map(lambda x:x.Get_Cuil(), newList))
+                    changes = line.replace(str(oldListCuils), str(newListCuils))
                     replacement = replacement + changes + "\n"
                 else:
                     replacement = replacement + line + "\n"
