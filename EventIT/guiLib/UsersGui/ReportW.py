@@ -126,7 +126,9 @@ class ReportW(tk.Tk):
                 else:
                     keyname = self.invitados.get()
                     if keyname in self.regdeusuarios.Get_Ciudadanos():
-                        self.eventmanager.asistir_evento(evento, self.user, [keyname])
+                        invitadocuil = self.regdeusuarios.Get_Ciudadanos()[keyname][0].Get_Cuil()
+                        invitado = self.regdeusuarios.searchCitizen(cuil= invitadocuil)
+                        self.eventmanager.asistir_evento(evento, self.user, [invitado])
                     else:
                         messagebox.showwarning(title= "Users not found", message= f"We couldt found the user: {keyname}")
 

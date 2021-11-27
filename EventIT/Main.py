@@ -7,7 +7,6 @@ from EventIT.MapsSist.MapClass import Map
 from EventIT.MapsSist.UbicacionClass import Ubicacion
 from EventIT.MapsSist.ZonaClass import Zona
 from EventIT.guiLib.Maingui import App
-from EventIT.EventLib.EventoClass import Evento
 from EventIT.EventLib.EventManager import EventManger
 from EventIT.sensorLib.sensor import Sensor
 
@@ -47,7 +46,7 @@ def crear_ubicaciones():
 if __name__ == "__main__":
     regdeusuarios = RegDeUsuarios()
     dataAnses= DatasetANSES()
-    regdeeventos = RegDeEventos()
+    regdeeventos = RegDeEventos(regdeusuarios)
     admin = Administrator("ADMIN")
     eventmanager  = EventManger(regdeeventos)
     regdesensores = RegDeSensores()
@@ -66,16 +65,6 @@ if __name__ == "__main__":
 
 
 
-    evento1 = Evento("fiesta", listadeubicaciones[0][2], "Evento 1")
-    evento2 = Evento("fiesta", listadeubicaciones[0][20], "Evento 2")
-    evento3 = Evento("fiesta", listadeubicaciones[3][3], "Evento 3")
-
-
-
-
-    regdeeventos.Set_Events(evento1, True)
-    regdeeventos.Set_Events(evento2, True)
-    regdeeventos.Set_Events(evento3, True)
 
     sensor1 = Sensor(Mapa.search_ubicacion(1,1), "fiesta", "sensor1,1")
     regdesensores.Set_Sensors(sensor1, True)
