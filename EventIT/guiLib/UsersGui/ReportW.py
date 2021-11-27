@@ -107,12 +107,15 @@ class ReportW(tk.Tk):
 
                     keyname_not_in = 0
                     user_not_found = False
+                    notfounds = []
                     for keyname in keyname_invitados:
                         if keyname not in self.regdeusuarios.Get_Ciudadanos():
                             user_not_found = True
                             keyname_not_in += 1
+                            notfounds.append(keyname)
+
                     if user_not_found:
-                        messagebox.showwarning(title= "Users not found", message= f"We couldt found {keyname_not_in} of the users")
+                        messagebox.showwarning(title= "Users not found", message= f"We couldt found {keyname_not_in} of the users\n {notfounds}")
                     else:
                         invitados = []
                         for keyname in keyname_invitados:
