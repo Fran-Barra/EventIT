@@ -12,14 +12,13 @@ class RegDeSensores:
         path = os.path.dirname(os.path.realpath(__file__)) + r'\registro_de_sensores.txt'
         with open(path,'r') as f:
             for linea in f.readlines():
-                if linea.split('/')[0] == 'Admin':
-                    name = linea.split('/')[0]
-                    tipo = linea.split('/')[1]
-                    ubicacionString = linea.split('/')[2][1:-1]
-                    latitud = int(ubicacionString.split(',')[0])
-                    longitud = int(ubicacionString.split(',')[1])
-                    ubicacion = Ubicacion(latitud, longitud)
-                    self.__sensores.append(Sensor(ubicacion, tipo, name))
+                name = linea.split('/')[0]
+                tipo = linea.split('/')[1]
+                ubicacionString = linea.split('/')[2][1:-1]
+                latitud = int(ubicacionString.split(',')[0])
+                longitud = int(ubicacionString.split(',')[1])
+                ubicacion = Ubicacion(latitud, longitud)
+                self.__sensores.append(Sensor(ubicacion, tipo, name))
             f.close()
 
     def __repr__(self):

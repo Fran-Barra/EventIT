@@ -66,9 +66,12 @@ if __name__ == "__main__":
 
 
 
-    sensor1 = Sensor(Mapa.search_ubicacion(1,1), "fiesta", "sensor1,1")
-    regdesensores.Set_Sensors(sensor1, True)
-    eventmanager.alta_tiposDeEvento("fiesta", admin)
+    # sensor1 = Sensor(Mapa.search_ubicacion(1,1), "fiesta", "sensor1,1")
+    # regdesensores.Set_Sensors(sensor1, True)
+    eventmanager.alta_tiposDeEvento("Fiesta", admin)
+    eventmanager.alta_tiposDeEvento("Sanitario", admin)
+    eventmanager.alta_tiposDeEvento("Privado", admin)
+    eventmanager.alta_tiposDeEvento("Social", admin)
 
 
 
