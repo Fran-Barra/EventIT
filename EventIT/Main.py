@@ -8,7 +8,6 @@ from EventIT.MapsSist.UbicacionClass import Ubicacion
 from EventIT.MapsSist.ZonaClass import Zona
 from EventIT.guiLib.Maingui import App
 from EventIT.EventLib.EventManager import EventManger
-from EventIT.sensorLib.sensor import Sensor
 
 
 
