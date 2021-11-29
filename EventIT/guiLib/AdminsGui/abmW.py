@@ -32,7 +32,7 @@ class AbmW(tk.Tk):
         self.text = tk.Label(self, text= "register use all parameters\nunsubscribe and \ndes/bloq use only keyname")
 
         self.bloq_btn = tk.Button(self, text= "Bloq", command= lambda: self.bloqueo(True))
-        self.desbloq_btn = tk.Button(self, text= "unlock", command= lambda: self.boqueo(False))
+        self.desbloq_btn = tk.Button(self, text= "unlock", command= lambda: self.bloqueo(False))
 
 
 
@@ -73,7 +73,7 @@ class AbmW(tk.Tk):
                 int(cuil)#lanza un error para asegurar que sea un numero
                 user.Mod_CUIL(cuil)
             if parameter == "name":
-                name = self.nameentry
+                name = self.nameentry.get()
                 user.Mod_Name(name)
         except ValueError:
             messagebox.showwarning(title= "Use numbers", message= "Remember to use only numbers in when chainging phone or cuil")
@@ -93,9 +93,14 @@ class AbmW(tk.Tk):
 
     def dardebaja(self):
         key_name = self.keynameentry.get()
-        self.regdeusuarios.Manage_Ciudadanos(None, False, key_name)
+        if key_name in self.regdeusuarios.Get_Ciudadanos():
+            cuilciudadano = self.regdeusuarios.Get_Ciudadanos()[key_name][0].Get_Cuil()
+            ciudadano = self.regdeusuarios.searchCitizen(cuil= cuilciudadano)
+            self.regdeusuarios.Manage_Ciudadanos(ciudadano, False, key_name)
+        else:
+            messagebox.showwarning(title= "User not found", message= "A user with that keyname couldnt be found")
 
-    def boqueo(self, bool):
+    def bloqueo(self, bool):
         keyname = self.keynameentry.get()
         if keyname in self.regdeusuarios.Get_Ciudadanos():
             self.regdeusuarios.estado_de_bloqueo(bool, keyname)
