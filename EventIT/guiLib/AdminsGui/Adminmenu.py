@@ -2,6 +2,7 @@ import tkinter as tk
 from EventIT.UsersLib.RegDeUsuarios import RegDeUsuarios
 from EventIT.UsersLib.AdminClass import Administrator
 from EventIT.EventLib.EventManager import EventManger
+from EventIT.EventLib.RegDeEventosClass import RegDeEventos
 from EventIT.sensorLib.RegDeSensores import RegDeSensores
 from EventIT.MapsSist.MapClass import Map
 from EventIT.guiLib.AdminsGui.NewAdminW import New_AdminW
@@ -10,8 +11,8 @@ from EventIT.guiLib.AdminsGui.eventmaneW import EventManagerW
 from EventIT.guiLib.AdminsGui.CreateSensorW import CreateSensorW
 
 class AdminMenu(tk.Tk):
-    def __init__(self, regdeusuarios: RegDeUsuarios, eventmanager: EventManger, regdesensores: RegDeSensores,
-                 mapa: Map, admin: Administrator):
+    def __init__(self, regdeusuarios: RegDeUsuarios, eventmanager: EventManger, regdeeventos: RegDeEventos,
+                 regdesensores: RegDeSensores, mapa: Map, admin: Administrator):
         super().__init__()
         self.wm_title("EventIT")
         self.wm_geometry(f"350x400+{550}+{150}")
@@ -19,6 +20,7 @@ class AdminMenu(tk.Tk):
         self.admin = admin
         self.regdeusuarios = regdeusuarios
         self.eventmanager = eventmanager
+        self.regdeeventos = regdeeventos
         self.regdesensores = regdesensores
         self.mapa = mapa
         self.Create_Widgets()
@@ -48,7 +50,7 @@ class AdminMenu(tk.Tk):
         if window == AbmW:
             AbmW(self.regdeusuarios, self.admin)
         if window == EventManagerW:
-            EventManagerW(self.eventmanager, self.admin)
+            EventManagerW(self.eventmanager, self.regdeeventos, self.admin)
         if window == CreateSensorW:
             CreateSensorW(self.regdesensores, self.mapa, self.admin)
 
