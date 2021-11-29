@@ -105,30 +105,28 @@ class TestPrueba(unittest.TestCase):
     def test_ranking(self):
         print(Estadisticas.calculate_ranking(map=self.Mapa, datasetANSES=self.datasetANSES, regDeEventos=self.regDeEventos, mayor_cantidad_de_asistentes=True))
 
-    # def test_create_the_attendees_list_with_ANSES_users(self):
+    def test_add_events(self):
+        self.assertEqual(self.regDeEventos.View_Events(), [self.evento1, self.evento2, self.evento3, self.evento4])
 
-    # def test_add_events(self):
-    #     self.assertEqual(self.regDeEventos.View_Events(), [self.evento1, self.evento2])
-    #
-    # def test_set_attendance_inscribirse(self):
-    #     self.assertEqual(self.evento1.getListaDeAsistencia(), [self.juan, self.jose])
-    #
-    # def test_set_attendance_desinscribirse(self):
-    #     self.evento1.Set_Attendance(self.jose, False)
-    #     self.assertEqual(self.evento1.getListaDeAsistencia(), [self.juan])
-    #
-    # def test_calculate_number_of_attendees_per_zone_per_event(self):
-    #     self.assertEqual(Estadisticas.calculate_number_of_attendees_per_zone_per_event(self.mapa1, self.datasetANSES, self.regDeEventos)[self.evento1], 2)
-    #
-    # def test_calculate_total_number_of_attendees(self):
-    #     self.assertEqual(Estadisticas.calculate_total_number_of_attendees(self.mapa1, self.datasetANSES, self.regDeEventos)[self.evento1], 2)
-    #
-    # def test_calculate_percentage_of_atendees_of_the_zone(self):
-    #     self.assertEqual(Estadisticas.calculate_percentage_of_atendees_of_the_zone(self.mapa1, self.datasetANSES, self.regDeEventos)[self.evento1], 100)
-    #
-    # def test_calculate_positions_of_the_ranking(self):
-    #     self.assertEqual(Estadisticas.calculate_positions_of_the_ranking(self.mapa1, self.datasetANSES, self.regDeEventos), [self.evento1, self.evento2])
-    #     self.assertEqual(Estadisticas.calculate_positions_of_the_ranking(map=self.mapa1, datasetANSES=self.datasetANSES, regDeEventos=self.regDeEventos, mayor_porcentaje=True), [self.evento1, self.evento2])
+    def test_set_attendance_inscribirse(self):
+        self.assertEqual(self.evento1.getListaDeAsistencia(), [self.regDeUsuarios.Get_Ciudadanos()['Lucas'][0], self.regDeUsuarios.Get_Ciudadanos()['Joaquin'][0], self.ciudadano2])
+
+    def test_set_attendance_desinscribirse(self):
+        self.evento1.Set_Attendance(self.regDeUsuarios.Get_Ciudadanos()['Lucas'][0], False)
+        self.assertEqual(self.evento1.getListaDeAsistencia(), [self.regDeUsuarios.Get_Ciudadanos()['Joaquin'][0], self.ciudadano2])
+
+    def test_calculate_number_of_attendees_per_zone_per_event(self):
+        self.assertEqual(Estadisticas.calculate_number_of_attendees_per_zone_per_event(self.Mapa, self.datasetANSES, self.regDeEventos)[self.evento2], 1)
+
+    def test_calculate_total_number_of_attendees(self):
+        self.assertEqual(Estadisticas.calculate_total_number_of_attendees(self.regDeEventos)[self.evento1], 3)
+
+    def test_calculate_percentage_of_atendees_of_the_zone(self):
+        self.assertEqual(Estadisticas.calculate_percentage_of_atendees_of_the_zone(self.Mapa, self.datasetANSES, self.regDeEventos)[self.evento2], 50)
+
+    def test_calculate_positions_of_the_ranking(self):
+        self.assertEqual(Estadisticas.calculate_positions_of_the_ranking(self.Mapa, self.datasetANSES, self.regDeEventos), [self.evento2, self.evento4, self.evento1, self.evento3])
+        self.assertEqual(Estadisticas.calculate_positions_of_the_ranking(map=self.Mapa, datasetANSES=self.datasetANSES, regDeEventos=self.regDeEventos, mayor_porcentaje=True), [self.evento4, self.evento2, self.evento1, self.evento3])
 
 if __name__ == '__main__':
     unittest.main()
